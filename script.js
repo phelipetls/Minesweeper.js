@@ -12,10 +12,6 @@ class Minesweeper {
     return this.rows.flatMap(row => Array.from(row.cells));
   }
 
-  get bombs() {
-    return this.mines.filter(mine => mine.hasBomb);
-  }
-
   userDidNotPlayYet() {
     return this.mines.filter(mine => mine.hasAttribute("revealed")).length === 0;
   }
@@ -28,11 +24,15 @@ class Minesweeper {
 
   placeBombs() {
     this.resetBombs();
-    const sampleMines = getSample(this.mines, 30);
+    const sampleMines = getSample(this.mines, 10);
 
     for (const mine of sampleMines) {
       mine.hasBomb = true;
     }
+  }
+
+  get bombs() {
+    return this.mines.filter(mine => mine.hasBomb);
   }
 
   revealAllBombs() {
@@ -76,7 +76,7 @@ function getSurroundingMines(targetMine) {
   return [
     ...getMinesAbove(targetMine),
     ...getMinesBelow(targetMine),
-    ...getAdjacentMines(targetMine).filter(mine => mine !== targetMine)
+    targetMine.previousElementSibling, targetMine.nextElementSibling
   ].filter(Boolean);
 }
 
@@ -91,28 +91,6 @@ function isEmpty(mine) {
 function getSurroundingEmpty(mine) {
   return getSurroundingMines(mine).filter(isEmpty);
 }
-
-const mineSweeperElem = document.querySelector(".minesweeper");
-const mineSweeper = new Minesweeper(mineSweeperElem);
-
-mineSweeperElem.addEventListener("contextmenu", function(e) {
-  e.preventDefault();
-});
-
-mineSweeperElem.addEventListener("mousedown", function(e) {
-  if (mineSweeper.gameOver) return;
-
-  const mine = e.target;
-  if (mine.tagName !== "TD") return;
-
-  if (e.button === 0) {
-    dig(mine);
-  }
-
-  if (e.button === 2) {
-    flag(mine);
-  }
-});
 
 function dig(mine) {
   if (mine.hasAttribute("flagged") || mine.hasAttribute("revealed")) return;
@@ -152,6 +130,32 @@ function flag(mine) {
   mine.toggleAttribute("flagged");
 }
 
+
+const mineSweeperElem = document.querySelector(".minesweeper");
+const mineSweeper = new Minesweeper(mineSweeperElem);
+
+mineSweeperElem.addEventListener("contextmenu", function(e) {
+  e.preventDefault();
+});
+
+mineSweeperElem.addEventListener("mousedown", function(e) {
+  if (mineSweeper.gameOver) return;
+
+  const mine = e.target;
+
+  if (mine.tagName !== "TD") return;
+
+  if (e.button === 0) {
+    dig(mine);
+  }
+
+  if (e.button === 2) {
+    flag(mine);
+  }
+});
+
 mineSweeperElem.addEventListener("dblclick", function(e) {
+  if (mineSweeper.gameOver) return;
+
   getSurroundingMines(e.target).map(dig);
 })
