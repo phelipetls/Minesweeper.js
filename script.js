@@ -140,16 +140,19 @@ function reveal(mine) {
 
   if (mine.hasBomb) {
     mine.dataset.mineContent = "bomb";
+  } else if (isEmpty(mine)) {
+    getSurroundingMines(mine).map(dig);
   } else {
     mine.dataset.mineContent = countSurroundingBombs(mine);
   }
 
-  if (isEmpty(mine)) {
-    getSurroundingMines(mine).map(dig);
-  }
 }
 
 function flag(mine) {
   if (mine.hasAttribute("revealed")) return;
   mine.toggleAttribute("flagged");
 }
+
+mineSweeperElem.addEventListener("dblclick", function(e) {
+  getSurroundingMines(e.target).map(dig);
+})
