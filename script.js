@@ -2,7 +2,6 @@ class Minesweeper {
   constructor(elem) {
     this._mines = elem.tBodies[0];
     this.placeBombs();
-    this.gameOver = false;
   }
 
   get rows() {
