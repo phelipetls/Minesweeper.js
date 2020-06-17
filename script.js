@@ -17,8 +17,20 @@ class Minesweeper {
     return this.mines.filter(mine => mine.hasBomb);
   }
 
+  userDidNotPlayYet() {
+    return this.mines.filter(mine => mine.hasAttribute("revealed")).length === 0;
+  }
+
+  resetBombs() {
+    for (const mine of this.mines) {
+      mine.hasBomb = false;
+    }
+  }
+
   placeBombs() {
-    const sampleMines = getSample(this.mines, 10);
+    this.resetBombs();
+    const sampleMines = getSample(this.mines, 30);
+
     for (const mine of sampleMines) {
       mine.hasBomb = true;
     }
@@ -107,7 +119,13 @@ function dig(mine) {
   if (mine.hasAttribute("flagged") || mine.hasAttribute("revealed")) return;
 
   if (mine.hasBomb) {
-    mineSweeper.revealAllBombs();
+    if (mineSweeper.userDidNotPlayYet()) {
+      // If it's user first guess and it is a bomb, replace bombs.
+      mineSweeper.placeBombs();
+      dig(mine);
+    } else {
+      mineSweeper.revealAllBombs();
+    }
   } else {
     reveal(mine);
   }
