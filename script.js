@@ -11,16 +11,44 @@ function getSample(arr, k) {
   return sample;
 }
 
+function formatNumber(number) {
+  return "".padStart.call(number, 3, "0");
+}
+
 class Minesweeper {
-  constructor(elem) {
-    this.tableBody = elem.tBodies[0];
+  constructor(table, timer) {
+    this.tableBody = table.tBodies[0];
+    this.timer = timer;
+
     this.tableBody.addEventListener(
       "click",
       e => {
+        this.timerStart = Date.now();
         this.placeBombs(e.target)
+        this.trackElapsedTime();
       },
       { once: true }
     );
+  }
+
+  get elapsedTime() {
+    return (Date.now() - this.timerStart) / 1000;
+  }
+
+  getFormattedElapsedTime() {
+    const time = Math.min(Math.floor(this.elapsedTime), 999);
+    return formatNumber(time);
+  }
+
+  trackElapsedTime() {
+    this.timer.innerText = this.getFormattedElapsedTime();
+    let interval = setInterval(() => {
+      if (!this.gameOver) {
+        this.timer.innerText = this.getFormattedElapsedTime();
+      } else {
+        clearInterval(interval);
+      }
+    }, 1000)
   }
 
   get rows() {
@@ -57,6 +85,7 @@ class Minesweeper {
 
   revealAllBombs() {
     this.bombs.map(reveal);
+    alert(`You lost! At ${this.elapsedTime}`);
     this.gameOver = true;
   }
 }
@@ -113,24 +142,25 @@ function flag(mine) {
   mine.toggleAttribute("flagged");
 }
 
-const mineSweeperElem = document.querySelector(".minesweeper");
-const mineSweeper = new Minesweeper(mineSweeperElem);
+const mineSweeperTable = document.querySelector(".minesweeper");
+const mineSweeperTimer = document.querySelector(".timer");
+const mineSweeper = new Minesweeper(mineSweeperTable, mineSweeperTimer);
 
-mineSweeperElem.addEventListener("click", function(e) {
+mineSweeperTable.addEventListener("click", function(e) {
   if (mineSweeper.gameOver) return;
   if (e.target.tagName !== "TD") return;
 
   mineSweeper.dig(e.target);
 });
 
-mineSweeperElem.addEventListener("contextmenu", function(e) {
+mineSweeperTable.addEventListener("contextmenu", function(e) {
   e.preventDefault();
   if (mineSweeper.gameOver) return;
   if (e.target.tagName !== "TD") return;
   flag(e.target);
 });
 
-mineSweeperElem.addEventListener("dblclick", function(e) {
+mineSweeperTable.addEventListener("dblclick", function(e) {
   if (mineSweeper.gameOver) return;
   getSurroundingMines(e.target).map(mine => mineSweeper.dig(mine));
 });

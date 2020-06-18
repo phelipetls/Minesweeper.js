@@ -29,8 +29,9 @@ table.minesweeper caption {
   justify-content: space-between;
 }
 
-.counter {
+.counter, .timer {
   padding: 0 5px;
+  min-width: 50px;
   font-family: 'Orbitron';
   color: #a1c4fd;
   background-color: black;
