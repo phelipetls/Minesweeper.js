@@ -25,7 +25,13 @@ class Minesweeper {
     return this.rows.flatMap(row => Array.from(row.cells));
   }
 
+  dig(mine) {
+    if (mine.hasAttribute("flagged") || mine.hasAttribute("revealed")) return;
 
+    if (mine.hasBomb) {
+      this.revealAllBombs();
+    } else {
+      reveal(mine);
     }
   }
 
@@ -82,27 +88,13 @@ function isEmpty(mine) {
   return countSurroundingBombs(mine) === 0;
 }
 
-function dig(mine) {
-  if (mine.hasAttribute("flagged") || mine.hasAttribute("revealed")) return;
-
-  if (mine.hasBomb) {
-    if (mineSweeper.isFirstGuess) {
-      mine.hasBomb = false;
-      getSurroundingMines(mine).find(mine => !mine.hasBomb).hasBomb = true;
-    } else {
-      mineSweeper.revealAllBombs();
-    }
-  } else {
-    reveal(mine);
-  }
-}
 function reveal(mine) {
   mine.setAttribute("revealed", "");
 
   if (mine.hasBomb) {
     mine.dataset.mineContent = "bomb";
   } else if (isEmpty(mine)) {
-    getSurroundingMines(mine).map(dig);
+    getSurroundingMines(mine).map(mine => mineSweeper.dig(mine));
   } else {
     mine.dataset.mineContent = countSurroundingBombs(mine);
   }
@@ -117,23 +109,23 @@ const mineSweeperElem = document.querySelector(".minesweeper");
 const mineSweeper = new Minesweeper(mineSweeperElem);
 
 mineSweeperElem.addEventListener("mousedown", function(e) {
-  if (mineSweeper.gameOver) return;
-
   const mine = e.target;
 
+  if (mineSweeper.gameOver) return;
   if (mine.tagName !== "TD") return;
 
   if (e.button === 0) {
-    dig(mine);
+    mineSweeper.dig(mine);
   } else if (e.button === 2) {
     flag(mine);
   }
-
 });
 
 mineSweeperElem.addEventListener("dblclick", function(e) {
   if (mineSweeper.gameOver) return;
-  getSurroundingMines(e.target).map(dig);
+  getSurroundingMines(e.target).map(mine => mineSweeper.dig(mine));
+});
+
 mineSweeperElem.addEventListener("contextmenu", function(e) {
   e.preventDefault();
 });
