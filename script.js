@@ -15,9 +15,9 @@ class Minesweeper {
   constructor(elem) {
     this.tableBody = elem.tBodies[0];
     this.tableBody.addEventListener(
-      "mousedown",
+      "click",
       e => {
-        if (e.button === 0) this.placeBombs(e.target)
+        this.placeBombs(e.target)
       },
       { once: true }
     );
@@ -116,24 +116,21 @@ function flag(mine) {
 const mineSweeperElem = document.querySelector(".minesweeper");
 const mineSweeper = new Minesweeper(mineSweeperElem);
 
-mineSweeperElem.addEventListener("mousedown", function(e) {
-  const mine = e.target;
-
+mineSweeperElem.addEventListener("click", function(e) {
   if (mineSweeper.gameOver) return;
-  if (mine.tagName !== "TD") return;
+  if (e.target.tagName !== "TD") return;
 
-  if (e.button === 0) {
-    mineSweeper.dig(mine);
-  } else if (e.button === 2) {
-    flag(mine);
-  }
+  mineSweeper.dig(e.target);
+});
+
+mineSweeperElem.addEventListener("contextmenu", function(e) {
+  e.preventDefault();
+  if (mineSweeper.gameOver) return;
+  if (e.target.tagName !== "TD") return;
+  flag(e.target);
 });
 
 mineSweeperElem.addEventListener("dblclick", function(e) {
   if (mineSweeper.gameOver) return;
   getSurroundingMines(e.target).map(mine => mineSweeper.dig(mine));
-});
-
-mineSweeperElem.addEventListener("contextmenu", function(e) {
-  e.preventDefault();
 });
