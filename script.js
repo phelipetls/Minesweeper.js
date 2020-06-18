@@ -13,8 +13,14 @@ function getSample(arr, k) {
 
 class Minesweeper {
   constructor(elem) {
-    this.placeBombs();
     this.tableBody = elem.tBodies[0];
+    this.tableBody.addEventListener(
+      "mousedown",
+      e => {
+        if (e.button === 0) this.placeBombs(e.target)
+      },
+      { once: true }
+    );
   }
 
   get rows() {
@@ -35,8 +41,10 @@ class Minesweeper {
     }
   }
 
-  placeBombs() {
-    const sampleMines = getSample(this.mines, 10);
+  placeBombs(clickedMine) {
+    const sampleMines = getSample(this.mines, 70).filter(
+      mine => mine !== clickedMine
+    );
 
     for (const mine of sampleMines) {
       mine.hasBomb = true;
