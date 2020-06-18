@@ -12,8 +12,8 @@ class Minesweeper {
     return this.rows.flatMap(row => Array.from(row.cells));
   }
 
-  userDidNotPlayYet() {
-    return this.mines.filter(mine => mine.hasAttribute("revealed")).length === 0;
+  isFirstGuess() {
+    return !this.mines.some(mine => mine.hasAttribute("revealed"));
   }
 
   resetBombs() {
@@ -96,10 +96,9 @@ function dig(mine) {
   if (mine.hasAttribute("flagged") || mine.hasAttribute("revealed")) return;
 
   if (mine.hasBomb) {
-    if (mineSweeper.userDidNotPlayYet()) {
-      // If it's user first guess and it is a bomb, replace bombs.
-      mineSweeper.placeBombs();
-      dig(mine);
+    if (mineSweeper.isFirstGuess) {
+      mine.hasBomb = false;
+      getSurroundingMines(mine).find(mine => !mine.hasBomb).hasBomb = true;
     } else {
       mineSweeper.revealAllBombs();
     }
