@@ -6,7 +6,8 @@ function getSample(arr, k) {
   const sample = [];
   for (let i = 0; i < k; i++) {
     const n = getRandomNumber(arr.length);
-    sample.push(arr[n]);
+    const [ extractedItem ] = arr.splice(n, 1);
+    sample.push(extractedItem);
   }
   return sample;
 }
@@ -16,16 +17,19 @@ function formatNumber(number) {
 }
 
 class Minesweeper {
-  constructor(table, timer) {
+  constructor(table, timer, counter) {
     this.tableBody = table.tBodies[0];
     this.timer = timer;
+    this.counter = counter;
 
     this.tableBody.addEventListener(
       "click",
       e => {
         this.timerStart = Date.now();
-        this.placeBombs(e.target)
         this.trackElapsedTime();
+
+        this.placeBombs(e.target);
+        this.counter.innerText = formatNumber(this.bombs.length);
       },
       { once: true }
     );
@@ -70,8 +74,9 @@ class Minesweeper {
   }
 
   placeBombs(clickedMine) {
-    const sampleMines = getSample(this.mines, 70).filter(
-      mine => mine !== clickedMine
+    const sampleMines = getSample(
+      this.mines.filter(mine => mine !== clickedMine),
+      30,
     );
 
     for (const mine of sampleMines) {
@@ -144,7 +149,13 @@ function flag(mine) {
 
 const mineSweeperTable = document.querySelector(".minesweeper");
 const mineSweeperTimer = document.querySelector(".timer");
-const mineSweeper = new Minesweeper(mineSweeperTable, mineSweeperTimer);
+const mineSweeperCounter = document.querySelector(".counter");
+
+const mineSweeper = new Minesweeper(
+  mineSweeperTable,
+  mineSweeperTimer,
+  mineSweeperCounter
+);
 
 mineSweeperTable.addEventListener("click", function(e) {
   if (mineSweeper.gameOver) return;
