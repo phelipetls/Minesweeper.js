@@ -52,7 +52,7 @@ class Minesweeper {
       } else {
         clearInterval(interval);
       }
-    }, 1000)
+    }, 1000);
   }
 
   get rows() {
@@ -158,16 +158,13 @@ const mineSweeper = new Minesweeper(
 );
 
 mineSweeperTable.addEventListener("click", function(e) {
-  if (mineSweeper.gameOver) return;
-  if (e.target.tagName !== "TD") return;
-
+  if (mineSweeper.gameOver || e.target.tagName !== "TD") return;
   mineSweeper.dig(e.target);
 });
 
 mineSweeperTable.addEventListener("contextmenu", function(e) {
   e.preventDefault();
-  if (mineSweeper.gameOver) return;
-  if (e.target.tagName !== "TD") return;
+  if (mineSweeper.gameOver || e.target.tagName !== "TD") return;
   flag(e.target);
 });
 
