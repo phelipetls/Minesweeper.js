@@ -17,11 +17,22 @@ function formatNumber(number) {
 }
 
 class Minesweeper {
-  constructor(table, timer, counter) {
-    this.tableBody = table.tBodies[0];
-    this.timer = timer;
-    this.counter = counter;
+  constructor(container) {
+    this.container = container;
 
+    this.table = container.querySelector(".minesweeper");
+    this.tableBody = this.table.tBodies[0];
+
+    this.timer = container.querySelector(".timer");
+    this.counter = container.querySelector(".counter");
+
+    this.waitToStart();
+    this.handleRightClicks();
+    this.handleLeftClicks();
+    this.handleDoubleClicks();
+  }
+
+  waitToStart() {
     this.tableBody.addEventListener(
       "click",
       e => {
@@ -36,6 +47,33 @@ class Minesweeper {
     this.trackElapsedTime();
     this.placeBombs(firstClick);
     this.bombsCounter = this.bombs.length;
+  }
+
+  handleRightClicks() {
+    this.container.addEventListener("click", (e) => {
+      if (e.target.tagName === "TD" && !this.gameOver) {
+        this.dig(e.target);
+      } else if (e.target.className === "options") {
+        this.showOptions();
+      }
+    });
+  }
+
+  handleLeftClicks() {
+    this.container.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+      if (e.target.tagName === "TD" && !this.gameOver) {
+        this.flag(e.target);
+      }
+    });
+  }
+
+  handleDoubleClicks() {
+    this.container.addEventListener("dblclick", (e) => {
+      if (e.target.dataset.state === "revealed" && !this.gameOver) {
+        getSurroundingMines(e.target).map(mine => this.dig(mine));
+      }
+    });
   }
 
   get bombsCounter() {
@@ -167,28 +205,7 @@ function reveal(mine) {
   }
 }
 
-const mineSweeperTable = document.querySelector(".minesweeper");
-const mineSweeperTimer = document.querySelector(".timer");
-const mineSweeperCounter = document.querySelector(".counter");
+const mineSweeperContainer = document.querySelector(".container");
+const mineSweeper = new Minesweeper(mineSweeperContainer);
 
-const mineSweeper = new Minesweeper(
-  mineSweeperTable,
-  mineSweeperTimer,
-  mineSweeperCounter
-);
-
-mineSweeperTable.addEventListener("click", function(e) {
-  if (mineSweeper.gameOver || e.target.tagName !== "TD") return;
-  mineSweeper.dig(e.target);
-});
-
-mineSweeperTable.addEventListener("contextmenu", function(e) {
-  if (mineSweeper.gameOver || e.target.tagName !== "TD") return;
-  e.preventDefault();
-  mineSweeper.flag(e.target);
-});
-
-mineSweeperTable.addEventListener("dblclick", function(e) {
-  if (mineSweeper.gameOver || e.target.dataset.state !== "revealed") return;
-  getSurroundingMines(e.target).map(mine => mineSweeper.dig(mine));
-});
+const mineSweeperOptions = document.querySelector(".options");
