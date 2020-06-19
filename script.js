@@ -35,7 +35,15 @@ class Minesweeper {
     this.timerStart = Date.now();
     this.trackElapsedTime();
     this.placeBombs(firstClick);
-    this.counter.innerText = formatNumber(this.bombs.length);
+    this.bombsCounter = this.bombs.length;
+  }
+
+  get bombsCounter() {
+    return parseInt(this.counter.innerText);
+  }
+
+  set bombsCounter(number) {
+    this.counter.innerText = formatNumber(number);
   }
 
   get elapsedTime() {
@@ -102,8 +110,10 @@ class Minesweeper {
 
     if (!mine.dataset.state) {
       mine.dataset.state = "flagged";
+      this.bombsCounter -= 1;
     } else if (mine.dataset.state === "flagged") {
       mine.dataset.state = "question";
+      this.bombsCounter += 1;
     } else if (mine.dataset.state === "question") {
       mine.dataset.state = "";
     }
