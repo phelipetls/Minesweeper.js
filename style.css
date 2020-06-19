@@ -48,12 +48,18 @@ table.minesweeper caption {
   height: 30px;
 }
 
-.mine[revealed] {
+.mine[data-state=revealed] {
   background-image: linear-gradient(120deg, #cfd9df 0%, #e2ebf0 100%);
 }
 
-.mine[flagged]::after {
+.mine[data-state=flagged]::after {
   content: "🚩";
+}
+
+.mine[data-state=question]::after {
+  content: "?";
+  color: black;
+  font-weight: bold;
 }
 
 .mine[data-mine-content=bomb]::after {
