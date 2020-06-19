@@ -83,20 +83,25 @@ table.minesweeper caption {
 
 .mine[data-mine-content='4']::after {
   content: "4";
-  color: rebeccapurple;
+  color: purple;
 }
 
 .mine[data-mine-content='5']::after {
   content: "5";
-  color: brown;
+  color: maroon;
 }
 
 .mine[data-mine-content='6']::after {
   content: "6";
-  color: olivedrab;
+  color: cyan;
 }
 
 .mine[data-mine-content='7']::after {
   content: "7";
-  color: crimson;
+  color: black;
+}
+
+.mine[data-mine-content='8']::after {
+  content: "8";
+  color: gray;
 }
