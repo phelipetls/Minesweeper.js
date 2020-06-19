@@ -25,14 +25,17 @@ class Minesweeper {
     this.tableBody.addEventListener(
       "click",
       e => {
-        this.timerStart = Date.now();
-        this.trackElapsedTime();
-
-        this.placeBombs(e.target);
-        this.counter.innerText = formatNumber(this.bombs.length);
+        this.startGame(e.target);
       },
       { once: true }
     );
+  }
+
+  startGame(firstClick) {
+    this.timerStart = Date.now();
+    this.trackElapsedTime();
+    this.placeBombs(firstClick);
+    this.counter.innerText = formatNumber(this.bombs.length);
   }
 
   get elapsedTime() {
