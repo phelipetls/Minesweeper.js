@@ -20,6 +20,7 @@ body {
 }
 
 .menu {
+  flex: 0 50px;
   width: 100%;
   background-color: #a1c4fd;
   padding: 5px;
