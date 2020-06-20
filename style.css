@@ -21,11 +21,13 @@ body {
 
 .menu {
   flex: 0 50px;
+  font-size: 3em;
   width: 100%;
   background-color: #a1c4fd;
   padding: 5px;
 
   display: flex;
+  flex-flow: row wrap;
 }
 
 .game-menu {
