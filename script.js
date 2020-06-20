@@ -12,6 +12,13 @@ function getSample(arr, k) {
   return sample;
 }
 
+
+function createTable(width, height) {
+  const tableCells = `<td class="mine"></td>`.repeat(width);
+  return `<tr>${tableCells}</tr>`.repeat(height);
+}
+
+
 class Minesweeper {
   constructor(container) {
     this.container = container;
@@ -22,10 +29,37 @@ class Minesweeper {
     this.timer = container.querySelector(".timer");
     this.counter = container.querySelector(".counter");
 
+    this.difficultyMenu = container.querySelector("select#difficulty");
+    this.difficulty = this.difficultyMenu.value;
+
     this.waitToStart();
     this.handleRightClicks();
     this.handleLeftClicks();
     this.handleDoubleClicks();
+    this.handleDifficultyChange();
+  }
+
+  handleDifficultyChange() {
+    this.difficultyMenu.addEventListener("change", (e) => {
+      this.difficulty = e.target.value;
+    })
+  }
+
+  get difficulty() {
+    return this.difficulty.value;
+  }
+
+  set difficulty(level) {
+    const {width, height, bombs } = this.difficulties[level];
+    const newTable = createTable(width, height);
+    this.tableBody.innerHTML = newTable;
+    this.bombsCounter = bombs;
+  }
+
+  difficulties = {
+    "easy": { width: 9, height: 9, bombs: 10 },
+    "medium": { width: 16, height: 16, bombs: 40 },
+    "hard": { width: 30, height: 16, bombs: 99 },
   }
 
   waitToStart() {
@@ -42,7 +76,6 @@ class Minesweeper {
     this.timerStart = Date.now();
     this.trackElapsedTime();
     this.placeBombs(firstClick);
-    this.bombsCounter = this.bombs.length;
   }
 
   handleRightClicks() {
