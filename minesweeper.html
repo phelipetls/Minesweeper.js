@@ -7,79 +7,104 @@
     <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <table class="minesweeper">
-      <caption>
-        <div class="menu">
-          <div class="counter">000</div>
-          <div class="smiley">😀</div>
-          <div class="timer">000</div>
-        </div>
-      </caption>
-      <tr>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-      </tr>
-      <tr>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-      </tr>
-      <tr>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-      </tr>
-      <tr>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-      </tr>
-      <tr>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-      </tr>
-      <tr>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-      </tr>
-      <tr>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-      </tr>
-      <tr>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-        <td class="mine" data-mine-content=''></td>
-      </tr>
-    </table>
+    <div class="game">
+      <div class="menu game-menu">
+        <div class="counter">0</div>
+        <div class="smiley">😀</div>
+        <div class="timer">0</div>
+      </div>
+      <table class="minesweeper">
+        <tr>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+        </tr>
+        <tr>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+        </tr>
+        <tr>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+        </tr>
+        <tr>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+        </tr>
+        <tr>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+        </tr>
+        <tr>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+        </tr>
+        <tr>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+        </tr>
+        <tr>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+        </tr>
+        <tr>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+        </tr>
+        <tr>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+          <td class="mine"></td>
+        </tr>
+      </table>
+      <div class="menu difficulty-menu">
+        <select id="difficulty" name="difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+          <option value="custom">Custom</option>
+          <option value="random">Random</option>
+        </select>
+      </div>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>

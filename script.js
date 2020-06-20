@@ -12,10 +12,6 @@ function getSample(arr, k) {
   return sample;
 }
 
-function formatNumber(number) {
-  return "".padStart.call(number, 3, "0");
-}
-
 class Minesweeper {
   constructor(container) {
     this.container = container;
@@ -53,8 +49,6 @@ class Minesweeper {
     this.container.addEventListener("click", (e) => {
       if (e.target.tagName === "TD" && !this.gameOver) {
         this.dig(e.target);
-      } else if (e.target.className === "options") {
-        this.showOptions();
       }
     });
   }
@@ -77,11 +71,11 @@ class Minesweeper {
   }
 
   get bombsCounter() {
-    return parseInt(this.counter.innerText);
+    return this.counter.innerText;
   }
 
   set bombsCounter(number) {
-    this.counter.innerText = formatNumber(number);
+    this.counter.innerText = number;
   }
 
   get elapsedTime() {
@@ -89,8 +83,7 @@ class Minesweeper {
   }
 
   getFormattedElapsedTime() {
-    const time = Math.min(Math.floor(this.elapsedTime), 999);
-    return formatNumber(time);
+    return Math.min(Math.floor(this.elapsedTime), 999);
   }
 
   trackElapsedTime() {
@@ -205,7 +198,5 @@ function reveal(mine) {
   }
 }
 
-const mineSweeperContainer = document.querySelector(".container");
-const mineSweeper = new Minesweeper(mineSweeperContainer);
-
-const mineSweeperOptions = document.querySelector(".options");
+const mineSweeperGame = document.querySelector(".game");
+const mineSweeper = new Minesweeper(mineSweeperGame);
