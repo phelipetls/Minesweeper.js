@@ -6,7 +6,7 @@ function getSample(arr, k) {
   const sample = [];
   for (let i = 0; i < k; i++) {
     const n = getRandomNumber(arr.length);
-    const [ extractedItem ] = arr.splice(n, 1);
+    const [extractedItem] = arr.splice(n, 1);
     sample.push(extractedItem);
   }
   return sample;
@@ -118,7 +118,7 @@ class Minesweeper {
   placeBombs(clickedMine) {
     const sampleMines = getSample(
       this.mines.filter(mine => mine !== clickedMine),
-      30,
+      30
     );
 
     for (const mine of sampleMines) {
@@ -132,7 +132,6 @@ class Minesweeper {
 
   revealAllBombs() {
     this.bombs.map(reveal);
-    alert(`You lost! At ${this.elapsedTime}`);
     this.gameOver = true;
   }
 
