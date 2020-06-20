@@ -151,7 +151,7 @@ class Minesweeper {
   placeBombs(clickedMine) {
     const sampleMines = getSample(
       this.mines.filter(mine => mine !== clickedMine),
-      30
+      this.bombsCounter
     );
 
     for (const mine of sampleMines) {
