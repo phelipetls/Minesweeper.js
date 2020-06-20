@@ -104,7 +104,7 @@ class Minesweeper {
   }
 
   get bombsCounter() {
-    return this.counter.innerText;
+    return Number(this.counter.innerText);
   }
 
   set bombsCounter(number) {
