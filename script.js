@@ -13,6 +13,12 @@ function getSample(arr, k) {
 }
 
 
+function getContentWidth(elem) {
+  const { paddingLeft, paddingRight } = getComputedStyle(elem);
+  return elem.clientWidth - parseFloat(paddingLeft) - parseFloat(paddingRight);
+}
+
+
 function createTable(width, height) {
   const tableCells = `<td class="mine"></td>`.repeat(width);
   return `<tr>${tableCells}</tr>`.repeat(height);
@@ -54,6 +60,17 @@ class Minesweeper {
     const newTable = createTable(width, height);
     this.tableBody.innerHTML = newTable;
     this.bombsCounter = bombs;
+    this.setMinesSize(width, height);
+  }
+
+  setMinesSize(width, height) {
+    const desiredWidth = Math.min(25, this.container.clientWidth / width);
+    const desiredHeight = Math.min(25, this.container.clientHeight / height);
+    for (const mine of this.mines) {
+      mine.style.width = desiredWidth + "px";
+      mine.style.height = desiredHeight + "px";
+      mine.style.fontSize = getContentWidth(this.mines[0]) + "px";
+    }
   }
 
   difficulties = {
