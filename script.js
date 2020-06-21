@@ -65,7 +65,7 @@ class Minesweeper {
 
   setMinesSize(width, height) {
     const desiredWidth = Math.min(25, this.container.clientWidth / width);
-    const desiredHeight = Math.min(25, this.container.clientHeight / height);
+    const desiredHeight = Math.min(desiredWidth, this.container.clientHeight / height);
     for (const mine of this.mines) {
       mine.style.width = desiredWidth + "px";
       mine.style.height = desiredHeight + "px";

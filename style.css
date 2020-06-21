@@ -55,23 +55,32 @@ body {
   justify-content: center;
 }
 
+.minesweeper-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
 .minesweeper {
   table-layout: fixed;
   border-collapse: collapse;
 }
 
-.minesweeper-container {
-  flex: 1;
+.minesweeper tr {
   display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .minesweeper td {
+  padding: 2px;
   font-family: sans-serif;
-  text-align: center;
   border: 1px solid white;
   background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+
+  /* Center character within table cell,
+   * vertically and horizontally */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mine[data-state=revealed] {
