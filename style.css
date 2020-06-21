@@ -60,7 +60,7 @@ body {
   border-collapse: collapse;
 }
 
-.table-container {
+.minesweeper-container {
   flex: 1;
   display: flex;
   align-items: center;
