@@ -27,7 +27,7 @@ function debounce(func, ms) {
   return function() {
     clearTimeout(timeout);
     timeout = setTimeout(() => func.apply(this, arguments), ms);
-  }
+  };
 }
 
 class Minesweeper {
@@ -76,10 +76,13 @@ class Minesweeper {
   }
 
   handleResize() {
-    window.addEventListener("resize", debounce(() => {
-      console.log(this.difficultyMenu.value);
-      this.changeDifficulty(this.difficultyMenu.value)
-    }))
+    window.addEventListener(
+      "resize",
+      debounce(() => {
+        console.log(this.difficultyMenu.value);
+        this.changeDifficulty(this.difficultyMenu.value);
+      })
+    );
   }
 
   difficulties = {
