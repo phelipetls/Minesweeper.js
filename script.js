@@ -24,6 +24,13 @@ function createTable(width, height) {
   return `<tr>${tableCells}</tr>`.repeat(height);
 }
 
+function debounce(func, ms) {
+  let timeout;
+  return function() {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, arguments), ms);
+  }
+}
 
 class Minesweeper {
   constructor(container) {
@@ -43,6 +50,7 @@ class Minesweeper {
     this.handleLeftClicks();
     this.handleDoubleClicks();
     this.handleDifficultyChange();
+    this.handleResize();
   }
 
   handleDifficultyChange() {
@@ -73,6 +81,11 @@ class Minesweeper {
     "easy": { width: 9, height: 9, bombs: 10 },
     "medium": { width: 16, height: 16, bombs: 40 },
     "hard": { width: 30, height: 16, bombs: 99 },
+  handleResize() {
+    window.addEventListener("resize", debounce(() => {
+      console.log(this.difficultyMenu.value);
+      this.changeDifficulty(this.difficultyMenu.value)
+    }))
   }
 
   waitToStart() {
