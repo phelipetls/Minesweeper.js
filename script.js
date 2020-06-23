@@ -80,7 +80,7 @@ class Minesweeper {
       "resize",
       debounce(() => {
         this.changeDifficulty(this.difficultyMenu.value);
-      })
+      }, 200)
     );
   }
 
