@@ -51,10 +51,6 @@ body {
   content: "🕒";
 }
 
-.difficulty-menu {
-  justify-content: center;
-}
-
 .minesweeper-container {
   flex: 1;
   display: flex;
@@ -72,7 +68,6 @@ body {
 
 .minesweeper td {
   padding: 2px;
-  font-family: sans-serif;
   border: 1px solid white;
   background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
 
@@ -81,6 +76,27 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.difficulty-menu {
+  font-family: sans-serif;
+  justify-content: space-around;
+}
+
+.custom-params {
+  flex-basis: 50%;
+
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.param {
+  font-size: 0.3em;
+}
+
+input[type='number'] {
+  width: 80px;
 }
 
 .square[data-state=revealed] {
