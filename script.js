@@ -79,7 +79,6 @@ class Minesweeper {
     window.addEventListener(
       "resize",
       debounce(() => {
-        console.log(this.difficultyMenu.value);
         this.changeDifficulty(this.difficultyMenu.value);
       })
     );
@@ -209,10 +208,6 @@ class Minesweeper {
   revealAllBombs() {
     this.bombs.map(bomb => this.reveal(bomb));
     this.gameOver = true;
-  }
-
-  get nonBombs() {
-    return this.squares.filter(square => !square.hasBomb);
   }
 
   hasPlayerWon() {
