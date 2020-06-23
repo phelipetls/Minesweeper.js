@@ -60,12 +60,12 @@ class Minesweeper {
     const newTable = createTable(width, height);
     this.tableBody.innerHTML = newTable;
     this.bombsCounter = bombs;
-    this.setMinesSize(width, height);
+    this.resizeMines(width, height);
   }
 
-  setMinesSize(width, height) {
+  resizeMines(width) {
     const desiredWidth = Math.min(25, this.container.clientWidth / width);
-    const desiredHeight = Math.min(desiredWidth, this.container.clientHeight / height);
+    const desiredHeight = desiredWidth;
     for (const mine of this.mines) {
       mine.style.width = desiredWidth + "px";
       mine.style.height = desiredHeight + "px";
