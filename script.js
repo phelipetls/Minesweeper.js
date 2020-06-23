@@ -170,7 +170,10 @@ class Minesweeper {
     if (mine.hasBomb) {
       this.revealAllBombs();
     } else {
-      reveal(mine);
+      this.reveal(mine);
+      if (this.hasPlayerWon()) {
+        this.gameOver = true;
+      }
     }
   }
 
@@ -190,8 +193,33 @@ class Minesweeper {
   }
 
   revealAllBombs() {
-    this.bombs.map(reveal);
+    this.bombs.map(bomb => this.reveal(bomb));
     this.gameOver = true;
+  }
+
+  get nonBombs() {
+    return this.mines.filter(mine => !mine.hasBomb);
+  }
+
+  hasPlayerWon() {
+    for (const mine of this.mines) {
+      // If some mine is not a bomb and is not yet revealed
+      // then player needs to reveal
+      if (!mine.hasBomb && mine.dataset.state !== "revealed") return false;
+    }
+    return true;
+  }
+
+  reveal(mine) {
+    mine.dataset.state = "revealed";
+
+    if (mine.hasBomb) {
+      mine.dataset.mineContent = "bomb";
+    } else if (isEmpty(mine)) {
+      getSurroundingMines(mine).map(mine => mineSweeper.dig(mine));
+    } else {
+      mine.dataset.mineContent = countSurroundingBombs(mine);
+    }
   }
 
   flag(mine) {
@@ -242,18 +270,6 @@ function countSurroundingBombs(mine) {
 
 function isEmpty(mine) {
   return countSurroundingBombs(mine) === 0;
-}
-
-function reveal(mine) {
-  mine.dataset.state = "revealed";
-
-  if (mine.hasBomb) {
-    mine.dataset.mineContent = "bomb";
-  } else if (isEmpty(mine)) {
-    getSurroundingMines(mine).map(mine => mineSweeper.dig(mine));
-  } else {
-    mine.dataset.mineContent = countSurroundingBombs(mine);
-  }
 }
 
 const mineSweeperGame = document.querySelector(".game");
