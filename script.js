@@ -12,12 +12,10 @@ function getSample(arr, k) {
   return sample;
 }
 
-
 function getContentWidth(elem) {
   const { paddingLeft, paddingRight } = getComputedStyle(elem);
   return elem.clientWidth - parseFloat(paddingLeft) - parseFloat(paddingRight);
 }
-
 
 function createTable(width, height) {
   const tableCells = `<td class="mine"></td>`.repeat(width);
@@ -77,16 +75,18 @@ class Minesweeper {
     }
   }
 
-  difficulties = {
-    "easy": { width: 9, height: 9, bombs: 10 },
-    "medium": { width: 16, height: 16, bombs: 40 },
-    "hard": { width: 30, height: 16, bombs: 99 },
   handleResize() {
     window.addEventListener("resize", debounce(() => {
       console.log(this.difficultyMenu.value);
       this.changeDifficulty(this.difficultyMenu.value)
     }))
   }
+
+  difficulties = {
+    easy: { width: 9, height: 9, bombs: 10 },
+    medium: { width: 16, height: 16, bombs: 40 },
+    hard: { width: 30, height: 16, bombs: 99 }
+  };
 
   waitToStart() {
     this.tableBody.addEventListener(
@@ -105,7 +105,7 @@ class Minesweeper {
   }
 
   handleRightClicks() {
-    this.container.addEventListener("click", (e) => {
+    this.container.addEventListener("click", e => {
       if (e.target.tagName === "TD" && !this.gameOver) {
         this.dig(e.target);
       }
@@ -113,7 +113,7 @@ class Minesweeper {
   }
 
   handleLeftClicks() {
-    this.container.addEventListener("contextmenu", (e) => {
+    this.container.addEventListener("contextmenu", e => {
       e.preventDefault();
       if (e.target.tagName === "TD" && !this.gameOver) {
         this.flag(e.target);
@@ -122,7 +122,7 @@ class Minesweeper {
   }
 
   handleDoubleClicks() {
-    this.container.addEventListener("dblclick", (e) => {
+    this.container.addEventListener("dblclick", e => {
       if (e.target.dataset.state === "revealed" && !this.gameOver) {
         getSurroundingMines(e.target).map(mine => this.dig(mine));
       }
