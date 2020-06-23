@@ -66,7 +66,7 @@ class Minesweeper {
   }
 
   resizeSquares(width) {
-    const desiredWidth = this.container.clientWidth / width;
+    const desiredWidth = Math.min(25, this.container.clientWidth / width);
     const desiredHeight = desiredWidth;
     for (const square of this.squares) {
       square.style.width = desiredWidth + "px";
