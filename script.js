@@ -36,8 +36,8 @@ class Minesweeper {
     this.counter = container.querySelector(".counter");
 
     this.difficultyMenu = container.querySelector("select#difficulty");
-    this.difficulty = this.difficultyMenu.value;
 
+    this.changeDifficulty(this.difficultyMenu.value);
     this.waitToStart();
     this.handleRightClicks();
     this.handleLeftClicks();
@@ -46,17 +46,13 @@ class Minesweeper {
   }
 
   handleDifficultyChange() {
-    this.difficultyMenu.addEventListener("change", (e) => {
-      this.difficulty = e.target.value;
-    })
+    this.difficultyMenu.addEventListener("change", e => {
+      this.changeDifficulty(e.target.value);
+    });
   }
 
-  get difficulty() {
-    return this.difficulty.value;
-  }
-
-  set difficulty(level) {
-    const {width, height, bombs } = this.difficulties[level];
+  changeDifficulty(level) {
+    const { width, height, bombs } = this.difficulties[level];
     const newTable = createTable(width, height);
     this.tableBody.innerHTML = newTable;
     this.bombsCounter = bombs;
