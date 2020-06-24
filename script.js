@@ -143,14 +143,14 @@ class Minesweeper {
     this.container.addEventListener("dblclick", e => {
       const square = e.target;
       if (square.dataset.state === "revealed" && !this.gameOver) {
+        // Only reveal surrounding squares if number of flagged squares is
+        // greater than or equal to the number of surrounding bombs
         const surrounding = getSurroundingSquares(square);
         const nBombs = +square.dataset.squareContent;
         const nFlagged = surrounding.filter(
           square => square.dataset.state === "flagged"
         ).length;
 
-        // only reveal surrounding squares if number of flagged
-        // squares is greater or equal to number of surrounding bombs
         if (nFlagged >= nBombs) {
           surrounding.map(square => this.dig(square));
         }
