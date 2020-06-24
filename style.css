@@ -79,24 +79,29 @@ body {
 }
 
 .difficulty-menu {
+  font-size: 1em;
   font-family: sans-serif;
+  gap: 5px;
   justify-content: space-around;
 }
 
-.custom-params {
-  flex-basis: 50%;
-
+.params {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .param {
-  font-size: 0.3em;
+  display: flex;
+  align-items: center;
 }
 
-input[type='number'] {
-  width: 80px;
+.param label {
+  margin: 0 5px 0 10px;
+}
+
+.param input[type='number'] {
+  width: 60px;
 }
 
 .square[data-state=revealed] {
