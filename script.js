@@ -58,7 +58,7 @@ class Minesweeper {
   }
 
   changeDifficulty(level) {
-    const { width, height, bombs } = this.difficulties[level];
+    const { width, height, bombs } = this.getDifficultyParams(level);
     const newTable = createTable(width, height);
     this.tableBody.innerHTML = newTable;
     this.bombsCounter = bombs;
@@ -89,6 +89,15 @@ class Minesweeper {
     medium: { width: 16, height: 16, bombs: 40 },
     hard: { width: 30, height: 16, bombs: 99 }
   };
+
+  getDifficultyParams(level) {
+    if (level === "custom") {
+      const [width, height, bombs] = document.querySelectorAll(".param input");
+      return { width: width.value, height: height.value, bombs: bombs.value };
+    } else {
+      return this.difficulties[level];
+    }
+  }
 
   waitToStart() {
     this.tableBody.addEventListener(
