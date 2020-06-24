@@ -42,7 +42,7 @@ class Minesweeper {
 
     this.difficultyMenu = container.querySelector("select#difficulty");
 
-    this.changeDifficulty(this.difficultyMenu.value);
+    this.changeDifficulty();
     this.waitToStart();
     this.handleRightClicks();
     this.handleLeftClicks();
@@ -53,11 +53,12 @@ class Minesweeper {
 
   handleDifficultyChange() {
     this.difficultyMenu.addEventListener("change", e => {
-      this.changeDifficulty(e.target.value);
+      this.changeDifficulty();
     });
   }
 
-  changeDifficulty(level) {
+  changeDifficulty() {
+    const level = this.difficultyMenu.value;
     const { width, height, bombs } = this.getDifficultyParams(level);
     const newTable = createTable(width, height);
     this.tableBody.innerHTML = newTable;
@@ -79,7 +80,7 @@ class Minesweeper {
     window.addEventListener(
       "resize",
       debounce(() => {
-        this.changeDifficulty(this.difficultyMenu.value);
+        this.changeDifficulty();
       }, 200)
     );
   }
