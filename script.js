@@ -54,6 +54,12 @@ class Minesweeper {
   handleDifficultyChange() {
     this.difficultyMenu.addEventListener("change", e => {
       this.changeDifficulty();
+
+      if (e.target.value !== "custom") {
+        document.querySelector(".params").style.display = "";
+      } else {
+        document.querySelector(".params").style.display = "none";
+      }
     });
   }
 
@@ -293,3 +299,8 @@ function isEmpty(square) {
 
 const mineSweeperGame = document.querySelector(".game");
 const mineSweeper = new Minesweeper(mineSweeperGame);
+
+// Hide forms for grid parameters if difficulty level is not custom
+if (document.querySelector(".difficulty-menu").value === "custom") {
+  document.querySelector(".params").style.display = "none";
+}
