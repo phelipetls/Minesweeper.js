@@ -1,21 +1,8 @@
-function getRandomNumber(limit) {
-  return Math.floor(Math.random() * limit);
-}
-
-function getSample(arr, k) {
-  const sample = [];
-  for (let i = 0; i < k; i++) {
-    const n = getRandomNumber(arr.length);
-    const [extractedItem] = arr.splice(n, 1);
-    sample.push(extractedItem);
-  }
-  return sample;
-}
-
 function getContentWidth(elem) {
   const { paddingLeft, paddingRight } = getComputedStyle(elem);
   return elem.clientWidth - parseFloat(paddingLeft) - parseFloat(paddingRight);
 }
+import { getSample } from './random.js';
 
 function createTable(width, height) {
   const tableCells = `<td class="square"></td>`.repeat(width);
