@@ -1,6 +1,7 @@
 import { getSample } from "./random.js";
 import { getContentWidth, debounce } from "./utils.js";
 import { reveal, flag, revealContent, getSurroundingSquares } from "./square.js";
+import { getDifficultyParams } from "./difficulty.js"; 
 
 function createTable(width, height) {
   const tableCells = `<td class="square"></td>`.repeat(width);
@@ -16,8 +17,6 @@ class Minesweeper {
 
     this.timer = container.querySelector(".timer");
     this.counter = container.querySelector(".counter");
-
-    this.difficultyMenu = container.querySelector("select#difficulty");
 
     this.waitToStart();
 
@@ -166,24 +165,17 @@ class Minesweeper {
   }
 
   handleDifficultyChange() {
-    this.difficultyMenu.addEventListener("change", e => {
+    this.container.addEventListener("difficultyChanged", () => {
       this.changeDifficulty();
-
-      if (e.target.value !== "custom") {
-        document.querySelector(".params").style.display = "";
-      } else {
-        document.querySelector(".params").style.display = "none";
-      }
     });
   }
 
   changeDifficulty() {
-    const level = this.difficultyMenu.value;
-    const { width, height, bombs } = this.getDifficultyParams(level);
+    const { width, height, bombs } = getDifficultyParams();
     const newTable = createTable(width, height);
     this.tableBody.innerHTML = newTable;
     this.bombsCounter = bombs;
-    this.resizeSquares(width, height);
+    this.resizeSquares(width);
   }
 
   handleResize() {
@@ -204,27 +196,7 @@ class Minesweeper {
       square.style.fontSize = getContentWidth(this.squares[0]) + "px";
     }
   }
-
-  getDifficultyParams(level) {
-    if (level === "custom") {
-      const [width, height, bombs] = document.querySelectorAll(".param input");
-      return { width: width.value, height: height.value, bombs: bombs.value };
-    } else {
-      return this.difficulties[level];
-    }
-  }
-
-  difficulties = {
-    easy: { width: 9, height: 9, bombs: 10 },
-    medium: { width: 16, height: 16, bombs: 40 },
-    hard: { width: 30, height: 16, bombs: 99 }
-  };
 }
 
 const mineSweeperGame = document.querySelector(".game");
 const mineSweeper = new Minesweeper(mineSweeperGame);
-
-// Hide forms for grid parameters if difficulty level is not custom
-if (document.querySelector(".difficulty-menu").value === "custom") {
-  document.querySelector(".params").style.display = "none";
-}
