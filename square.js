@@ -1,5 +1,5 @@
-const squareRevealed = new Event("squareRevealed", { bubbles: true });
-const squareFlagged = new Event("squareFlagged", { bubbles: true });
+const squareRevealed = new CustomEvent("squareRevealed", { bubbles: true });
+const squareFlagged = new CustomEvent("squareFlagged", { bubbles: true });
 
 export function reveal(square) {
   // If attribute data-state is not empty, then

@@ -1,6 +1,6 @@
-import { getSample } from './random.js';
-import { getContentWidth, debounce } from './utils.js';
-import { reveal, flag, getSurroundingSquares } from './square.js';
+import { getSample } from "./random.js";
+import { getContentWidth, debounce } from "./utils.js";
+import { reveal, flag, getSurroundingSquares } from "./square.js";
 
 function createTable(width, height) {
   const tableCells = `<td class="square"></td>`.repeat(width);
@@ -43,7 +43,6 @@ class Minesweeper {
   get bombs() {
     return this.squares.filter(square => square.hasBomb);
   }
-
 
   handleRightClicks() {
     this.container.addEventListener("click", e => {
@@ -136,13 +135,13 @@ class Minesweeper {
   }
 
   handleRevealedSquare() {
-    this.container.addEventListener("squareRevealed", (e) => {
+    this.container.addEventListener("squareRevealed", e => {
       if (e.target.hasBomb) {
-        this.revealAllBombs()
+        this.revealAllBombs();
       } else if (this.hasPlayerWon()) {
         this.gameOver = true;
       }
-    })
+    });
   }
 
   revealAllBombs() {
@@ -160,10 +159,10 @@ class Minesweeper {
   }
 
   handleFlaggedSquare() {
-    this.container.addEventListener("squareFlagged", (e) => {
+    this.container.addEventListener("squareFlagged", e => {
       if (e.target.dataset.state === "flagged") this.bombsCounter--;
       else this.bombsCounter++;
-    })
+    });
   }
 
   handleDifficultyChange() {
