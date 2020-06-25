@@ -1,20 +1,9 @@
-function getContentWidth(elem) {
-  const { paddingLeft, paddingRight } = getComputedStyle(elem);
-  return elem.clientWidth - parseFloat(paddingLeft) - parseFloat(paddingRight);
-}
 import { getSample } from './random.js';
+import { getContentWidth, debounce } from './utils.js';
 
 function createTable(width, height) {
   const tableCells = `<td class="square"></td>`.repeat(width);
   return `<tr>${tableCells}</tr>`.repeat(height);
-}
-
-function debounce(func, ms) {
-  let timeout;
-  return function() {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(this, arguments), ms);
-  };
 }
 
 class Minesweeper {
