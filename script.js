@@ -32,93 +32,18 @@ class Minesweeper {
     this.handleResize();
   }
 
-  handleRevealedSquare() {
-    this.container.addEventListener("squareRevealed", (e) => {
-      if (e.target.hasBomb) {
-        this.revealAllBombs()
-      } else if (this.hasPlayerWon()) {
-        this.gameOver = true;
-      }
-    })
+  get rows() {
+    return Array.from(this.tableBody.rows);
   }
 
-  handleFlaggedSquare() {
-    this.container.addEventListener("squareFlagged", (e) => {
-      if (e.target.dataset.state === "flagged") this.bombsCounter--;
-      else this.bombsCounter++;
-    })
+  get squares() {
+    return this.rows.flatMap(row => Array.from(row.cells));
   }
 
-  handleDifficultyChange() {
-    this.difficultyMenu.addEventListener("change", e => {
-      this.changeDifficulty();
-
-      if (e.target.value !== "custom") {
-        document.querySelector(".params").style.display = "";
-      } else {
-        document.querySelector(".params").style.display = "none";
-      }
-    });
+  get bombs() {
+    return this.squares.filter(square => square.hasBomb);
   }
 
-  changeDifficulty() {
-    const level = this.difficultyMenu.value;
-    const { width, height, bombs } = this.getDifficultyParams(level);
-    const newTable = createTable(width, height);
-    this.tableBody.innerHTML = newTable;
-    this.bombsCounter = bombs;
-    this.resizeSquares(width, height);
-  }
-
-  resizeSquares(width) {
-    const desiredWidth = Math.min(25, this.container.clientWidth / width);
-    const desiredHeight = desiredWidth;
-    for (const square of this.squares) {
-      square.style.width = desiredWidth + "px";
-      square.style.height = desiredHeight + "px";
-      square.style.fontSize = getContentWidth(this.squares[0]) + "px";
-    }
-  }
-
-  handleResize() {
-    window.addEventListener(
-      "resize",
-      debounce(() => {
-        this.changeDifficulty();
-      }, 200)
-    );
-  }
-
-  difficulties = {
-    easy: { width: 9, height: 9, bombs: 10 },
-    medium: { width: 16, height: 16, bombs: 40 },
-    hard: { width: 30, height: 16, bombs: 99 }
-  };
-
-  getDifficultyParams(level) {
-    if (level === "custom") {
-      const [width, height, bombs] = document.querySelectorAll(".param input");
-      return { width: width.value, height: height.value, bombs: bombs.value };
-    } else {
-      return this.difficulties[level];
-    }
-  }
-
-  waitToStart() {
-    this.tableBody.addEventListener(
-      "click",
-      e => {
-        this.startGame(e.target);
-      },
-      { once: true }
-    );
-  }
-
-  startGame(firstClick) {
-    this.timerStart = Date.now();
-    this.trackElapsedTime();
-    this.placeBombs(firstClick);
-  }
 
   handleRightClicks() {
     this.container.addEventListener("click", e => {
@@ -156,6 +81,33 @@ class Minesweeper {
     });
   }
 
+  waitToStart() {
+    this.tableBody.addEventListener(
+      "click",
+      e => {
+        this.startGame(e.target);
+      },
+      { once: true }
+    );
+  }
+
+  startGame(firstClick) {
+    this.timerStart = Date.now();
+    this.trackElapsedTime();
+    this.placeBombs(firstClick);
+  }
+
+  placeBombs(clickedSquare) {
+    const sampleSquares = getSample(
+      this.squares.filter(square => square !== clickedSquare),
+      this.bombsCounter
+    );
+
+    for (const square of sampleSquares) {
+      square.hasBomb = true;
+    }
+  }
+
   get bombsCounter() {
     return Number(this.counter.innerText);
   }
@@ -183,27 +135,14 @@ class Minesweeper {
     }, 1000);
   }
 
-  get rows() {
-    return Array.from(this.tableBody.rows);
-  }
-
-  get squares() {
-    return this.rows.flatMap(row => Array.from(row.cells));
-  }
-
-  placeBombs(clickedSquare) {
-    const sampleSquares = getSample(
-      this.squares.filter(square => square !== clickedSquare),
-      this.bombsCounter
-    );
-
-    for (const square of sampleSquares) {
-      square.hasBomb = true;
-    }
-  }
-
-  get bombs() {
-    return this.squares.filter(square => square.hasBomb);
+  handleRevealedSquare() {
+    this.container.addEventListener("squareRevealed", (e) => {
+      if (e.target.hasBomb) {
+        this.revealAllBombs()
+      } else if (this.hasPlayerWon()) {
+        this.gameOver = true;
+      }
+    })
   }
 
   revealAllBombs() {
@@ -213,12 +152,74 @@ class Minesweeper {
 
   hasPlayerWon() {
     for (const square of this.squares) {
-      // If some square is not a bomb and is not yet revealed
-      // then player needs to reveal
+      // If a non-bomb square is not yet revealed
+      // then the game is not over
       if (!square.hasBomb && square.dataset.state !== "revealed") return false;
     }
     return true;
   }
+
+  handleFlaggedSquare() {
+    this.container.addEventListener("squareFlagged", (e) => {
+      if (e.target.dataset.state === "flagged") this.bombsCounter--;
+      else this.bombsCounter++;
+    })
+  }
+
+  handleDifficultyChange() {
+    this.difficultyMenu.addEventListener("change", e => {
+      this.changeDifficulty();
+
+      if (e.target.value !== "custom") {
+        document.querySelector(".params").style.display = "";
+      } else {
+        document.querySelector(".params").style.display = "none";
+      }
+    });
+  }
+
+  changeDifficulty() {
+    const level = this.difficultyMenu.value;
+    const { width, height, bombs } = this.getDifficultyParams(level);
+    const newTable = createTable(width, height);
+    this.tableBody.innerHTML = newTable;
+    this.bombsCounter = bombs;
+    this.resizeSquares(width, height);
+  }
+
+  handleResize() {
+    window.addEventListener(
+      "resize",
+      debounce(() => {
+        this.changeDifficulty();
+      }, 200)
+    );
+  }
+
+  resizeSquares(width) {
+    const desiredWidth = Math.min(25, this.container.clientWidth / width);
+    const desiredHeight = desiredWidth;
+    for (const square of this.squares) {
+      square.style.width = desiredWidth + "px";
+      square.style.height = desiredHeight + "px";
+      square.style.fontSize = getContentWidth(this.squares[0]) + "px";
+    }
+  }
+
+  getDifficultyParams(level) {
+    if (level === "custom") {
+      const [width, height, bombs] = document.querySelectorAll(".param input");
+      return { width: width.value, height: height.value, bombs: bombs.value };
+    } else {
+      return this.difficulties[level];
+    }
+  }
+
+  difficulties = {
+    easy: { width: 9, height: 9, bombs: 10 },
+    medium: { width: 16, height: 16, bombs: 40 },
+    hard: { width: 30, height: 16, bombs: 99 }
+  };
 }
 
 const mineSweeperGame = document.querySelector(".game");
