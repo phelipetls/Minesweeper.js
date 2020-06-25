@@ -1,5 +1,6 @@
 import { getSample } from './random.js';
 import { getContentWidth, debounce } from './utils.js';
+import { reveal, flag, getSurroundingSquares } from './square.js';
 
 function createTable(width, height) {
   const tableCells = `<td class="square"></td>`.repeat(width);
@@ -18,13 +19,34 @@ class Minesweeper {
 
     this.difficultyMenu = container.querySelector("select#difficulty");
 
-    this.changeDifficulty();
     this.waitToStart();
+
+    this.handleRevealedSquare();
+    this.handleFlaggedSquare();
+
+    this.changeDifficulty();
     this.handleRightClicks();
     this.handleLeftClicks();
     this.handleDoubleClicks();
     this.handleDifficultyChange();
     this.handleResize();
+  }
+
+  handleRevealedSquare() {
+    this.container.addEventListener("squareRevealed", (e) => {
+      if (e.target.hasBomb) {
+        this.revealAllBombs()
+      } else if (this.hasPlayerWon()) {
+        this.gameOver = true;
+      }
+    })
+  }
+
+  handleFlaggedSquare() {
+    this.container.addEventListener("squareFlagged", (e) => {
+      if (e.target.dataset.state === "flagged") this.bombsCounter--;
+      else this.bombsCounter++;
+    })
   }
 
   handleDifficultyChange() {
@@ -101,7 +123,7 @@ class Minesweeper {
   handleRightClicks() {
     this.container.addEventListener("click", e => {
       if (e.target.tagName === "TD" && !this.gameOver) {
-        this.dig(e.target);
+        reveal(e.target);
       }
     });
   }
@@ -110,7 +132,7 @@ class Minesweeper {
     this.container.addEventListener("contextmenu", e => {
       e.preventDefault();
       if (e.target.tagName === "TD" && !this.gameOver) {
-        this.flag(e.target);
+        flag(e.target);
       }
     });
   }
@@ -128,7 +150,7 @@ class Minesweeper {
         ).length;
 
         if (nFlagged >= nBombs) {
-          surrounding.map(square => this.dig(square));
+          surrounding.map(square => reveal(square));
         }
       }
     });
@@ -169,19 +191,6 @@ class Minesweeper {
     return this.rows.flatMap(row => Array.from(row.cells));
   }
 
-  dig(square) {
-    if (square.dataset.state) return;
-
-    if (square.hasBomb) {
-      this.revealAllBombs();
-    } else {
-      this.reveal(square);
-      if (this.hasPlayerWon()) {
-        this.gameOver = true;
-      }
-    }
-  }
-
   placeBombs(clickedSquare) {
     const sampleSquares = getSample(
       this.squares.filter(square => square !== clickedSquare),
@@ -198,7 +207,7 @@ class Minesweeper {
   }
 
   revealAllBombs() {
-    this.bombs.map(bomb => this.reveal(bomb));
+    this.bombs.map(bomb => reveal(bomb));
     this.gameOver = true;
   }
 
@@ -210,67 +219,6 @@ class Minesweeper {
     }
     return true;
   }
-
-  reveal(square) {
-    square.dataset.state = "revealed";
-
-    if (square.hasBomb) {
-      square.dataset.squareContent = "bomb";
-    } else if (isEmpty(square)) {
-      getSurroundingSquares(square).map(square => mineSweeper.dig(square));
-    } else {
-      square.dataset.squareContent = countSurroundingBombs(square);
-    }
-  }
-
-  flag(square) {
-    if (square.dataset.state === "revealed") return;
-
-    if (!square.dataset.state) {
-      square.dataset.state = "flagged";
-      this.bombsCounter -= 1;
-    } else if (square.dataset.state === "flagged") {
-      square.dataset.state = "question";
-      this.bombsCounter += 1;
-    } else if (square.dataset.state === "question") {
-      square.dataset.state = "";
-    }
-  }
-}
-
-function getAdjacentSquares(square) {
-  return [square.previousElementSibling, square, square.nextElementSibling];
-}
-
-function getSquares(square, direction) {
-  const row = square.parentElement[direction];
-  if (!row || !row.matches("tr")) return [];
-  return getAdjacentSquares(row.cells[square.cellIndex]);
-}
-
-function getSquaresBelow(square) {
-  return getSquares(square, "nextElementSibling");
-}
-
-function getSquaresAbove(square) {
-  return getSquares(square, "previousElementSibling");
-}
-
-function getSurroundingSquares(clickedSquare) {
-  return [
-    ...getSquaresAbove(clickedSquare),
-    ...getSquaresBelow(clickedSquare),
-    clickedSquare.previousElementSibling,
-    clickedSquare.nextElementSibling
-  ].filter(Boolean);
-}
-
-function countSurroundingBombs(square) {
-  return getSurroundingSquares(square).filter(square => square.hasBomb).length;
-}
-
-function isEmpty(square) {
-  return countSurroundingBombs(square) === 0;
 }
 
 const mineSweeperGame = document.querySelector(".game");
