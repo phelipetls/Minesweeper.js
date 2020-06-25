@@ -1,6 +1,6 @@
 import { getSample } from "./random.js";
 import { getContentWidth, debounce } from "./utils.js";
-import { reveal, flag, getSurroundingSquares } from "./square.js";
+import { reveal, flag, revealContent, getSurroundingSquares } from "./square.js";
 
 function createTable(width, height) {
   const tableCells = `<td class="square"></td>`.repeat(width);
@@ -145,8 +145,7 @@ class Minesweeper {
   }
 
   revealAllBombs() {
-    // Do not dispatch event, which would call revealAllBombs again
-    this.bombs.map(bomb => reveal(bomb, false));
+    this.bombs.forEach(revealContent);
     this.gameOver = true;
   }
 
