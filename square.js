@@ -1,14 +1,12 @@
 const squareRevealed = new CustomEvent("squareRevealed", { bubbles: true });
 const squareFlagged = new CustomEvent("squareFlagged", { bubbles: true });
 
-export function reveal(square) {
-  // If attribute data-state is not empty, then
+export function reveal(square, dispatch = true) {
+  // If attribute data-state is not undefined, then
   // it is either revealed, flagged or question
-  // so we can't dig those.
+  // so we can't reveal it.
   if (square.dataset.state) return;
   square.dataset.state = "revealed";
-
-  square.dispatchEvent(squareRevealed);
 
   if (square.hasBomb) {
     square.dataset.squareContent = "bomb";
@@ -17,6 +15,8 @@ export function reveal(square) {
   } else {
     square.dataset.squareContent = countSurroundingBombs(square);
   }
+
+  if (dispatch) square.dispatchEvent(squareRevealed);
 }
 
 export function flag(square) {

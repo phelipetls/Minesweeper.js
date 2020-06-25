@@ -145,7 +145,8 @@ class Minesweeper {
   }
 
   revealAllBombs() {
-    this.bombs.map(bomb => reveal(bomb));
+    // Do not dispatch event, which would call revealAllBombs again
+    this.bombs.map(bomb => reveal(bomb, false));
     this.gameOver = true;
   }
 
