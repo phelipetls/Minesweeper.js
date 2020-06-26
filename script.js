@@ -121,7 +121,9 @@ class Minesweeper {
   }
 
   set elapsedTime(time) {
-    this.timer.innerText = Math.min(Math.floor(time), 999);
+    const displayTime = Math.min(Math.floor(time), 999);
+    const formattedTime = "".padStart.call(displayTime, 3, "0");
+    this.timer.innerText = formattedTime;
   }
 
   trackElapsedTime() {
