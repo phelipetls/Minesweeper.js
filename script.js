@@ -122,13 +122,14 @@ class Minesweeper {
   }
 
   trackElapsedTime() {
-    let interval = setInterval(() => {
     this.startTime = Date.now();
     this.elapsedTime = this.elapsedTime;
+
+    this.timerInterval = setInterval(() => {
       if (!this.gameOver) {
         this.elapsedTime = this.elapsedTime;
       } else {
-        clearInterval(interval);
+        clearInterval(this.timerInterval);
       }
     }, 1000);
   }
