@@ -46,7 +46,7 @@ class Minesweeper {
 
   handleRightClicks() {
     this.container.addEventListener("click", e => {
-      if (e.target.tagName === "TD" && !this.gameOver) {
+      if (e.target.tagName === "TD" && !this.game.over) {
         reveal(e.target);
       }
     });
@@ -55,7 +55,7 @@ class Minesweeper {
   handleLeftClicks() {
     this.container.addEventListener("contextmenu", e => {
       e.preventDefault();
-      if (e.target.tagName === "TD" && !this.gameOver) {
+      if (e.target.tagName === "TD" && !this.game.over) {
         flag(e.target);
       }
     });
@@ -64,7 +64,7 @@ class Minesweeper {
   handleDoubleClicks() {
     this.container.addEventListener("dblclick", e => {
       const square = e.target;
-      if (square.dataset.state === "revealed" && !this.gameOver) {
+      if (square.dataset.state === "revealed" && !this.game.over) {
         // Only reveal surrounding squares if number of flagged squares is
         // greater than or equal to the number of surrounding bombs
         const surrounding = getSurroundingSquares(square);
@@ -81,6 +81,7 @@ class Minesweeper {
   }
 
   waitToStart() {
+    this.game = { over: false, started: false };
     this.createGrid();
 
     this.elapsedTime = 0;
@@ -89,6 +90,7 @@ class Minesweeper {
     this.tableBody.addEventListener(
       "click",
       e => {
+        this.game.started = true;
         this.trackElapsedTime();
         this.placeBombs(e.target);
       },
@@ -128,7 +130,7 @@ class Minesweeper {
     this.elapsedTime = this.elapsedTime;
 
     this.timerInterval = setInterval(() => {
-      if (!this.gameOver) {
+      if (!this.game.over) {
         this.elapsedTime = this.elapsedTime;
       } else {
         clearInterval(this.timerInterval);
@@ -141,14 +143,14 @@ class Minesweeper {
       if (e.target.hasBomb) {
         this.revealAllBombs();
       } else if (this.hasPlayerWon()) {
-        this.gameOver = true;
+        this.game.over = true;
       }
     });
   }
 
   revealAllBombs() {
     this.bombs.forEach(revealContent);
-    this.gameOver = true;
+    this.game.over = true;
   }
 
   hasPlayerWon() {
