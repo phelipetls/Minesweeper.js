@@ -19,7 +19,6 @@ class Minesweeper {
     this.counter = container.querySelector(".counter");
 
     this.waitToStart();
-    this.changeDifficulty();
     this.handleDifficultyChange();
 
     this.handleRevealedSquare();
@@ -162,18 +161,18 @@ class Minesweeper {
     });
   }
 
-  handleDifficultyChange() {
-    this.container.addEventListener("difficultyChanged", () => {
-      this.changeDifficulty();
-    });
-  }
-
-  changeDifficulty() {
+  createGrid() {
     const { width, height, bombs } = getDifficultyParams();
     const newTable = createTable(width, height);
     this.tableBody.innerHTML = newTable;
     this.bombsCounter = bombs;
     this.resizeSquares(width);
+  }
+
+  handleDifficultyChange() {
+    this.container.addEventListener("difficultyChanged", () => {
+      this.createGrid();
+    });
   }
 
   handleResize() {
