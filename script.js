@@ -1,3 +1,4 @@
+import "./restart-game.js";
 import { getSample } from "./random.js";
 import { getContentWidth, debounce } from "./utils.js";
 import { getDifficultyParams } from "./difficulty.js";
@@ -28,6 +29,7 @@ class Minesweeper {
     this.handleDoubleClicks();
 
     this.handleResize();
+    this.handleRestart();
   }
 
   get rows() {
@@ -195,6 +197,14 @@ class Minesweeper {
       square.style.height = desiredHeight + "px";
       square.style.fontSize = getContentWidth(this.squares[0]) + "px";
     }
+  }
+
+  handleRestart() {
+    this.container.addEventListener("restartGame", e => {
+      if (e.detail.answer === "yes") {
+        this.waitToStart();
+      }
+    })
   }
 }
 
