@@ -26,9 +26,11 @@ export function getDifficultyParams() {
 difficultyMenu.addEventListener("change", e => {
   e.target.dispatchEvent(newGameRequest);
 
-  if (e.target.value === "custom") {
-    document.querySelector(".params").style.display = "";
-  } else {
-    document.querySelector(".params").style.display = "none";
+  if (e.target.matches("select")) {
+    if (e.target.value === "custom") {
+      document.querySelector(".params").style.display = "";
+    } else {
+      document.querySelector(".params").style.display = "none";
+    }
   }
 });
