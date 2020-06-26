@@ -1,3 +1,5 @@
+import { newGameRequest } from "./restart-game.js";
+
 const difficultySelect = document.querySelector("select#difficulty");
 const difficultyMenu = document.querySelector(".difficulty-menu");
 const customParams = document.querySelector(".params");
@@ -21,12 +23,8 @@ export function getDifficultyParams() {
   }
 }
 
-const difficultyChanged = new CustomEvent("difficultyChanged", {
-  bubbles: true
-});
-
 difficultyMenu.addEventListener("change", e => {
-  e.target.dispatchEvent(difficultyChanged);
+  e.target.dispatchEvent(newGameRequest);
 
   if (e.target.value === "custom") {
     document.querySelector(".params").style.display = "";

@@ -1,4 +1,4 @@
-import { createNewGamePopup } from "./restart-game.js";
+import { confirmRestartGame } from "./restart-game.js";
 import { getSample } from "./random.js";
 import { getContentWidth, debounce } from "./utils.js";
 import { getDifficultyParams } from "./difficulty.js";
@@ -20,7 +20,6 @@ class Minesweeper {
     this.counter = container.querySelector(".counter");
 
     this.waitToStart();
-    this.handleDifficultyChange();
 
     this.handleRevealedSquare();
     this.handleFlaggedSquare();
@@ -29,7 +28,7 @@ class Minesweeper {
     this.handleDoubleClicks();
 
     this.handleResize();
-    this.handleRestart();
+    this.handleNewGameRequest();
   }
 
   get rows() {
@@ -175,12 +174,6 @@ class Minesweeper {
     this.resizeSquares(width);
   }
 
-  handleDifficultyChange() {
-    this.container.addEventListener("difficultyChanged", () => {
-      this.createGrid();
-    });
-  }
-
   handleResize() {
     window.addEventListener(
       "resize",
@@ -201,20 +194,24 @@ class Minesweeper {
     }
   }
 
-  handleRestart() {
+  handleNewGameRequest() {
     this.container.addEventListener("newGameRequest", () => {
-      if (this.game.started && !this.game.over) {
-        createNewGamePopup();
-      } else if (this.game.over) {
-        this.waitToStart();
-      }
+      this.askForNewGame();
     });
 
-    this.container.addEventListener("restartGame", e => {
-      if (e.detail.answer === "yes") {
-        this.waitToStart();
-      }
+    this.container.addEventListener("restartGameConfirmed", () => {
+      this.waitToStart();
     })
+  }
+
+  askForNewGame() {
+    if (this.game.started && !this.game.over) {
+      confirmRestartGame();
+    } else if (this.game.over) {
+      this.waitToStart();
+    } else if (!this.game.started) {
+      this.createGrid();
+    }
   }
 }
 
