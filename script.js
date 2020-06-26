@@ -182,8 +182,9 @@ class Minesweeper {
     window.addEventListener(
       "resize",
       debounce(() => {
-        this.changeDifficulty();
-      }, 200)
+        const { width } = getDifficultyParams();
+        this.resizeSquares(width);
+      }, 100)
     );
   }
 
