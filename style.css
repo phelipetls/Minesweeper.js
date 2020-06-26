@@ -34,6 +34,10 @@ body {
   justify-content: space-between;
 }
 
+.smiley {
+  cursor: pointer;
+}
+
 .counter,
 .timer {
   padding: 0 5px;
@@ -161,4 +165,27 @@ body {
 .square[data-square-content='8']::after {
   content: "8";
   color: gray;
+}
+
+.new-game-popup {
+  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+  font-family: sans-serif;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
+.confirm-buttons {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.confirm-buttons button {
+  color: black;
+  cursor: pointer;
+  background-color: lightgrey;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 5px 10px;
 }
