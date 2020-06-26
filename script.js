@@ -1,7 +1,7 @@
 import { getSample } from "./random.js";
 import { getContentWidth, debounce } from "./utils.js";
+import { getDifficultyParams } from "./difficulty.js";
 import { reveal, flag, revealContent, getSurroundingSquares } from "./square.js";
-import { getDifficultyParams } from "./difficulty.js"; 
 
 function createTable(width, height) {
   const tableCells = `<td class="square"></td>`.repeat(width);
@@ -19,15 +19,15 @@ class Minesweeper {
     this.counter = container.querySelector(".counter");
 
     this.waitToStart();
+    this.changeDifficulty();
+    this.handleDifficultyChange();
 
     this.handleRevealedSquare();
     this.handleFlaggedSquare();
-
-    this.changeDifficulty();
     this.handleRightClicks();
     this.handleLeftClicks();
     this.handleDoubleClicks();
-    this.handleDifficultyChange();
+
     this.handleResize();
   }
 
@@ -150,8 +150,6 @@ class Minesweeper {
 
   hasPlayerWon() {
     for (const square of this.squares) {
-      // If a non-bomb square is not yet revealed
-      // then the game is not over
       if (!square.hasBomb && square.dataset.state !== "revealed") return false;
     }
     return true;
