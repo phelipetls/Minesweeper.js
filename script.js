@@ -114,18 +114,19 @@ class Minesweeper {
   }
 
   get elapsedTime() {
-    return (Date.now() - this.timerStart) / 1000;
+    return (Date.now() - this.startTime) / 1000;
   }
 
-  getFormattedElapsedTime() {
-    return Math.min(Math.floor(this.elapsedTime), 999);
+  set elapsedTime(time) {
+    this.timer.innerText = Math.min(Math.floor(time), 999);
   }
 
   trackElapsedTime() {
-    this.timer.innerText = this.getFormattedElapsedTime();
     let interval = setInterval(() => {
+    this.startTime = Date.now();
+    this.elapsedTime = this.elapsedTime;
       if (!this.gameOver) {
-        this.timer.innerText = this.getFormattedElapsedTime();
+        this.elapsedTime = this.elapsedTime;
       } else {
         clearInterval(interval);
       }
