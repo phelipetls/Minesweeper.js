@@ -1,4 +1,4 @@
-import "./restart-game.js";
+import { createNewGamePopup } from "./restart-game.js";
 import { getSample } from "./random.js";
 import { getContentWidth, debounce } from "./utils.js";
 import { getDifficultyParams } from "./difficulty.js";
@@ -202,6 +202,14 @@ class Minesweeper {
   }
 
   handleRestart() {
+    this.container.addEventListener("newGameRequest", () => {
+      if (this.game.started && !this.game.over) {
+        createNewGamePopup();
+      } else if (this.game.over) {
+        this.waitToStart();
+      }
+    });
+
     this.container.addEventListener("restartGame", e => {
       if (e.detail.answer === "yes") {
         this.waitToStart();
