@@ -79,19 +79,19 @@ class Minesweeper {
   }
 
   waitToStart() {
+    this.createGrid();
+
+    this.elapsedTime = 0;
+    clearInterval(this.timerInterval);
+
     this.tableBody.addEventListener(
       "click",
       e => {
-        this.startGame(e.target);
+        this.trackElapsedTime();
+        this.placeBombs(e.target);
       },
       { once: true }
     );
-  }
-
-  startGame(firstClick) {
-    this.timerStart = Date.now();
-    this.trackElapsedTime();
-    this.placeBombs(firstClick);
   }
 
   placeBombs(clickedSquare) {
