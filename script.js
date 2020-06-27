@@ -18,6 +18,7 @@ class Minesweeper {
     this.tableBody = this.table.tBodies[0];
 
     this.timer = this.gameContainer.querySelector(".timer");
+    this.smiley = this.gameContainer.querySelector(".smiley");
     this.counter = this.gameContainer.querySelector(".counter");
 
     this.waitToStart();
@@ -82,6 +83,7 @@ class Minesweeper {
 
   waitToStart() {
     this.game = { over: false, started: false };
+    this.smiley.textContent = "😀";
     this.createGrid();
 
     this.elapsedTime = 0;
@@ -143,16 +145,18 @@ class Minesweeper {
   handleRevealedSquare() {
     this.gameContainer.addEventListener("squareRevealed", e => {
       if (e.target.hasBomb) {
+        this.game.over = true;
         this.revealAllBombs();
+        this.smiley.textContent = "😵";
       } else if (this.allNonBombsRevealed()) {
         this.game.over = true;
+        this.smiley.textContent = "😎";
       }
     });
   }
 
   revealAllBombs() {
     this.bombs.forEach(revealContent);
-    this.game.over = true;
   }
 
   allNonBombsRevealed() {
