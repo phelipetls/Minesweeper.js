@@ -174,7 +174,7 @@ class Minesweeper {
     const newTable = createTable(width, height);
     this.tableBody.innerHTML = newTable;
     this.bombsCounter = bombs;
-    this.resizeSquares(width);
+    this.resizeSquares(width, height);
   }
 
   handleResize() {
@@ -187,14 +187,19 @@ class Minesweeper {
     );
   }
 
-  resizeSquares(width) {
-    const desiredWidth = Math.min(25, this.container.clientWidth / width);
-    const desiredHeight = desiredWidth;
+  resizeSquares(width, height) {
+    let dimension = this.getSquaresDimension(width, height);
     for (const square of this.squares) {
-      square.style.width = desiredWidth + "px";
-      square.style.height = desiredHeight + "px";
+      square.style.width = dimension + "px";
+      square.style.height = dimension + "px";
       square.style.fontSize = getContentWidth(this.squares[0]) + "px";
     }
+  }
+
+  getSquaresDimension(width, height) {
+    const { clientWidth } = this.gameContainer;
+    const { clientHeight } = this.tableContainer;
+    return Math.min(25, clientWidth / width, clientHeight / height);
   }
 
   handleNewGameRequest() {
