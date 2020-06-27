@@ -6,37 +6,48 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div class="game">
-      <div class="menu game-menu">
-        <div class="counter">00</div>
-        <div class="smiley">😀</div>
-        <div class="timer">000</div>
-      </div>
-      <div class="minesweeper-container">
-        <table class="minesweeper">
-          <tbody></tbody>
-        </table>
-      </div>
-      <div class="menu difficulty-menu">
-        <select id="difficulty" name="difficulty">
-          <option value="easy">Easy</option>
-          <option value="medium" selected>Medium</option>
-          <option value="hard">Hard</option>
-          <option value="custom">Custom</option>
-          <option value="random">Random</option>
-        </select>
-        <div class="params" style="display: none">
-          <div class="param">
-            <label for="width">Width:</label>
-            <input id="width" type="number" name="width" min="0" max="30" value="10">
-          </div>
-          <div class="param">
-            <label for="height">Height:</label>
-            <input id="height" type="number" name="height" min="0" max="30" value="10">
-          </div>
-          <div class="param">
-            <label for="bombs">Bombs:</label>
-            <input id="bombs" type="number" name="bombs" value="5">
+    <header>
+      <h1>Minesweeper</h1>
+    </header>
+    <main>
+      <aside>
+        <h3>About</h3>
+        <p>
+          This is a Minesweeper implementation in vanilla JavaScript.
+        </p>
+      </aside>
+      <div class="game">
+        <div class="menu game-menu">
+          <div class="counter">00</div>
+          <div class="smiley">😀</div>
+          <div class="timer">000</div>
+        </div>
+        <div class="minesweeper-container">
+          <table class="minesweeper">
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="menu difficulty-menu">
+          <select id="difficulty" name="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option>
+            <option value="custom">Custom</option>
+            <option value="random">Random</option>
+          </select>
+          <div class="params" style="display: none">
+            <div class="param">
+              <label for="width">Width:</label>
+              <input id="width" type="number" name="width" min="0" max="30" value="10">
+            </div>
+            <div class="param">
+              <label for="height">Height:</label>
+              <input id="height" type="number" name="height" min="0" max="30" value="10">
+            </div>
+            <div class="param">
+              <label for="bombs">Bombs:</label>
+              <input id="bombs" type="number" name="bombs" value="5">
+            </div>
           </div>
         </div>
       </div>
@@ -47,7 +58,7 @@
           <button id="no" name="no" type="button">No</button>
         </div>
       </div>
-    </div>
-    <script src="script.js" type="module"></script>
+    </main>
+    <script src="index.js" type="module"></script>
   </body>
 </html>

@@ -12,7 +12,27 @@ body {
   margin: 0;
 }
 
+body {
+  display: flex;
+  flex-flow: column;
+}
+
+header {
+  flex: 0;
+}
+
+header h1 {
+  text-align: center;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-flow: row wrap;
+}
+
 .game {
+  flex: 1;
   height: 100%;
   display: flex;
   flex-flow: column;
@@ -21,7 +41,7 @@ body {
 
 .menu {
   flex: 0 50px;
-  font-size: 3em;
+  font-size: 2em;
   width: 100%;
   background-color: #a1c4fd;
   padding: 5px;
