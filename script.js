@@ -114,7 +114,7 @@ class Minesweeper {
   }
 
   set bombsCounter(number) {
-    this.counter.innerText = number;
+    this.counter.innerText = "".padStart.call(number, 2, "0");
   }
 
   get elapsedTime() {
