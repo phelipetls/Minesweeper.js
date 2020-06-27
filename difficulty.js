@@ -1,5 +1,5 @@
 import { newGameRequest } from "./restart-game.js";
-import { getRandomInt } from "./random.js";
+import { Random } from "./random.js";
 
 const difficultySelect = document.querySelector("select#difficulty");
 const difficultyMenu = document.querySelector(".difficulty-menu");
@@ -27,9 +27,12 @@ export function getDifficultyParams() {
 }
 
 function getRandomParams() {
-  const width = getRandomInt(6, 18);
-  const height = getRandomInt(6, 30);
-  const bombs = Math.floor(0.15 * (width * height));
+  const width = Random.intFromInterval(6, 18);
+  const height = Random.intFromInterval(6, 30);
+
+  const difficulty = Random.floatFromInterval(0.1, 0.15);
+  const bombs = Math.floor(difficulty * (width * height));
+
   return { width, height, bombs };
 }
 
