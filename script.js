@@ -10,14 +10,15 @@ function createTable(width, height) {
 }
 
 class Minesweeper {
-  constructor(container) {
-    this.container = container;
+  constructor() {
+    this.gameContainer = document.querySelector(".game");
+    this.tableContainer = document.querySelector(".minesweeper-container");
 
-    this.table = container.querySelector(".minesweeper");
+    this.table = this.gameContainer.querySelector(".minesweeper");
     this.tableBody = this.table.tBodies[0];
 
-    this.timer = container.querySelector(".timer");
-    this.counter = container.querySelector(".counter");
+    this.timer = this.gameContainer.querySelector(".timer");
+    this.counter = this.gameContainer.querySelector(".counter");
 
     this.waitToStart();
 
@@ -44,7 +45,7 @@ class Minesweeper {
   }
 
   handleRightClicks() {
-    this.container.addEventListener("click", e => {
+    this.gameContainer.addEventListener("click", e => {
       if (e.target.tagName === "TD" && !this.game.over) {
         reveal(e.target);
       }
@@ -52,7 +53,7 @@ class Minesweeper {
   }
 
   handleLeftClicks() {
-    this.container.addEventListener("contextmenu", e => {
+    this.gameContainer.addEventListener("contextmenu", e => {
       e.preventDefault();
       if (e.target.tagName === "TD" && !this.game.over) {
         flag(e.target);
@@ -61,7 +62,7 @@ class Minesweeper {
   }
 
   handleDoubleClicks() {
-    this.container.addEventListener("dblclick", e => {
+    this.gameContainer.addEventListener("dblclick", e => {
       const square = e.target;
       if (square.dataset.state === "revealed" && !this.game.over) {
         // Only reveal surrounding squares if number of flagged squares is
@@ -140,7 +141,7 @@ class Minesweeper {
   }
 
   handleRevealedSquare() {
-    this.container.addEventListener("squareRevealed", e => {
+    this.gameContainer.addEventListener("squareRevealed", e => {
       if (e.target.hasBomb) {
         this.revealAllBombs();
       } else if (this.hasPlayerWon()) {
@@ -162,7 +163,7 @@ class Minesweeper {
   }
 
   handleFlaggedSquare() {
-    this.container.addEventListener("squareFlagged", e => {
+    this.gameContainer.addEventListener("squareFlagged", e => {
       if (e.target.dataset.state === "flagged") this.bombsCounter--;
       else this.bombsCounter++;
     });
@@ -197,11 +198,11 @@ class Minesweeper {
   }
 
   handleNewGameRequest() {
-    this.container.addEventListener("newGameRequest", () => {
+    this.gameContainer.addEventListener("newGameRequest", () => {
       this.askForNewGame();
     });
 
-    this.container.addEventListener("restartGameConfirmed", () => {
+    this.gameContainer.addEventListener("restartGameConfirmed", () => {
       this.waitToStart();
     })
   }
@@ -217,5 +218,4 @@ class Minesweeper {
   }
 }
 
-const mineSweeperGame = document.querySelector(".game");
-const mineSweeper = new Minesweeper(mineSweeperGame);
+new Minesweeper();
