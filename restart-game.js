@@ -1,8 +1,14 @@
 const container = document.querySelector(".minesweeper");
 const smiley = document.querySelector(".smiley");
 const popup = document.querySelector(".new-game-popup");
-export const newGameRequest = new CustomEvent("newGameRequest", { bubbles: true });
-const restartGameConfirmed = new CustomEvent("restartGameConfirmed", { bubbles: true })
+
+export const newGameRequest = new CustomEvent("newGameRequest", {
+  bubbles: true
+});
+
+const restartGameConfirmed = new CustomEvent("restartGameConfirmed", {
+  bubbles: true
+});
 
 smiley.addEventListener("click", () => {
   container.dispatchEvent(newGameRequest);

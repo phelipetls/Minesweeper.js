@@ -2,7 +2,12 @@ import { confirmRestartGame } from "./restart-game.js";
 import { getSample } from "./random.js";
 import { getContentWidth, debounce } from "./utils.js";
 import { getDifficultyParams } from "./difficulty.js";
-import { reveal, flag, revealContent, getSurroundingSquares } from "./square.js";
+import {
+  reveal,
+  flag,
+  revealContent,
+  getSurroundingSquares
+} from "./square.js";
 
 function createTable(width, height) {
   const tableCells = `<td class="square"></td>`.repeat(width);
@@ -145,8 +150,8 @@ class Minesweeper {
   handleRevealedSquare() {
     this.gameContainer.addEventListener("squareRevealed", e => {
       if (e.target.hasBomb) {
-        this.game.over = true;
         this.revealAllBombs();
+        this.game.over = true;
         this.smiley.textContent = "😵";
       } else if (this.allNonBombsRevealed()) {
         this.game.over = true;
@@ -213,7 +218,7 @@ class Minesweeper {
 
     this.gameContainer.addEventListener("restartGameConfirmed", () => {
       this.waitToStart();
-    })
+    });
   }
 
   askForNewGame() {
