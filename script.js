@@ -144,7 +144,7 @@ class Minesweeper {
     this.gameContainer.addEventListener("squareRevealed", e => {
       if (e.target.hasBomb) {
         this.revealAllBombs();
-      } else if (this.hasPlayerWon()) {
+      } else if (this.allNonBombsRevealed()) {
         this.game.over = true;
       }
     });
@@ -155,7 +155,7 @@ class Minesweeper {
     this.game.over = true;
   }
 
-  hasPlayerWon() {
+  allNonBombsRevealed() {
     for (const square of this.squares) {
       if (!square.hasBomb && square.dataset.state !== "revealed") return false;
     }
