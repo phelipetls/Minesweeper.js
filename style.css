@@ -38,15 +38,6 @@ body {
   cursor: pointer;
 }
 
-.counter,
-.timer {
-  padding: 0 5px;
-  min-width: 50px; /* Avoid box width from resizing when number changes */
-
-  display: flex;
-  gap: 5px;
-}
-
 .counter::before {
   content: "🚩";
 }
