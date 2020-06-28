@@ -12,6 +12,10 @@ body {
   margin: 0;
 }
 
+.sans {
+  font-family: sans-serif;
+}
+
 body {
   display: flex;
   flex-flow: column;
