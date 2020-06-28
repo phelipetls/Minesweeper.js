@@ -1,5 +1,6 @@
 html {
   box-sizing: border-box;
+  padding: 0 15px;
 }
 
 *, *::before, *::after {
@@ -12,10 +13,6 @@ body {
   margin: 0;
 }
 
-.sans {
-  font-family: sans-serif;
-}
-
 body {
   display: flex;
   flex-flow: column;
@@ -26,18 +23,45 @@ header {
 }
 
 header h1 {
+  color: white;
+  background-color: #a1c4fd;
   text-align: center;
+  padding: 10px;
+  border: 1px solid #e2ebf0;
+  border-radius: 10px;
 }
 
 main {
   flex: 1;
   display: flex;
   flex-flow: row wrap;
+  gap: 10px;
+}
+
+aside {
+  flex: 1 20%;
+  padding: 20px;
+  border: 1px solid #e2ebf0;
+  border-radius: 10px;
+}
+
+aside h2 {
+  color: white;
+  margin: -20px -20px 0 -20px;
+  border-radius: 10px 10px 0 0;
+  padding: 10px;
+  background-color: #a1c4fd;
+}
+
+aside ul {
+  list-style: none;
 }
 
 .game {
-  flex: 1;
-  height: 100%;
+  border: 1px solid #e2ebf0;
+  border-radius: 10px;
+
+  flex: 1 50%;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -47,6 +71,7 @@ main {
   flex: 0 50px;
   font-size: 2em;
   width: 100%;
+  max-width: 100%;
   background-color: #a1c4fd;
   padding: 5px;
 
@@ -55,6 +80,7 @@ main {
 }
 
 .game-menu {
+  border-radius: 10px 10px 0 0;
   justify-content: space-between;
 }
 
@@ -86,7 +112,7 @@ main {
 }
 
 .minesweeper td {
-  font-family: sans-serif;
+  font-size: 0.8rem;
   padding: 2px;
   border: 1px solid white;
   background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
@@ -99,9 +125,8 @@ main {
 }
 
 .difficulty-menu {
+  border-radius: 0 0 10px 10px ;
   font-size: 1em;
-  font-family: sans-serif;
-  gap: 5px;
   justify-content: space-around;
 }
 
@@ -121,7 +146,7 @@ main {
 }
 
 .param input[type='number'] {
-  width: 60px;
+  width: 5em;
 }
 
 .square[data-state=revealed] {
@@ -183,8 +208,8 @@ main {
 }
 
 .new-game-popup {
+  font-size: larger;
   background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
-  font-family: sans-serif;
   border: 1px solid black;
   border-radius: 10px;
   padding: 5px 10px;
@@ -203,4 +228,17 @@ main {
   border: 1px solid black;
   border-radius: 10px;
   padding: 5px 10px;
+}
+
+.timer,
+.counter,
+.new-game-popup,
+td,
+aside,
+header {
+  font-family: sans-serif;
+}
+
+summary {
+  cursor: pointer;
 }

@@ -190,8 +190,8 @@ class Minesweeper {
     window.addEventListener(
       "resize",
       debounce(() => {
-        const { width } = getDifficultyParams();
-        this.resizeSquares(width);
+        const { width, height } = getDifficultyParams();
+        this.resizeSquares(width, height);
       }, 100)
     );
   }
@@ -201,7 +201,6 @@ class Minesweeper {
     for (const square of this.squares) {
       square.style.width = dimension + "px";
       square.style.height = dimension + "px";
-      square.style.fontSize = getContentWidth(this.squares[0]) + "px";
     }
   }
 
