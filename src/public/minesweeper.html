@@ -14,9 +14,75 @@
         <h3>About</h3>
         <p>
           This is a Minesweeper implementation in vanilla JavaScript.
+        </p>
+        <p>
           Since it is one of my favorite games, I used it as an inspiration to
           learn more about web development.
         </p>
+        <details>
+          <summary>Instructions</summary>
+          <ul class="instructions">
+            <li>
+              <h3>Goal: reveal all squares without a bomb.</h3>
+            </li>
+
+            <li>
+              <details>
+                <summary>Left Click</summary>
+                <p>Reveals the square content.</p>
+                <p>
+                  If it is a bomb, you will lose and all bombs will be revealed.
+                </p>
+                <p>
+                  Otherwise, the square will show the number of surrounding
+                  bombs.
+                </p>
+                <p>
+                  The empty surrounding bombs will be revealed recursively if
+                  the square is empty.
+                </p>
+              </details>
+            </li>
+
+            <li>
+              <details>
+                <summary>Right Click</summary>
+                <p>Mark a square as flagged or as a question mark.</p>
+                <p>
+                  Put a flag on a square if you think there is a bomb there.
+                </p>
+                <p>
+                  If you're not really sure if it is a bomb, put a question
+                  mark.
+                </p>
+              </details>
+            </li>
+
+            <li>
+              <details>
+                <summary>Double Click</summary>
+                <p>
+                  Reveals all surrounding squares, but only if the number of
+                  flagged squares is equal to or greater than the number of
+                  surrounding bombs.
+                </p>
+              </details>
+            </li>
+          </ul>
+        </details>
+        <!-- <details> -->
+        <!--   <summary>Implementation details</summary> -->
+        <!--   <p>I used mostly the DOM API to implement the logic behind the game.</p> -->
+        <!--   <p>The board is a HTML <code>table</code> element and each square is a <code>td</code> element.</p> -->
+        <!--   <p>In this way, it was trivial to get the main operation when a bomb was clicked, I mean, to get the surrounding squares</p> -->
+        <!--   <p> -->
+        <!--     Given a <code>td</code> element, we can get the row above easily with the properties <code>parentElement</code> and <code>previousElementSibling</code>. -->
+        <!--     Similarly for the row below, for which we would use <code>nextElementSibling</code>. -->
+        <!--   </p> -->
+        <!--   <p> -->
+        <!--     Then, to get the <code>td</code> exactly above, we would use the <td>cellIndex</td> property. -->
+        <!--   </p> -->
+        <!-- </details> -->
       </aside>
       <div class="game">
         <div class="menu game-menu">
