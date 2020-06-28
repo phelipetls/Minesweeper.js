@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Minesweeper</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <header>
@@ -70,19 +70,6 @@
             </li>
           </ul>
         </details>
-        <!-- <details> -->
-        <!--   <summary>Implementation details</summary> -->
-        <!--   <p>I used mostly the DOM API to implement the logic behind the game.</p> -->
-        <!--   <p>The board is a HTML <code>table</code> element and each square is a <code>td</code> element.</p> -->
-        <!--   <p>In this way, it was trivial to get the main operation when a bomb was clicked, I mean, to get the surrounding squares</p> -->
-        <!--   <p> -->
-        <!--     Given a <code>td</code> element, we can get the row above easily with the properties <code>parentElement</code> and <code>previousElementSibling</code>. -->
-        <!--     Similarly for the row below, for which we would use <code>nextElementSibling</code>. -->
-        <!--   </p> -->
-        <!--   <p> -->
-        <!--     Then, to get the <code>td</code> exactly above, we would use the <td>cellIndex</td> property. -->
-        <!--   </p> -->
-        <!-- </details> -->
       </aside>
       <div class="game">
         <div class="menu game-menu">
@@ -141,6 +128,6 @@
         </div>
       </div>
     </main>
-    <script src="index.js" type="module"></script>
+    <script src="js/index.js" type="module"></script>
   </body>
 </html>
