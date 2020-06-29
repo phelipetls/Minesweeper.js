@@ -7,6 +7,26 @@ html {
   box-sizing: inherit;
 }
 
+.white-font {
+  color: white;
+}
+
+.upper-border-radius {
+  border-radius: 10px 10px 0 0;
+}
+
+.lower-border-radius {
+  border-radius: 0 0 10px 10px ;
+}
+
+.blue-bg {
+  background-color: #a1c4fd;
+}
+
+.grey-bg {
+  background-color: #e2ebf0;
+}
+
 html,
 body {
   height: 100%;
@@ -23,8 +43,6 @@ header {
 }
 
 header h1 {
-  color: white;
-  background-color: #a1c4fd;
   text-align: center;
   padding: 10px;
   border: 1px solid #e2ebf0;
@@ -46,11 +64,8 @@ aside {
 }
 
 aside h2 {
-  color: white;
   margin: -20px -20px 0 -20px;
-  border-radius: 10px 10px 0 0;
   padding: 10px;
-  background-color: #a1c4fd;
 }
 
 aside ul {
@@ -72,7 +87,6 @@ aside ul {
   font-size: 2em;
   width: 100%;
   max-width: 100%;
-  background-color: #a1c4fd;
   padding: 5px;
 
   display: flex;
@@ -80,7 +94,6 @@ aside ul {
 }
 
 .game-menu {
-  border-radius: 10px 10px 0 0;
   justify-content: space-between;
 }
 
@@ -125,8 +138,7 @@ aside ul {
 }
 
 .difficulty-menu {
-  border-radius: 0 0 10px 10px ;
-  font-size: 1em;
+  font-size: 1.3em;
   justify-content: space-around;
 }
 
@@ -233,6 +245,7 @@ aside ul {
 .timer,
 .counter,
 .new-game-popup,
+.difficulty-menu,
 td,
 aside,
 header {
