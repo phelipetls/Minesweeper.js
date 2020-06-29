@@ -1,0 +1,15 @@
+{
+  "name": "minesweeper.js",
+  "version": "0.0.1",
+  "description": "A Minesweeper implementation in JavaScript",
+  "main": "src/index.js",
+  "scripts": {},
+  "author": "Phelipe Teles",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.3.1"
+  }
+}
