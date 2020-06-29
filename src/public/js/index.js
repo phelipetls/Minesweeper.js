@@ -1,6 +1,6 @@
 import { confirmRestartGame } from "./restart-game.js";
 import { getSample } from "./random.js";
-import { getContentWidth, debounce } from "./utils.js";
+import { debounce } from "./utils.js";
 import { getDifficultyParams } from "./difficulty.js";
 import {
   reveal,
@@ -90,7 +90,7 @@ class Minesweeper {
   waitToStart() {
     this.game = { over: false, started: false };
     this.smiley.textContent = "😀";
-    this.createGrid();
+    this.createBoard();
 
     this.elapsedTime = 0;
     clearInterval(this.timerInterval);
@@ -179,12 +179,32 @@ class Minesweeper {
     });
   }
 
-  createGrid() {
+  createBoard() {
     const { width, height, bombs } = getDifficultyParams();
     const newTable = createTable(width, height);
     this.tableBody.innerHTML = newTable;
     this.bombsCounter = bombs;
     this.resizeSquares(width, height);
+  }
+
+  handleNewGameRequest() {
+    this.gameContainer.addEventListener("newGameRequest", () => {
+      this.askForNewGame();
+    });
+
+    this.gameContainer.addEventListener("restartGameConfirmed", () => {
+      this.waitToStart();
+    });
+  }
+
+  askForNewGame() {
+    if (this.game.started && !this.game.over) {
+      confirmRestartGame();
+    } else if (this.game.over) {
+      this.waitToStart();
+    } else if (!this.game.started) {
+      this.createBoard();
+    }
   }
 
   handleResize() {
@@ -193,7 +213,7 @@ class Minesweeper {
       debounce(() => {
         const { width, height } = getDifficultyParams();
         this.resizeSquares(width, height);
-      }, 100)
+      }, 200)
     );
   }
 
@@ -227,10 +247,10 @@ class Minesweeper {
   getSquaresSizeFullScreen(width, height) {
     const gameContainerParent = this.gameContainer.parentElement;
     const bestWidth = gameContainerParent.clientWidth / width;
-    const notTableHeight =
+    const nonTableHeight =
       this.gameContainer.clientHeight - this.tableContainer.clientHeight;
     const bestHeight =
-      (gameContainerParent.clientHeight - notTableHeight) / height;
+      (gameContainerParent.clientHeight - nonTableHeight) / height;
     return Math.min(25, bestWidth, bestHeight);
   }
 
@@ -242,32 +262,12 @@ class Minesweeper {
       this.gameContainer.classList.add("fullscreen");
       document.querySelector("body").append(wrapper);
       this.styleMenusOnFullscreen();
-    }
+    };
   }
 
   styleMenusOnFullscreen() {
     for (const menu of this.gameContainer.querySelectorAll(".menu")) {
       menu.setAttribute("fullscreen", "fullscreen");
-    };
-  }
-
-  handleNewGameRequest() {
-    this.gameContainer.addEventListener("newGameRequest", () => {
-      this.askForNewGame();
-    });
-
-    this.gameContainer.addEventListener("restartGameConfirmed", () => {
-      this.waitToStart();
-    });
-  }
-
-  askForNewGame() {
-    if (this.game.started && !this.game.over) {
-      confirmRestartGame();
-    } else if (this.game.over) {
-      this.waitToStart();
-    } else if (!this.game.started) {
-      this.createGrid();
     }
   }
 }
