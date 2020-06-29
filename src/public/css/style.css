@@ -255,3 +255,41 @@ header {
 summary {
   cursor: pointer;
 }
+
+.fullscreen-button-container {
+  margin: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fullscreen-wrapper {
+  position: fixed;
+  background-image: url("../images/dimmed-black.png");
+  background-repeat: repeat;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+}
+
+.fullscreen {
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 500px) {
+  .fullscreen {
+    width: 100%;
+    height: 100%;
+  }
+
+  .menu[fullscreen] {
+    border-radius: 0;
+  }
+}

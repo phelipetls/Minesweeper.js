@@ -36,6 +36,7 @@ class Minesweeper {
 
     this.handleResize();
     this.handleNewGameRequest();
+    this.handleFullscreen();
   }
 
   get rows() {
@@ -197,17 +198,57 @@ class Minesweeper {
   }
 
   resizeSquares(width, height) {
-    let dimension = this.getSquaresDimension(width, height);
+    let dimension = this.divideSpacePerSquare(width, height);
     for (const square of this.squares) {
       square.style.width = dimension + "px";
       square.style.height = dimension + "px";
     }
   }
 
-  getSquaresDimension(width, height) {
-    const { clientWidth } = this.gameContainer;
-    const { clientHeight } = this.tableContainer;
-    return Math.min(25, clientWidth / width, clientHeight / height);
+  divideSpacePerSquare(width, height) {
+    if (this.gameContainer.parentElement.className === "fullscreen-wrapper") {
+      return this.getSquaresSizeFullScreen(width, height);
+    } else {
+      return this.getSquaresSize(width, height);
+    }
+  }
+
+  getSquaresSize(width, height) {
+    const { clientWidth, clientHeight } = document.documentElement;
+    const { clientWidth: gameWidth } = this.gameContainer;
+    const { clientHeight: tableHeight } = this.tableContainer;
+    if (clientWidth > clientHeight) {
+      return Math.min(25, gameWidth / width, tableHeight / height);
+    } else {
+      return Math.min(25, gameWidth / width);
+    }
+  }
+
+  getSquaresSizeFullScreen(width, height) {
+    const gameContainerParent = this.gameContainer.parentElement;
+    const bestWidth = gameContainerParent.clientWidth / width;
+    const notTableHeight =
+      this.gameContainer.clientHeight - this.tableContainer.clientHeight;
+    const bestHeight =
+      (gameContainerParent.clientHeight - notTableHeight) / height;
+    return Math.min(25, bestWidth, bestHeight);
+  }
+
+  handleFullscreen() {
+    document.querySelector(".fullscreen-button").onclick = () => {
+      const wrapper = document.createElement("div");
+      wrapper.className = "fullscreen-wrapper";
+      wrapper.append(this.gameContainer);
+      this.gameContainer.classList.add("fullscreen");
+      document.querySelector("body").append(wrapper);
+      this.styleMenusOnFullscreen();
+    }
+  }
+
+  styleMenusOnFullscreen() {
+    for (const menu of this.gameContainer.querySelectorAll(".menu")) {
+      menu.setAttribute("fullscreen", "fullscreen");
+    };
   }
 
   handleNewGameRequest() {
