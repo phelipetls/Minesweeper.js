@@ -290,3 +290,9 @@ class Minesweeper {
 }
 
 new Minesweeper();
+
+const aboutButton = document.querySelector(".about-btn");
+
+aboutButton.onclick = function() {
+  document.querySelector(".about").toggleAttribute("hidden");
+}
