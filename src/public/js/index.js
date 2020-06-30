@@ -257,7 +257,7 @@ class Minesweeper {
   handleFullscreen() {
     const wrapper = document.querySelector(".fullscreen-wrapper");
 
-    document.querySelector(".fullscreen-button").onclick = () => {
+    document.querySelector(".fullscreen-btn").onclick = () => {
       wrapper.removeAttribute("hidden");
       wrapper.append(this.gameContainer);
       this.gameContainer.classList.add("fullscreen");
