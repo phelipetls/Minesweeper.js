@@ -50,14 +50,23 @@ nav {
   justify-content: space-between;
 }
 
-nav h1 {
+.hamburguer-menu {
+  cursor: pointer;
 }
+
+.hamburguer-menu-bar {
+  width: 35px;
+  height: 5px;
+  background-color: white;
+  margin: 6px 0;
+}
+
+/* NAVBAR CONFIGURATION ON SMALLER SCREENS */
 
 .nav-items {
   width: 100%;
   display: flex;
-  flex-flow: row wrap;
-  gap: 10px;
+  flex-flow: column wrap;
 }
 
 .nav-item {
@@ -68,20 +77,21 @@ nav h1 {
   align-items: center;
 }
 
-.nav-item:hover {
-  color: #a1c4fd;
-  background-color: white;
-}
-
+/* ON LARGER SCREENS */
 @media screen and (min-width: 680px) {
   /* Buttons on navbar occupy 100% of height on larger screens */
   .nav-items {
     width: auto;
     height: 100%;
+    flex-flow: row wrap;
   }
 
   .nav-item {
     padding: 10px;
+  }
+
+  .hamburguer-menu {
+    display: none;
   }
 }
 
