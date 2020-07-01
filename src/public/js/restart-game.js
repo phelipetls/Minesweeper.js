@@ -1,3 +1,5 @@
+import { insertCenteredPopup } from "./popup.js";
+
 const container = document.querySelector(".minesweeper");
 const smiley = document.querySelector(".smiley");
 const popup = document.querySelector(".new-game-popup");
@@ -25,12 +27,6 @@ popup.addEventListener("click", e => {
 });
 
 export function confirmRestartGame() {
-  const coords = container.getBoundingClientRect();
-
   popup.removeAttribute("hidden");
-  container.append(popup);
-  container.style.position = "relative";
-  popup.style.position = "absolute";
-  popup.style.left = (coords.width - popup.clientWidth) / 2 + "px";
-  popup.style.top = (coords.height - popup.clientHeight) / 2 + "px";
+  insertCenteredPopup(container, popup);
 }
