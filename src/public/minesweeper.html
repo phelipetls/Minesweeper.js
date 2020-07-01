@@ -132,26 +132,27 @@
             </div>
           </div>
         </div>
+        <div class="popup new-game-popup" hidden>
+          <h6>Sure you want to restart?</h6>
+          <div class="new-game-buttons">
+            <button id="yes" name="yes" type="button">Yes</button>
+            <button id="no" name="no" type="button">No</button>
+          </div>
+        </div>
+        <div class="popup submit-game-popup" hidden>
+          <h6>You won!</h6>
+          <h6>Submit your victory:</h6>
+          <form method="post">
+            <input id="player-name" name="player-name" type="text" placeholder="Enter your name">
+            <div class="submit-buttons">
+              <button id="submit" name="submit" type="button">Submit</button>
+              <button id="cancel" name="cancel" type="button">Cancel</button>
+            </div>
+          </form>
+        </div>
       </div>
     </main>
     <div class="fullscreen-wrapper" hidden></div>
-    <div class="popup new-game-popup" hidden>
-      <h6>Sure you want to restart?</h6>
-      <div class="new-game-buttons">
-        <button id="yes" name="yes" type="button">Yes</button>
-        <button id="no" name="no" type="button">No</button>
-      </div>
-    </div>
-    <div class="popup submit-record-popup" hidden>
-      <h6>Want to submit?</h6>
-      <form method="post">
-        <input id="player" name="player" type="text" placeholder="Your name...">
-        <div class="submit-buttons">
-          <button id="player" name="player" type="button">Submit</button>
-          <button id="player" name="player" type="button">Cancel</button>
-        </div>
-      </form>
-    </div>
     <script src="js/index.js" type="module"></script>
   </body>
 </html>

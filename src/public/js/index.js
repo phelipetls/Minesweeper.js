@@ -1,6 +1,7 @@
 import { confirmRestartGame } from "./restart-game.js";
 import { getSample } from "./random.js";
 import { debounce } from "./utils.js";
+import { askToSubmitGame } from "./submit-game.js";
 import { getDifficultyParams } from "./difficulty.js";
 import {
   reveal,
@@ -37,6 +38,7 @@ class Minesweeper {
     this.handleResize();
     this.handleNewGameRequest();
     this.handleFullscreen();
+    this.handleGameSubmission();
   }
 
   get rows() {
@@ -155,9 +157,27 @@ class Minesweeper {
         this.game.over = true;
         this.smiley.textContent = "😵";
       } else if (this.allNonBombsRevealed()) {
+        askToSubmitGame();
         this.game.over = true;
         this.smiley.textContent = "😎";
       }
+    });
+  }
+
+  handleGameSubmission() {
+    this.gameContainer.addEventListener("submitGame", async e => {
+      const body = JSON.stringify({
+        name: e.detail.name,
+        time: this.elapsedTime,
+        width: this.width,
+        height: this.height
+      });
+
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: body
+      });
     });
   }
 
@@ -181,6 +201,9 @@ class Minesweeper {
 
   createBoard() {
     const { width, height, bombs } = getDifficultyParams();
+    this.width = width;
+    this.height = height;
+
     const newTable = createTable(width, height);
     this.tableBody.innerHTML = newTable;
     this.bombsCounter = bombs;
