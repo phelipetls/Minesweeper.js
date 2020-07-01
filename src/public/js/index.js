@@ -291,18 +291,18 @@ class Minesweeper {
       wrapper.setAttribute("hidden", "hidden");
       this.gameContainer.classList.remove("fullscreen");
       document.querySelector("main").append(this.gameContainer);
-    }
+    };
 
-    wrapper.onclick = (e) => {
+    wrapper.onclick = e => {
       if (e.target.className !== "fullscreen-wrapper") return;
       exitFullscreen();
-    }
+    };
 
-    document.onkeydown = (e) => {
+    document.onkeydown = e => {
       if (e.key === "Escape") {
         exitFullscreen(e);
       }
-    }
+    };
   }
 
   styleMenusOnFullscreen() {
@@ -318,4 +318,4 @@ const aboutButton = document.querySelector(".about-btn");
 
 aboutButton.onclick = function() {
   document.querySelector(".about").toggleAttribute("hidden");
-}
+};
