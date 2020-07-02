@@ -60,6 +60,30 @@ nav {
   border-radius: 10px;
   background-color: #a1c4fd;
   justify-content: space-between;
+.custom-difficulty-params {
+  display: flex;
+  flex-flow: row;
+}
+
+@media screen and (max-width: 680px) {
+  .custom-difficulty-params {
+    flex-flow: column;
+  }
+}
+
+.custom-difficulty-param {
+  display: flex;
+  align-items: center;
+}
+
+.custom-difficulty-param label {
+  width: 50%;
+  text-align: right;
+  margin: 0 5px 0 10px;
+}
+
+.custom-difficulty-param input[type="number"] {
+  width: 4em;
 }
 
 /* NAVBAR CONFIGURATION ON SMALLER SCREENS */
@@ -199,30 +223,6 @@ aside ul {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.difficulty-menu {
-  font-size: 1.3em;
-  justify-content: space-around;
-}
-
-.custom-difficulty-params {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-}
-
-.param {
-  display: flex;
-  align-items: center;
-}
-
-.param label {
-  margin: 0 5px 0 10px;
-}
-
-.param input[type="number"] {
-  width: 5em;
 }
 
 .square[data-state="revealed"] {

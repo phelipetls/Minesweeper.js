@@ -22,7 +22,9 @@ export function getDifficultyParams() {
   } else if (level !== "custom") {
     return difficulties[level];
   } else {
-    const [width, height, bombs] = document.querySelectorAll(".param input");
+    const [width, height, bombs] = document.querySelectorAll(
+      ".custom-difficulty-param input"
+    );
     return { width: width.value, height: height.value, bombs: bombs.value };
   }
 }
@@ -44,7 +46,8 @@ menu.addEventListener("change", e => {
     if (e.target.value === "custom") {
       document.querySelector(".custom-difficulty-params").style.display = "";
     } else {
-      document.querySelector(".custom-difficulty-params").style.display = "none";
+      document.querySelector(".custom-difficulty-params").style.display =
+        "none";
     }
   }
 });
