@@ -7,27 +7,32 @@
   </head>
   <body>
     <nav class="blue-bg white-font">
-      <section class="nav-menu">
+      <div class="nav-menu">
         <h1>Minesweeper.js</h1>
         <div class="nav-items">
           <input class="player-name" type="text" placeholder="Player name...">
           <div class="about-btn nav-item">About</div>
           <div class="nav-item">Leaderboards</div>
-          <div arrow="down" class="nav-item white-filter"></div>
+          <div class="arrow nav-item white-filter"></div>
         </div>
-      </section>
-      <section
-        class="menu game-options-menu blue-bg white-font"
-        style="display: none;"
-      >
-        <select class="user-input" id="difficulty" name="difficulty">
-          <option value="easy">Easy</option>
-          <option value="medium" selected>Medium</option>
-          <option value="hard">Hard</option>
-          <option value="custom">Custom</option>
-          <option value="random">Random</option>
-        </select>
-        <div class="custom-difficulty-params" style="display: none">
+      </div>
+      <div class="game-options blue-bg white-font" hidden>
+        <div class="menu game-options-menu">
+          <select class="user-input" id="difficulty" name="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option>
+            <option value="custom">Custom</option>
+            <option value="random">Random</option>
+          </select>
+          <img
+            class="fullscreen-btn white-filter"
+            width="40"
+            height="100%"
+            src="./images/screen-full.svg"
+            />
+        </div>
+        <div class="menu custom-difficulty-params" style="display: none">
           <div class="custom-difficulty-param">
             <label for="width">Width:</label>
             <input

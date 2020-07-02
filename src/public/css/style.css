@@ -100,12 +100,12 @@ nav {
   flex-flow: column wrap;
 }
 
-[arrow="up"] {
-  background: url("../images/triangle-up.svg") center no-repeat;
+.arrow {
+  background: url("../images/triangle-down.svg") center no-repeat;
 }
 
-[arrow="down"] {
-  background: url("../images/triangle-down.svg") center no-repeat;
+.arrow[closed] {
+  background: url("../images/triangle-up.svg") center no-repeat;
 }
 
 .nav-item {
