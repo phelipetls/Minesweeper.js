@@ -60,7 +60,12 @@ nav {
   margin: 5px 0;
   border-radius: 10px;
   background-color: #a1c4fd;
+  flex-flow: row;
   justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
 .custom-difficulty-params {
   display: flex;
   flex-flow: row;
