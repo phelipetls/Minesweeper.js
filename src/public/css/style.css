@@ -3,7 +3,9 @@ html {
   padding: 0 15px;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
@@ -16,7 +18,7 @@ html {
 }
 
 .lower-border-radius {
-  border-radius: 0 0 10px 10px ;
+  border-radius: 0 0 10px 10px;
 }
 
 .blue-bg {
@@ -158,7 +160,8 @@ aside ul {
 }
 
 .white-filter {
- filter: invert(100%) sepia(0%) saturate(1720%) hue-rotate(31deg) brightness(115%) contrast(106%);
+  filter: invert(100%) sepia(0%) saturate(1720%) hue-rotate(31deg)
+    brightness(115%) contrast(106%);
 }
 
 .smiley {
@@ -223,64 +226,64 @@ aside ul {
   margin: 0 5px 0 10px;
 }
 
-.param input[type='number'] {
+.param input[type="number"] {
   width: 5em;
 }
 
-.square[data-state=revealed] {
+.square[data-state="revealed"] {
   background-image: linear-gradient(120deg, #cfd9df 0%, #e2ebf0 100%);
 }
 
-.square[data-state=flagged]::after {
+.square[data-state="flagged"]::after {
   content: "🚩";
 }
 
-.square[data-state=question]::after {
+.square[data-state="question"]::after {
   content: "?";
   color: black;
   font-weight: bold;
 }
 
-.square[data-square-content=bomb]::after {
+.square[data-square-content="bomb"]::after {
   content: "💣";
 }
 
-.square[data-square-content='1']::after {
+.square[data-square-content="1"]::after {
   content: "1";
   color: blue;
 }
 
-.square[data-square-content='2']::after {
+.square[data-square-content="2"]::after {
   content: "2";
   color: green;
 }
 
-.square[data-square-content='3']::after {
+.square[data-square-content="3"]::after {
   content: "3";
   color: red;
 }
 
-.square[data-square-content='4']::after {
+.square[data-square-content="4"]::after {
   content: "4";
   color: purple;
 }
 
-.square[data-square-content='5']::after {
+.square[data-square-content="5"]::after {
   content: "5";
   color: maroon;
 }
 
-.square[data-square-content='6']::after {
+.square[data-square-content="6"]::after {
   content: "6";
   color: cyan;
 }
 
-.square[data-square-content='7']::after {
+.square[data-square-content="7"]::after {
   content: "7";
   color: black;
 }
 
-.square[data-square-content='8']::after {
+.square[data-square-content="8"]::after {
   content: "8";
   color: gray;
 }
