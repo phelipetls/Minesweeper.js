@@ -1,3 +1,4 @@
+import "./navbar.js";
 import "./fullscreen.js";
 import { confirmRestartGame } from "./restart-game.js";
 import { getSample } from "./random.js";
@@ -211,7 +212,7 @@ class Minesweeper {
   }
 
   handleNewGameRequest() {
-    this.gameContainer.addEventListener("newGameRequest", () => {
+    document.addEventListener("newGameRequest", () => {
       this.askForNewGame();
     });
 

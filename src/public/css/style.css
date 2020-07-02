@@ -45,22 +45,21 @@ nav {
   padding: 0 20px;
   border: 1px solid #e2ebf0;
   margin: 0 -15px 15px;
+}
 
+.nav-menu{
   display: flex;
   flex-flow: row wrap;
   align-items: center;
   justify-content: space-between;
 }
 
-.hamburguer-menu {
-  cursor: pointer;
-}
-
-.hamburguer-menu-bar {
-  width: 35px;
-  height: 5px;
-  background-color: white;
-  margin: 6px 0;
+.game-options-menu {
+  font-size: 1em;
+  margin: 5px 0;
+  border-radius: 10px;
+  background-color: #a1c4fd;
+  justify-content: space-between;
 }
 
 /* NAVBAR CONFIGURATION ON SMALLER SCREENS */
@@ -69,6 +68,10 @@ nav {
   width: 100%;
   display: flex;
   flex-flow: column wrap;
+}
+
+.down-arrow {
+  background: url("../images/triangle-down.svg") center no-repeat;
 }
 
 .nav-item {
@@ -90,10 +93,6 @@ nav {
 
   .nav-item {
     padding: 10px;
-  }
-
-  .hamburguer-menu {
-    display: none;
   }
 }
 
@@ -134,7 +133,6 @@ aside ul {
 
 .menu {
   flex: 0 50px;
-  font-size: 2em;
   width: 100%;
   max-width: 100%;
   padding: 5px;
@@ -143,6 +141,7 @@ aside ul {
 }
 
 .game-menu {
+  font-size: 2em;
   justify-content: space-between;
 }
 
@@ -203,7 +202,7 @@ aside ul {
   justify-content: space-around;
 }
 
-.params {
+.custom-difficulty-params {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;

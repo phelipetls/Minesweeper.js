@@ -7,23 +7,65 @@
   </head>
   <body>
     <nav class="blue-bg white-font">
-      <h1>Minesweeper.js</h1>
-      <div class="hamburguer-menu">
-        <div class="hamburguer-menu-bar"></div>
-        <div class="hamburguer-menu-bar"></div>
-        <div class="hamburguer-menu-bar"></div>
-      </div>
-      <div class="nav-items">
-        <div class="about-btn nav-item">About</div>
-        <div class="nav-item">Leaderboards</div>
+      <section class="nav-menu">
+        <h1>Minesweeper.js</h1>
+        <div class="nav-items">
+          <div class="about-btn nav-item">About</div>
+          <div class="nav-item">Leaderboards</div>
+          <div class="nav-item down-arrow white-filter"></div>
+        </div>
+      </section>
+      <section class="menu game-options-menu blue-bg white-font" style="display: none;">
+        <select class="user-input" id="difficulty" name="difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium" selected>Medium</option>
+          <option value="hard">Hard</option>
+          <option value="custom">Custom</option>
+          <option value="random">Random</option>
+        </select>
+        <div class="custom-difficulty-params" style="display: none">
+          <div class="param">
+            <label for="width">Width:</label>
+            <input
+              class="user-input"
+              id="width"
+              type="number"
+              name="width"
+              min="0"
+              max="30"
+              value="10"
+              />
+          </div>
+          <div class="param">
+            <label for="height">Height:</label>
+            <input
+              class="user-input"
+              id="height"
+              type="number"
+              name="height"
+              min="0"
+              max="30"
+              value="10"
+              />
+          </div>
+          <div class="param">
+            <label for="bombs">Bombs:</label>
+            <input
+              class="user-input"
+              id="bombs"
+              type="number"
+              name="bombs"
+              value="5"
+              />
+          </div>
+        </div>
         <img
           class="fullscreen-btn white-filter"
           width="40"
           height="100%"
           src="./images/screen-full.svg"
-          alt="Fullscreen"
-        />
-      </div>
+          />
+      </section>
     </nav>
     <main>
       <aside class="about" hidden>
@@ -101,53 +143,6 @@
           <table class="minesweeper">
             <tbody></tbody>
           </table>
-        </div>
-        <div
-          class="menu difficulty-menu lower-border-radius blue-bg white-font"
-        >
-          <select class="user-input" id="difficulty" name="difficulty">
-            <option value="easy">Easy</option>
-            <option value="medium" selected>Medium</option>
-            <option value="hard">Hard</option>
-            <option value="custom">Custom</option>
-            <option value="random">Random</option>
-          </select>
-          <div class="params" style="display: none">
-            <div class="param">
-              <label for="width">Width:</label>
-              <input
-                class="user-input"
-                id="width"
-                type="number"
-                name="width"
-                min="0"
-                max="30"
-                value="10"
-              />
-            </div>
-            <div class="param">
-              <label for="height">Height:</label>
-              <input
-                class="user-input"
-                id="height"
-                type="number"
-                name="height"
-                min="0"
-                max="30"
-                value="10"
-              />
-            </div>
-            <div class="param">
-              <label for="bombs">Bombs:</label>
-              <input
-                class="user-input"
-                id="bombs"
-                type="number"
-                name="bombs"
-                value="5"
-              />
-            </div>
-          </div>
         </div>
         <div class="popup new-game-popup" hidden>
           <h6>Sure you want to restart?</h6>

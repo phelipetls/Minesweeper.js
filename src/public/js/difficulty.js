@@ -1,21 +1,22 @@
 import { newGameRequest } from "./restart-game.js";
 import { Random } from "./random.js";
 
-const difficultySelect = document.querySelector("select#difficulty");
-const difficultyMenu = document.querySelector(".difficulty-menu");
-const customParams = document.querySelector(".params");
+const select = document.querySelector("select#difficulty");
+const menu = document.querySelector(".game-options-menu");
+const params = document.querySelector(".custom-difficulty-params");
+
 const difficulties = {
   easy: { width: 9, height: 9, bombs: 10 },
   medium: { width: 16, height: 16, bombs: 40 },
   hard: { width: 30, height: 16, bombs: 99 }
 };
 
-if (difficultySelect.value === "custom") {
-  customParams.style.display = "";
+if (select.value === "custom") {
+  params.style.display = "";
 }
 
 export function getDifficultyParams() {
-  const level = difficultySelect.value;
+  const level = select.value;
   if (level === "random") {
     return getRandomParams();
   } else if (level !== "custom") {
@@ -36,14 +37,14 @@ function getRandomParams() {
   return { width, height, bombs };
 }
 
-difficultyMenu.addEventListener("change", e => {
+menu.addEventListener("change", e => {
   e.target.dispatchEvent(newGameRequest);
 
   if (e.target.matches("select")) {
     if (e.target.value === "custom") {
-      document.querySelector(".params").style.display = "";
+      document.querySelector(".custom-difficulty-params").style.display = "";
     } else {
-      document.querySelector(".params").style.display = "none";
+      document.querySelector(".custom-difficulty-params").style.display = "none";
     }
   }
 });
