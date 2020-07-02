@@ -1,3 +1,4 @@
+import "./fullscreen.js";
 import { confirmRestartGame } from "./restart-game.js";
 import { getSample } from "./random.js";
 import { debounce } from "./utils.js";
@@ -37,7 +38,6 @@ class Minesweeper {
 
     this.handleResize();
     this.handleNewGameRequest();
-    this.handleFullscreen();
     this.handleGameSubmission();
   }
 
@@ -275,40 +275,6 @@ class Minesweeper {
     const bestHeight =
       (gameContainerParent.clientHeight - nonTableHeight) / height;
     return Math.min(25, bestWidth, bestHeight);
-  }
-
-  handleFullscreen() {
-    const wrapper = document.querySelector(".fullscreen-wrapper");
-
-    document.querySelector(".fullscreen-btn").onclick = () => {
-      wrapper.removeAttribute("hidden");
-      wrapper.append(this.gameContainer);
-      this.gameContainer.classList.add("fullscreen");
-      this.styleMenusOnFullscreen();
-    };
-
-    const exitFullscreen = () => {
-      wrapper.setAttribute("hidden", "hidden");
-      this.gameContainer.classList.remove("fullscreen");
-      document.querySelector("main").append(this.gameContainer);
-    };
-
-    wrapper.onclick = e => {
-      if (e.target.className !== "fullscreen-wrapper") return;
-      exitFullscreen();
-    };
-
-    document.onkeydown = e => {
-      if (e.key === "Escape") {
-        exitFullscreen(e);
-      }
-    };
-  }
-
-  styleMenusOnFullscreen() {
-    for (const menu of this.gameContainer.querySelectorAll(".menu")) {
-      menu.setAttribute("fullscreen", "fullscreen");
-    }
   }
 }
 
