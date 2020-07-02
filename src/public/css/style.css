@@ -1,6 +1,7 @@
 html {
   box-sizing: border-box;
   padding: 0 15px;
+  font-family: sans-serif;
 }
 
 *,
@@ -306,16 +307,6 @@ aside ul {
   display: flex;
   margin: 10px 0;
   justify-content: space-between;
-}
-
-.timer,
-.counter,
-.difficulty-menu,
-.popup,
-td,
-nav,
-aside {
-  font-family: sans-serif;
 }
 
 summary {
