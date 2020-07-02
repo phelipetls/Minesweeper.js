@@ -11,3 +11,7 @@ arrow.addEventListener("click", () => {
     arrow.setAttribute("arrow", "down");
   }
 })
+
+arrow.addEventListener("mousedown", e => {
+  e.preventDefault();
+})
