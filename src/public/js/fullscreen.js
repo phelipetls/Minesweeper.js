@@ -2,7 +2,7 @@ const gameContainer = document.querySelector(".game");
 const fullScreenWrapper = document.querySelector(".fullscreen-wrapper");
 const fullScreenButton = document.querySelector(".fullscreen-btn");
 
-fullScreenButton.addEventListener("click", e => {
+fullScreenButton.addEventListener("click", () => {
   const src = fullScreenButton.getAttribute("src");
   if (src.includes("full")) {
     enableFullScreen();

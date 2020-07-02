@@ -16,7 +16,6 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  console.log(`Game registered successfully. Body: ${JSON.stringify(req.body)}`);
   res.sendStatus(200);
 });
 
