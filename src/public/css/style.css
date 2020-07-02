@@ -48,7 +48,7 @@ nav {
   margin: 0 -15px 15px;
 }
 
-.nav-menu{
+.nav-menu {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
@@ -57,9 +57,6 @@ nav {
 
 .game-options-menu {
   font-size: 1em;
-  margin: 5px 0;
-  border-radius: 10px;
-  background-color: #a1c4fd;
   flex-flow: row;
   justify-content: space-between;
   align-items: center;
@@ -69,6 +66,7 @@ nav {
 .custom-difficulty-params {
   display: flex;
   flex-flow: row;
+  justify-content: center;
 }
 
 @media screen and (max-width: 680px) {
@@ -166,11 +164,8 @@ aside ul {
 }
 
 .menu {
-  flex: 0 50px;
   width: 100%;
-  max-width: 100%;
   padding: 5px;
-
   display: flex;
 }
 
