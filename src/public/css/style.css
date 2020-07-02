@@ -70,7 +70,11 @@ nav {
   flex-flow: column wrap;
 }
 
-.down-arrow {
+[arrow="up"] {
+  background: url("../images/triangle-up.svg") center no-repeat;
+}
+
+[arrow="down"] {
   background: url("../images/triangle-down.svg") center no-repeat;
 }
 
