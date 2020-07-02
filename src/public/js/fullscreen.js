@@ -23,7 +23,7 @@ document.addEventListener("keydown", e => {
 });
 
 function enableFullScreen() {
-  fullScreenButton.setAttribute("src", "./images/screen-normal.svg");
+  fullScreenButton.setAttribute("hidden", "hidden");
   fullScreenWrapper.removeAttribute("hidden");
   fullScreenWrapper.append(gameContainer);
   gameContainer.classList.add("fullscreen");
@@ -31,6 +31,7 @@ function enableFullScreen() {
 }
 
 function exitFullScreen() {
+  fullScreenButton.removeAttribute("hidden");
   fullScreenWrapper.setAttribute("hidden", "hidden");
   fullScreenButton.setAttribute("src", "./images/screen-full.svg");
   gameContainer.classList.remove("fullscreen");
