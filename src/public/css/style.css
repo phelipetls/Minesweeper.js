@@ -365,3 +365,11 @@ select#difficulty {
   background: url("../images/triangle-down.svg") center right / 22% no-repeat,
     linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
 }
+
+input.player-name {
+  background-color: #a1c4fd;
+  color: white;
+  border: 0;
+  border-bottom: solid white 1px;
+  padding: 10px 0;
+}
