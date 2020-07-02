@@ -356,3 +356,19 @@ summary {
     border-radius: 0;
   }
 }
+
+.user-input {
+  color: #444;
+  background-color: #fff;
+  padding: 1em .5em;
+  max-width: 100%;
+  border: 1px solid #e2ebf0;
+  border-radius: .5em;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+select {
+  background-image: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+}
