@@ -154,10 +154,12 @@ class Minesweeper {
     this.gameContainer.addEventListener("squareRevealed", e => {
       if (e.target.hasBomb) {
         this.game.over = true;
+        this.game.victory = false;
         this.smiley.textContent = "😵";
         this.revealAllBombs();
       } else if (this.allNonBombsRevealed()) {
         this.game.over = true;
+        this.game.victory = true;
         this.smiley.textContent = "😎";
       }
 
@@ -174,9 +176,11 @@ class Minesweeper {
 
     const body = JSON.stringify({
       name: playerName,
-      time: this.elapsedTime,
       width: this.width,
-      height: this.height
+      height: this.height,
+      bombs: this.bombsCounter,
+      time: this.elapsedTime,
+      victory: this.game.victory,
     });
 
     await fetch("/", {
