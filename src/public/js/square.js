@@ -2,23 +2,18 @@ const squareRevealed = new CustomEvent("squareRevealed", { bubbles: true });
 const squareFlagged = new CustomEvent("squareFlagged", { bubbles: true });
 
 export function reveal(square) {
-  if (
-    square.dataset.state === "revealed" ||
-    square.dataset.state === "flagged" ||
-    square.dataset.state === "question"
-  )
-    return;
   revealContent(square);
   square.dispatchEvent(squareRevealed);
 }
 
 export function revealContent(square) {
+  if (square.dataset.state) return;
   square.dataset.state = "revealed";
 
   if (square.hasBomb) {
     square.dataset.squareContent = "bomb";
   } else if (isEmpty(square)) {
-    getSurroundingSquares(square).map(square => reveal(square));
+    getSurroundingSquares(square).map(revealContent);
   } else {
     square.dataset.squareContent = countSurroundingBombs(square);
   }

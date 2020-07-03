@@ -152,18 +152,17 @@ class Minesweeper {
 
   handleRevealedSquare() {
     this.gameContainer.addEventListener("squareRevealed", e => {
+      const userWon = this.areAllNonBombsRevealed();
+
       if (e.target.hasBomb) {
-        this.game.over = true;
-        this.game.victory = false;
         this.smiley.textContent = "😵";
         this.revealAllBombs();
-      } else if (this.allNonBombsRevealed()) {
-        this.game.over = true;
-        this.game.victory = true;
+      } else if (userWon) {
         this.smiley.textContent = "😎";
       }
 
-      if (this.game.over) {
+      if (e.target.hasBomb || userWon) {
+        this.game.over = true;
         this.recordGame();
       }
     });
@@ -180,7 +179,7 @@ class Minesweeper {
       height: this.height,
       bombs: this.bombsCounter,
       time: this.elapsedTime,
-      victory: this.game.victory,
+      victory: this.areAllNonBombsRevealed(),
     });
 
     await fetch("/", {
@@ -194,7 +193,7 @@ class Minesweeper {
     this.bombs.forEach(revealContent);
   }
 
-  allNonBombsRevealed() {
+  areAllNonBombsRevealed() {
     for (const square of this.squares) {
       if (!square.hasBomb && square.dataset.state !== "revealed") return false;
     }
