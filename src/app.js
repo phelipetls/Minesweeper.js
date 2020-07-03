@@ -10,24 +10,23 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(morgan("short"));
 
-const minesweeperHTML = path.join(__dirname, "public/minesweeper.html");
 const db = new sqlite3.Database("./db/minesweeper.db");
 
-db.serialize(() => {
-  db.run(`
-    CREATE TABLE IF NOT EXISTS games (
-      name TEXT NOT NULL,
-      width INTEGER NOT NULL,
-      height INTEGER NOT NULL,
-      bombs INTEGER NOT NULL,
-      time REAL NOT NULL,
-      victory INTEGER NOT NULL
-    )`);
-});
+db.run(`
+  CREATE TABLE IF NOT EXISTS games (
+    id INTEGER PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    width INTEGER NOT NULL,
+    height INTEGER NOT NULL,
+    bombs INTEGER NOT NULL,
+    time REAL NOT NULL,
+    victory INTEGER NOT NULL
+)`);
 
+const indexHtml = path.join(__dirname, "public/minesweeper.html");
 
 app.get("/", (req, res) => {
-  res.sendFile(minesweeperHTML);
+  res.sendFile(indexHtml);
 });
 
 app.post("/", (req, res) => {
