@@ -3,12 +3,7 @@ const fullScreenWrapper = document.querySelector(".fullscreen-wrapper");
 const fullScreenButton = document.querySelector(".fullscreen-btn");
 
 fullScreenButton.addEventListener("click", () => {
-  const src = fullScreenButton.getAttribute("src");
-  if (src.includes("full")) {
-    enableFullScreen();
-  } else {
-    exitFullScreen();
-  }
+  enableFullScreen();
 });
 
 fullScreenWrapper.addEventListener("click", e => {

@@ -1,8 +1,6 @@
-import { newGameRequest } from "./restart-game.js";
 import { Random } from "./random.js";
 
 const select = document.querySelector("select#difficulty");
-const menu = document.querySelector(".game-options-menu");
 const params = document.querySelector(".custom-difficulty-params");
 
 const difficulties = {
@@ -17,6 +15,7 @@ if (select.value === "custom") {
 
 export function getDifficultyParams() {
   const level = select.value;
+
   if (level === "random") {
     return getRandomParams();
   } else if (level !== "custom") {
@@ -34,20 +33,11 @@ function getRandomParams() {
   const height = Random.intFromInterval(6, 30);
 
   const difficulty = Random.floatFromInterval(0.1, 0.15);
-  const bombs = Math.floor(difficulty * (width * height));
+  const bombs = Math.floor(difficulty * width * height);
 
   return { width, height, bombs };
 }
 
-menu.addEventListener("change", e => {
-  e.target.dispatchEvent(newGameRequest);
-
-  if (e.target.matches("select")) {
-    if (e.target.value === "custom") {
-      document.querySelector(".custom-difficulty-params").style.display = "";
-    } else {
-      document.querySelector(".custom-difficulty-params").style.display =
-        "none";
-    }
-  }
+select.addEventListener("change", e => {
+  params.style.display = (e.target.value === "custom" ? "": "none");
 });
