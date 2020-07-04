@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Minesweeper.js</title>
+    <link rel="stylesheet" href="../css/normalize.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <nav>
+      <h1>Minesweeper.js</h1>
+      <ul>
+        {% block firstlink %}
+          <li><a href="/game">Play</a></li>
+        {% endblock %}
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Register</a></li>
+      </ul>
+    </nav>
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+    <footer class="center">
+      <a class="center" href="https://github.com/phelipetls/Minesweeper.js">
+        <img src="./images/mark-github.svg" alt="">
+      </a>
+    </footer>
+  </body>
+</html>

@@ -2,11 +2,17 @@ const express = require("express");
 const path = require("path");
 const morgan = require("morgan");
 const sqlite3 = require("sqlite3").verbose();
+const nunjucks = require("nunjucks");
 
 const app = express();
 const port = 3000;
 
 app.use(express.static("public"));
+nunjucks.configure("src/views", {
+  autoescape: true,
+  express: app
+});
+
 app.use(express.static("src/public"));
 app.use(express.json());
 app.use(morgan("short"));
@@ -24,12 +30,8 @@ db.run(`
     victory INTEGER NOT NULL
 )`);
 
-const indexHtml = path.join(__dirname, "public/minesweeper.html");
 
 app.get("/", (req, res) => {
-  res.sendFile(indexHtml);
-});
-
 app.post("/", (req, res) => {
   db.serialize(() => {
     db.run(
@@ -39,6 +41,7 @@ app.post("/", (req, res) => {
   });
 
   res.sendStatus(200);
+  res.render("index.html");
 });
 
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
