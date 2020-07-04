@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <section class="authentication">
+    <form method="post">
+      {% include "form-content.html" %}
+    </form>
+    <div class="authentication-info">
+      Not registered yet? <a href="/register">Sign up</a>
+    </div>
+  </section>
+{% endblock %}

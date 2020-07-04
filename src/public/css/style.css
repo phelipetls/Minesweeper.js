@@ -262,6 +262,45 @@ footer a {
   padding: 0 0.3em;
 }
 
+/* Authentication
+   ========================================================================== */
+
+.authentication {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+
+div.authentication-info {
+  margin: 2em;
+}
+
+form {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.form-input {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.form-input label {
+  width: 6em;
+  text-align: right;
+  padding-right: 5px;
+}
+
+form button {
+  align-self: stretch;
+}
+
 /* Popup
    ========================================================================== */
 

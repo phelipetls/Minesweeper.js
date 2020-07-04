@@ -23,4 +23,12 @@ app.get("/game", (req, res) => {
   res.render("game.html");
 });
 
+app.get("/login", (req, res) => {
+  res.render("login.html");
+});
+
+app.get("/register", (req, res) => {
+  res.render("register.html");
+});
+
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
