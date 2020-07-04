@@ -53,16 +53,16 @@ nav ul {
   align-items: center;
 }
 
+nav a {
+  color: var(--dark-grey);
+  text-decoration: none;
+}
+
 nav ul li {
   text-align: center;
 }
 
-nav a {
-  text-decoration: none;
-}
-
 nav ul li a {
-  color: var(--black);
   padding: 10px;
 }
 
