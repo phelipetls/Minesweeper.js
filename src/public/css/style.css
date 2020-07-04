@@ -88,17 +88,6 @@ section.play-game-button {
   flex: 1;
 }
 
-/* Footer
-   ========================================================================== */
-
-footer {
-  margin: 1em;
-}
-
-footer a {
-  padding: 0 0.3em;
-}
-
 /* Game components
    ========================================================================== */
 
@@ -216,6 +205,17 @@ table {
 
 .square[data-square-content="8"]::before {
   color: gray;
+}
+
+/* Footer
+   ========================================================================== */
+
+footer {
+  margin: 1em 0;
+}
+
+footer a {
+  padding: 0 0.3em;
 }
 
 /* Miscellaneous
