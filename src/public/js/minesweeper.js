@@ -1,4 +1,5 @@
 import { getSample } from "./random.js";
+import { confirmNewGame } from "./restart-game.js";
 import { debounce, createTable } from "./utils.js";
 import { getDifficultyParams } from "./difficulty.js";
 import {
@@ -27,6 +28,7 @@ export class Minesweeper {
     this.handleRightClicks();
     this.handleLeftClicks();
     this.handleDoubleClicks();
+    this.handleNewGames();
     this.handleResize();
   }
 
@@ -153,7 +155,6 @@ export class Minesweeper {
 
       if (e.target.hasBomb || userWon) {
         this.game.over = true;
-        this.recordGame();
       }
     });
   }
@@ -176,12 +177,16 @@ export class Minesweeper {
     });
   }
 
-  askForNewGame() {
-    if (this.game.over) {
-      this.waitToStart();
-    } else if (!this.game.started) {
-      this.createBoard();
-    }
+  handleNewGames() {
+    document.addEventListener("newGame", (e) => {
+      if (this.game.over || e.detail.force) {
+        this.waitToStart();
+      } else if (!this.game.started) {
+        this.createBoard();
+      } else if (this.game.started && !this.game.over) {
+        confirmNewGame();
+      }
+    })
   }
 
   createBoard() {
