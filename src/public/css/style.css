@@ -111,12 +111,19 @@ div.custom-difficulty-params {
   align-items: center;
 }
 
+@media screen and (max-width: 680px) {
+  div.custom-difficulty-params {
+    flex-flow: column;
+  }
+}
+
 .difficulty-param {
   display: flex;
   flex-flow: row;
 }
 
 .difficulty-param label {
+  color: var(--dark-grey);
 }
 
 .difficulty-param input {
