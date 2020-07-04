@@ -39,5 +39,5 @@ function getRandomParams() {
 }
 
 select.addEventListener("change", e => {
-  params.style.display = (e.target.value === "custom" ? "": "none");
+  params.style.display = e.target.value === "custom" ? "" : "none";
 });
