@@ -171,39 +171,54 @@ table {
               1px 1px var(--dark-grey);
 }
 
-.square::before {
+.square[data-state='revealed'] {
+  background-color: var(--light-grey);
+}
+
+.square:before {
   content: attr(data-square-content);
 }
 
-.square[data-square-content="1"]::before {
+.square[data-state='flagged']:before {
+  background-image: url("../images/bxs-flag-alt.svg");
+}
+
+.square[bomb] {
+  background-image: url("../images/bxs-bomb.svg");
+}
+
+.square[bomb]:before {
+}
+
+.square[data-square-content="1"]:before {
   color: blue;
 }
 
-.square[data-square-content="2"]::before {
+.square[data-square-content="2"]:before {
   color: green;
 }
 
-.square[data-square-content="3"]::before {
+.square[data-square-content="3"]:before {
   color: red;
 }
 
-.square[data-square-content="4"]::before {
+.square[data-square-content="4"]:before {
   color: purple;
 }
 
-.square[data-square-content="5"]::before {
+.square[data-square-content="5"]:before {
   color: maroon;
 }
 
-.square[data-square-content="6"]::before {
+.square[data-square-content="6"]:before {
   color: cyan;
 }
 
-.square[data-square-content="7"]::before {
+.square[data-square-content="7"]:before {
   color: black;
 }
 
-.square[data-square-content="8"]::before {
+.square[data-square-content="8"]:before {
   color: gray;
 }
 

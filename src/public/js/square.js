@@ -11,7 +11,7 @@ export function revealContent(square) {
   square.dataset.state = "revealed";
 
   if (square.hasBomb) {
-    square.dataset.squareContent = "💣";
+    square.setAttribute("bomb", "bomb");
   } else if (isEmpty(square)) {
     getSurroundingSquares(square).map(revealContent);
   } else {
