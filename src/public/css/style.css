@@ -337,6 +337,12 @@ input, button {
 
 button {
   background-color: var(--grey);
+  cursor: pointer;
+}
+
+button:hover {
+  color: var(--white);
+  background-color: var(--dark-grey);
 }
 
 select {
