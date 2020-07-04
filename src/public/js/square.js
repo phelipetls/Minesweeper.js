@@ -11,11 +11,12 @@ export function revealContent(square) {
   square.dataset.state = "revealed";
 
   if (square.hasBomb) {
-    square.dataset.squareContent = "bomb";
+    square.dataset.squareContent = "💣";
   } else if (isEmpty(square)) {
     getSurroundingSquares(square).map(revealContent);
   } else {
-    square.dataset.squareContent = countSurroundingBombs(square);
+    const squareContent = countSurroundingBombs(square);
+    square.dataset.squareContent = squareContent;
   }
 }
 

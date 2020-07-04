@@ -1,5 +1,8 @@
 :root {
-  --grey: #dddddd;
+  --white: #e9e9e9;
+  --light-grey: #f3f3f3;
+  --grey: #dcdcdc;
+  --dark-grey: #777;
   --black: #111111;
 }
 
@@ -85,6 +88,108 @@ footer {
 
 footer a {
   padding: 0 0.3em;
+}
+
+/* Game components
+   ========================================================================== */
+
+.game {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+
+/* Difficulty parameters
+   ========================================================================== */
+
+section.difficulty {
+  display: flex;
+  justify-content: space-between;
+}
+
+div.custom-difficulty-params {
+  display: flex;
+  align-items: center;
+}
+
+.difficulty-param {
+  display: flex;
+  flex-flow: row;
+}
+
+.difficulty-param label {
+}
+
+.difficulty-param input {
+  margin: 0 10px;
+  width: 4em;
+}
+
+.difficulty-param input:nth-last-child(1) {
+}
+
+/* Game menu
+   ========================================================================== */
+
+.game-menu {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Minesweeper
+   ========================================================================== */
+
+.table-container {
+  flex: 1;
+}
+
+table {
+  margin: 0;
+  padding: 0;
+}
+
+.square {
+  text-align: center;
+  background-color: var(--grey);
+  box-shadow: inset 2px 2px var(--white),
+              1px 1px var(--dark-grey);
+}
+
+.square::before {
+  content: attr(data-square-content);
+}
+
+.square[data-square-content="1"]::before {
+  color: blue;
+}
+
+.square[data-square-content="2"]::before {
+  color: green;
+}
+
+.square[data-square-content="3"]::before {
+  color: red;
+}
+
+.square[data-square-content="4"]::before {
+  color: purple;
+}
+
+.square[data-square-content="5"]::before {
+  color: maroon;
+}
+
+.square[data-square-content="6"]::before {
+  color: cyan;
+}
+
+.square[data-square-content="7"]::before {
+  color: black;
+}
+
+.square[data-square-content="8"]::before {
+  color: gray;
 }
 
 /* Miscellaneous

@@ -19,4 +19,8 @@ app.get("/", (req, res) => {
   res.render("index.html");
 });
 
+app.get("/game", (req, res) => {
+  res.render("game.html");
+});
+
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));

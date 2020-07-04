@@ -1,7 +1,5 @@
-import { confirmRestartGame } from "./restart-game.js";
 import { getSample } from "./random.js";
 import { debounce, createTable } from "./utils.js";
-import { getPlayerName } from "./record-game.js";
 import { getDifficultyParams } from "./difficulty.js";
 import {
   flag,
@@ -13,9 +11,9 @@ import {
 export class Minesweeper {
   constructor() {
     this.gameContainer = document.querySelector(".game");
-    this.tableContainer = document.querySelector(".minesweeper-container");
+    this.tableContainer = document.querySelector(".table-container");
 
-    this.table = this.gameContainer.querySelector(".minesweeper");
+    this.table = this.gameContainer.querySelector("table");
     this.tableBody = this.table.tBodies[0];
 
     this.timer = this.gameContainer.querySelector(".timer");
@@ -29,9 +27,7 @@ export class Minesweeper {
     this.handleRightClicks();
     this.handleLeftClicks();
     this.handleDoubleClicks();
-
     this.handleResize();
-    this.handleNewGameRequest();
   }
 
   get rows() {
@@ -162,27 +158,6 @@ export class Minesweeper {
     });
   }
 
-  async recordGame() {
-    const playerName = getPlayerName();
-
-    if (!playerName) return;
-
-    const body = JSON.stringify({
-      name: playerName,
-      width: this.width,
-      height: this.height,
-      bombs: this.bombsCounter,
-      time: this.elapsedTime,
-      victory: this.areAllNonBombsRevealed()
-    });
-
-    await fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: body
-    });
-  }
-
   revealAllBombs() {
     this.bombs.forEach(revealContent);
   }
@@ -201,20 +176,8 @@ export class Minesweeper {
     });
   }
 
-  handleNewGameRequest() {
-    document.addEventListener("newGameRequest", () => {
-      this.askForNewGame();
-    });
-
-    this.gameContainer.addEventListener("restartGameConfirmed", () => {
-      this.waitToStart();
-    });
-  }
-
   askForNewGame() {
-    if (this.game.started && !this.game.over) {
-      confirmRestartGame();
-    } else if (this.game.over) {
+    if (this.game.over) {
       this.waitToStart();
     } else if (!this.game.started) {
       this.createBoard();
@@ -223,6 +186,7 @@ export class Minesweeper {
 
   createBoard() {
     const { width, height, bombs } = getDifficultyParams();
+
     this.width = width;
     this.height = height;
 
@@ -243,39 +207,15 @@ export class Minesweeper {
   }
 
   resizeSquares(width, height) {
-    let dimension = this.divideSpacePerSquare(width, height);
+    let dimension = this.getSquaresSize(width, height);
     for (const square of this.squares) {
       square.style.width = dimension + "px";
       square.style.height = dimension + "px";
     }
   }
 
-  divideSpacePerSquare(width, height) {
-    if (this.gameContainer.parentElement.className === "fullscreen-wrapper") {
-      return this.getSquaresSizeFullScreen(width, height);
-    } else {
-      return this.getSquaresSize(width, height);
-    }
-  }
-
   getSquaresSize(width, height) {
-    const { clientWidth, clientHeight } = document.documentElement;
-    const { clientWidth: gameWidth } = this.gameContainer;
-    const { clientHeight: tableHeight } = this.tableContainer;
-    if (clientWidth > clientHeight) {
-      return Math.min(25, gameWidth / width, tableHeight / height);
-    } else {
-      return Math.min(25, gameWidth / width);
-    }
-  }
-
-  getSquaresSizeFullScreen(width, height) {
-    const gameContainerParent = this.gameContainer.parentElement;
-    const bestWidth = gameContainerParent.clientWidth / width;
-    const nonTableHeight =
-      this.gameContainer.clientHeight - this.tableContainer.clientHeight;
-    const bestHeight =
-      (gameContainerParent.clientHeight - nonTableHeight) / height;
-    return Math.min(25, bestWidth, bestHeight);
+    const { clientWidth, clientHeight } = this.tableContainer;
+    return Math.min(25, clientWidth / width, clientHeight / height);
   }
 }

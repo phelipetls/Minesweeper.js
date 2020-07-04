@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block firstlink %}
+  <li><a href="/">Home</a></li>
+{% endblock %}
+
+{% block content %}
+  <section class="game">
+    <section class="difficulty">
+      <select id="difficulty" name="">
+        <option value="easy">Easy</option>
+        <option value="medium" selected>Medium</option>
+        <option value="hard">Hard</option>
+        <option value="custom">Custom</option>
+        <option value="random">Random</option>
+      </select>
+      <div class="custom-difficulty-params">
+        <div class="difficulty-param">
+          <label class="center" for="width">Width:</label>
+          <input
+            id="width"
+            type="number"
+            name="width"
+            min="0"
+            max="30"
+            value="10"
+            />
+        </div>
+        <div class="difficulty-param">
+          <label class="center" for="height">Height:</label>
+          <input
+            id="height"
+            type="number"
+            name="height"
+            min="0"
+            max="30"
+            value="10"
+            />
+        </div>
+        <div class="difficulty-param">
+          <label class="center" for="bombs">Bombs:</label>
+          <input
+            id="bombs"
+            type="number"
+            name="bombs"
+            value="5"
+            />
+        </div>
+      </div>
+    </section>
+    <section class="game-menu">
+      <div class="counter">00</div>
+      <div class="smiley">😀</div>
+      <div class="timer">000</div>
+    </section>
+    <section class="center table-container">
+      <table class="minesweeper">
+        <tbody></tbody>
+      </table>
+    </section>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="../js/index.js" type="module"></script>
+{% endblock %}
