@@ -7,6 +7,7 @@ const app = express();
 const port = 3000;
 
 app.use(express.static("public"));
+app.use(express.static("src/public"));
 app.use(express.json());
 app.use(morgan("short"));
 

@@ -2,8 +2,11 @@
   "name": "minesweeper.js",
   "version": "0.0.1",
   "description": "A Minesweeper implementation in JavaScript",
-  "main": "src/index.js",
-  "scripts": {},
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
   "author": "Phelipe Teles",
   "license": "MIT",
   "dependencies": {
@@ -12,6 +15,7 @@
     "sqlite3": "^4.2.0"
   },
   "devDependencies": {
-    "eslint": "^7.3.1"
+    "eslint": "^7.3.1",
+    "nodemon": "^2.0.4"
   }
 }
