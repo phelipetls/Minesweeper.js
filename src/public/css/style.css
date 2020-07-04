@@ -278,6 +278,34 @@ footer a {
   justify-content: space-around;
 }
 
+/* Inputs, buttons, select etc.
+   ========================================================================== */
+
+button, select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input, button, select {
+  border: 1px solid var(--grey);
+  border-radius: .5em;
+}
+
+input, button {
+  padding: 0.5em;
+}
+
+button {
+  background-color: var(--grey);
+}
+
+select {
+  padding: 0.5em;
+  padding-right: 1em;
+  background: url("../images/bx-chevron-down.svg") center right / 22% no-repeat;
+}
+
 /* Miscellaneous
    ========================================================================== */
 
