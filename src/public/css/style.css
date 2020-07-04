@@ -138,10 +138,20 @@ div.custom-difficulty-params {
    ========================================================================== */
 
 .game-menu {
+  margin: 10px 0;
+  padding: 10px;
+  background-color: var(--grey);
+
   display: flex;
   justify-content: space-between;
 }
 
+.game-menu > *:before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+}
 
 .smiley {
   cursor: pointer;
@@ -157,6 +167,16 @@ div.custom-difficulty-params {
 
 .smiley[data-mood='cool'] {
   background-image: url('../images/bx-cool.svg');
+}
+
+.counter:before {
+  background-image: url("../images/bxs-bomb.svg");
+  margin-right: 3px;
+}
+
+.timer:before {
+  background-image: url("../images/bx-time.svg");
+  margin-right: 3px;
 }
 
 /* Minesweeper
