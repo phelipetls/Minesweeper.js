@@ -6,7 +6,6 @@ const nunjucks = require("nunjucks");
 const app = express();
 const port = 3000;
 
-app.use(express.static("public"));
 nunjucks.configure("src/views", {
   autoescape: true,
   express: app
