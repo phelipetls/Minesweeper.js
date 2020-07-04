@@ -81,7 +81,7 @@ export class Minesweeper {
 
   waitToStart() {
     this.game = { over: false, started: false };
-    this.smiley.textContent = "😀";
+    this.smiley.dataset.mood = "normal";
     this.createBoard();
 
     this.elapsedTime = 0;
@@ -145,10 +145,10 @@ export class Minesweeper {
       const userWon = this.areAllNonBombsRevealed();
 
       if (e.target.hasBomb) {
-        this.smiley.textContent = "😵";
         this.revealAllBombs();
+        this.smiley.dataset.mood = "sad";
       } else if (userWon) {
-        this.smiley.textContent = "😎";
+        this.smiley.dataset.mood = "cool";
       }
 
       if (e.target.hasBomb || userWon) {

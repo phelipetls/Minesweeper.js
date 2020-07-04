@@ -137,6 +137,23 @@ div.custom-difficulty-params {
   justify-content: space-between;
 }
 
+
+.smiley {
+  cursor: pointer;
+}
+
+.smiley[data-mood='normal'] {
+  background-image: url('../images/bx-smile.svg');
+}
+
+.smiley[data-mood='sad'] {
+  background-image: url('../images/bx-dizzy.svg');
+}
+
+.smiley[data-mood='cool'] {
+  background-image: url('../images/bx-cool.svg');
+}
+
 /* Minesweeper
    ========================================================================== */
 
