@@ -3,11 +3,21 @@
 {% block content %}
   <section class="authentication">
     <form method="post">
-      {% include "form-content.html" %}
+      {% include "authentication-inputs.html" %}
+
+      <div class="form-input">
+        <label for="password2">Confirm password:</label>
+        <input id="password2" name="password2" type="password" required>
+      </div>
+
+      <button type="submit">Register</button>
+
     </form>
+
     <div class="authentication-info">
-      Already registered? <a href="/login">Sign in</a>
+      Already registered? <a href="/login">Log in</a>
     </div>
+
     {% if errors %}
       {% for error in errors  %}
       <div class="error">
@@ -15,5 +25,6 @@
       </div>
       {% endfor %}
     {% endif %}
+
   </section>
 {% endblock %}

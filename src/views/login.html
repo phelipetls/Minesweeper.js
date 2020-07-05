@@ -3,10 +3,13 @@
 {% block content %}
   <section class="authentication">
     <form method="post">
-      {% include "form-content.html" %}
+      {% include "authentication-inputs.html" %}
+    <button type="submit">Login</button>
     </form>
+
     <div class="authentication-info">
       Not registered yet? <a href="/register">Sign up</a>
     </div>
+
   </section>
 {% endblock %}
