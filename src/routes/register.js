@@ -4,8 +4,6 @@ const db = require("../db/index");
 const auth = require("./auth.js");
 const router = new express.Router();
 
-module.exports = router;
-
 router.get("/", (req, res) => {
   res.render("register.html");
 });
@@ -35,3 +33,5 @@ router.post("/", async (req, res) => {
       });
   }
 });
+
+module.exports = router;
