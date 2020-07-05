@@ -11,5 +11,11 @@
       Not registered yet? <a href="/register">Sign up</a>
     </div>
 
+    {% if messages.error %}
+      <div class="error">
+        {{ messages.error }}
+      </div>
+    {% endif %}
+
   </section>
 {% endblock %}
