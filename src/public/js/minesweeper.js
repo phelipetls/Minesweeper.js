@@ -75,7 +75,7 @@ export class Minesweeper {
         ).length;
 
         if (nFlagged >= nBombs) {
-          surrounding.map(reveal);
+          surrounding.map(revealContent);
         }
       }
     });
