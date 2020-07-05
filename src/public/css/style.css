@@ -209,8 +209,12 @@ table {
   content: attr(data-square-content);
 }
 
-.square[data-state='flagged']:before {
+.square[data-state='flagged'] {
   background-image: url("../images/bxs-flag-alt.svg");
+}
+
+.square[data-state='question'] {
+  background-image: url("../images/bx-question-mark.svg");
 }
 
 .square[bomb] {
