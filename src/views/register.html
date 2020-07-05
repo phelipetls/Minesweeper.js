@@ -8,5 +8,12 @@
     <div class="authentication-info">
       Already registered? <a href="/login">Sign in</a>
     </div>
+    {% if errors %}
+      {% for error in errors  %}
+      <div class="error">
+        {{ error.message }}
+      </div>
+      {% endfor %}
+    {% endif %}
   </section>
 {% endblock %}

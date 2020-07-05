@@ -4,6 +4,7 @@
   --grey: #dcdcdc;
   --dark-grey: #777;
   --black: #111111;
+  --red: #ff4136;
 }
 
 html {
@@ -358,6 +359,16 @@ select {
 
 /* Miscellaneous
    ========================================================================== */
+
+.error {
+  width: 50%;
+  margin: 2px;
+  padding: 5px;
+  text-align: center;
+  background-color: var(--red);
+  border: 1px solid red;
+  border-radius: 10px;
+}
 
 .center {
   display: flex;
