@@ -188,7 +188,7 @@ export class Minesweeper {
   }
 
   handleNewGames() {
-    document.addEventListener("newGame", (e) => {
+    document.addEventListener("newGame", e => {
       if (this.game.over || e.detail.force) {
         this.waitToStart();
       } else if (!this.game.started) {
@@ -196,7 +196,7 @@ export class Minesweeper {
       } else if (this.game.started && !this.game.over) {
         confirmNewGame();
       }
-    })
+    });
   }
 
   createBoard() {

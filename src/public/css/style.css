@@ -221,9 +221,6 @@ table {
   background-image: url("../images/bxs-bomb.svg");
 }
 
-.square[bomb]:before {
-}
-
 .square[data-square-content="1"]:before {
   color: blue;
 }
