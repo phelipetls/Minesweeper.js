@@ -5,17 +5,17 @@ const LocalStrategy = require("passport-local").Strategy;
 exports.run = (passport) => {
   async function authenticateUser(username, password, done) {
     try {
-      const result = await db.query(
+      const { rows } = await db.query(
         "SELECT * FROM users WHERE name = $1",
         [username]);
 
-      if (result.rows.length === 0) {
+      if (rows.length === 0) {
         done(null, false, { message: "User not registered" });
       } else {
-        const match = await bcrypt.compare(password, result.rows[0].password);
+        const match = await bcrypt.compare(password, rows[0].password);
 
         if (match) {
-          done(null, result.rows[0]);
+          done(null, rows[0]);
         } else {
           done(null, false, { message: "Wrong password" });
         }
