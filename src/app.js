@@ -9,6 +9,7 @@ const index = require("./routes/index");
 const game = require("./routes/game");
 const login = require("./routes/login");
 const register = require("./routes/register");
+const logout = require("./routes/logout");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -39,5 +40,6 @@ app.post("/login", (req, res, next) => {
     res.redirect("/game");
   })(req, res, next);
 });
+app.use("/logout", logout);
 
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
