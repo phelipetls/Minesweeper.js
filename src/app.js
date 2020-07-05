@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const session = require("express-session");
+const flash = require("express-flash");
 const nunjucks = require("nunjucks");
 const passport = require("passport");
 const passportConfing = require("./passportConfig");
@@ -17,6 +18,7 @@ const port = process.env.PORT || 3000;
 app.use(express.static("src/public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan("short"));
+app.use(flash());
 
 app.use(session({ secret: "secret", resave: false, saveUninitialized: false }));
 app.use(passport.initialize());

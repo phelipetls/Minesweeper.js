@@ -25,12 +25,7 @@ exports.run = (passport) => {
     }
   }
 
-  passport.use(
-    new LocalStrategy(
-      { usernameField: "username", passwordField: "password" },
-      authenticateUser
-    )
-  );
+  passport.use(new LocalStrategy(authenticateUser));
 
   passport.serializeUser((user, done) => {
     done(null, user.id)
