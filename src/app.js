@@ -5,6 +5,10 @@ const nunjucks = require("nunjucks");
 
 const app = express();
 const port = 3000;
+const site = require("./routes/site");
+const game = require("./routes/game");
+const login = require("./routes/login");
+const register = require("./routes/register");
 
 nunjucks.configure("src/views", {
   autoescape: true,
@@ -15,20 +19,13 @@ app.use(express.static("src/public"));
 app.use(express.json());
 app.use(morgan("short"));
 
-app.get("/", (req, res) => {
-  res.render("index.html");
 });
 
-app.get("/game", (req, res) => {
-  res.render("game.html");
-});
+app.get("/", site.get);
+app.get("/game", game.get);
+app.get("/login", login.get);
 
-app.get("/login", (req, res) => {
-  res.render("login.html");
-});
-
-app.get("/register", (req, res) => {
-  res.render("register.html");
-});
+app.get("/register", register.get);
+app.post("/register", register.post);
 
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
