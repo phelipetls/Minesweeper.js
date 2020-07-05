@@ -1,29 +1,33 @@
+const bcrypt = require("bcrypt");
+const db = require("../db/index");
+const auth = require("./auth.js");
+
 exports.get = (req, res) => {
   res.render("register.html");
 };
 
-exports.post = (req, res) => {
-  const { name, password, passwordConfirmed } = req.body;
+exports.post = async (req, res) => {
+  const { username, password, password2 } = req.body;
 
-  console.log(name, password);
+  const errors = auth.validate(username, password, password2);
 
-  const errors = [];
+  if (errors.length > 0) {
+    res.render("register.html", { errors: errors });
+  } else {
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-  if (!name || !password) {
-    errors.push({ message: "Please enter both username and password" });
+    db.query(
+      "INSERT INTO users (name, password) VALUES ($1, $2)",
+      [username, hashedPassword],
+      (err, result) => {
+        if (err.code == 23505) {
+          errors.push({ message: "User already registered" });
+          res.render("register.html", { errors: errors });
+        } else {
+          res.redirect("/login");
+        }
+      }
+    );
+
   }
-
-  if (password.length <= 6) {
-    errors.push({ message: "Please enter a password longer than 6 characters"})
-  }
-
-  if (password != passwordConfirmed) {
-    errors.push({ message: "Passwords do not match."})
-  }
-
-  console.log(errors);
-
-  if (errors) {
-    res.render("register.html", { errors: errors })
-  }
-}
+};
