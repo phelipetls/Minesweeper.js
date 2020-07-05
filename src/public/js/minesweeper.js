@@ -2,12 +2,7 @@ import { getSample } from "./random.js";
 import { confirmNewGame } from "./restart-game.js";
 import { debounce, createTable } from "./utils.js";
 import { getDifficultyParams } from "./difficulty.js";
-import {
-  flag,
-  reveal,
-  revealContent,
-  getSurroundingSquares
-} from "./square.js";
+import { flag, reveal, revealBomb, getSurroundingSquares } from "./square.js";
 
 export class Minesweeper {
   constructor() {
@@ -66,16 +61,17 @@ export class Minesweeper {
       const square = e.target;
 
       if (square.dataset.state === "revealed" && !this.game.over) {
-        // Only reveal surrounding squares if number of flagged squares is
-        // greater than or equal to the number of surrounding bombs
-        const surrounding = getSurroundingSquares(square);
+        const surroundingSquares = getSurroundingSquares(square);
+
         const nBombs = +square.dataset.squareContent;
-        const nFlagged = surrounding.filter(
+        const nFlagged = surroundingSquares.filter(
           square => square.dataset.state === "flagged"
         ).length;
 
+        // Only reveal surrounding squares if number of surrouding flags
+        // equals/is greater than surrounding bombs
         if (nFlagged >= nBombs) {
-          surrounding.map(revealContent);
+          surroundingSquares.forEach(reveal);
         }
       }
     });
@@ -143,24 +139,23 @@ export class Minesweeper {
   }
 
   handleRevealedSquare() {
+    this.gameContainer.addEventListener("bombRevealed", e => {
+      this.game.over = true;
+      this.revealAllBombs();
+      this.smiley.dataset.mood = "sad";
+      this.recordGame({ victory: false });
+    });
+
     this.gameContainer.addEventListener("squareRevealed", e => {
-      const userWon = this.areAllNonBombsRevealed();
-
-      if (e.target.hasBomb) {
-        this.revealAllBombs();
-        this.smiley.dataset.mood = "sad";
-      } else if (userWon) {
-        this.smiley.dataset.mood = "cool";
-      }
-
-      if (e.target.hasBomb || userWon) {
+      if (this.areAllNonBombsRevealed()) {
         this.game.over = true;
-        this.recordGame();
+        this.smiley.dataset.mood = "cool";
+        this.recordGame({ victory: true });
       }
     });
   }
 
-  async recordGame() {
+  async recordGame({ victory }) {
     await fetch("/game", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -169,13 +164,13 @@ export class Minesweeper {
         height: this.height,
         bombs: this.bombsCounter,
         time: this.elapsedTime,
-        victory: this.areAllNonBombsRevealed()
+        victory: victory,
       })
     });
   }
 
   revealAllBombs() {
-    this.bombs.forEach(revealContent);
+    this.bombs.forEach(revealBomb);
   }
 
   areAllNonBombsRevealed() {

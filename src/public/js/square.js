@@ -1,23 +1,25 @@
+const bombRevealed = new CustomEvent("bombRevealed", { bubbles: true });
 const squareRevealed = new CustomEvent("squareRevealed", { bubbles: true });
 const squareFlagged = new CustomEvent("squareFlagged", { bubbles: true });
 
 export function reveal(square) {
-  revealContent(square);
-  square.dispatchEvent(squareRevealed);
-}
-
-export function revealContent(square) {
   if (square.dataset.state) return;
+
   square.dataset.state = "revealed";
 
   if (square.hasBomb) {
-    square.setAttribute("bomb", "bomb");
-  } else if (isEmpty(square)) {
-    getSurroundingSquares(square).map(revealContent);
+    revealBomb(square);
+    square.dispatchEvent(bombRevealed);
+  } else if (hasNoSurroundingBombs(square)) {
+    getSurroundingSquares(square).map(reveal);
   } else {
-    const squareContent = countSurroundingBombs(square);
-    square.dataset.squareContent = squareContent;
+    square.dataset.squareContent = countSurroundingBombs(square);
+    square.dispatchEvent(squareRevealed);
   }
+}
+
+export function revealBomb(square) {
+  square.setAttribute("bomb", "bomb");
 }
 
 export function flag(square) {
@@ -67,6 +69,6 @@ function countSurroundingBombs(square) {
   return getSurroundingSquares(square).filter(square => square.hasBomb).length;
 }
 
-function isEmpty(square) {
+function hasNoSurroundingBombs(square) {
   return countSurroundingBombs(square) === 0;
 }
