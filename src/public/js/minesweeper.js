@@ -155,7 +155,22 @@ export class Minesweeper {
 
       if (e.target.hasBomb || userWon) {
         this.game.over = true;
+        this.recordGame();
       }
+    });
+  }
+
+  async recordGame() {
+    await fetch("/game", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        width: this.width,
+        height: this.height,
+        bombs: this.bombsCounter,
+        time: this.elapsedTime,
+        victory: this.areAllNonBombsRevealed()
+      })
     });
   }
 
