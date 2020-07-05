@@ -28,6 +28,11 @@ nunjucks.configure("src/views", {
   express: app
 });
 
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
+
 app.use("/", index);
 app.use("/game", game);
 app.use("/login", login);
