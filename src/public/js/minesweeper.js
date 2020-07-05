@@ -1,7 +1,7 @@
 import { getSample } from "./random.js";
 import { confirmNewGame } from "./restart-game.js";
 import { debounce, createTable } from "./utils.js";
-import { getDifficultyParams } from "./difficulty.js";
+import { getDifficultyParams, getDifficultyLevel } from "./difficulty.js";
 import { flag, reveal, revealBomb, getSurroundingSquares } from "./square.js";
 
 export class Minesweeper {
@@ -164,7 +164,8 @@ export class Minesweeper {
         height: this.height,
         bombs: this.bombsCounter,
         time: this.elapsedTime,
-        victory: victory,
+        level: getDifficultyLevel(),
+        victory: victory
       })
     });
   }

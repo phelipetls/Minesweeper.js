@@ -14,7 +14,7 @@ if (select.value === "custom") {
 }
 
 export function getDifficultyParams() {
-  const level = select.value;
+  const level = getDifficultyLevel();
 
   if (level === "random") {
     return getRandomParams();
@@ -22,8 +22,16 @@ export function getDifficultyParams() {
     return difficulties[level];
   } else {
     const [width, height, bombs] = params.querySelectorAll("input");
-    return { width: width.value, height: height.value, bombs: bombs.value };
+    return {
+      width: width.value,
+      height: height.value,
+      bombs: bombs.value
+    };
   }
+}
+
+export function getDifficultyLevel() {
+  return select.value;
 }
 
 function getRandomParams() {

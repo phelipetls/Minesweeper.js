@@ -12,6 +12,7 @@ CREATE TABLE plays (
   user_id SERIAL REFERENCES users(id),
   width INTEGER NOT NULL,
   height INTEGER NOT NULL,
+  level TEXT NOT NULL,
   bombs INTEGER NOT NULL,
   time REAL NOT NULL,
   victory BOOLEAN NOT NULL
