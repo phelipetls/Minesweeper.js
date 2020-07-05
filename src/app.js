@@ -37,14 +37,6 @@ app.use("/", index);
 app.use("/game", game);
 app.use("/login", login);
 app.use("/register", register);
-
-app.post("/login", (req, res, next) => {
-  passport.authenticate("local", function(err, user, info) {
-    if (err) return next(err);
-    if (!user) return res.redirect("/login");
-    res.redirect("/game");
-  })(req, res, next);
-});
 app.use("/logout", logout);
 
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
