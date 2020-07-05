@@ -4,5 +4,5 @@ const router = new express.Router();
 module.exports = router;
 
 router.get("/", (req, res) => {
-  res.render("game.html");
+  res.render("index.html");
 });

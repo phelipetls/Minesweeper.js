@@ -2,9 +2,10 @@ const express = require("express");
 const morgan = require("morgan");
 const nunjucks = require("nunjucks");
 
-const site = require("./routes/site");
+const index = require("./routes/index");
 const game = require("./routes/game");
 const login = require("./routes/login");
+
 const register = require("./routes/register");
 
 const app = express();
@@ -19,11 +20,9 @@ nunjucks.configure("src/views", {
   express: app
 });
 
-app.get("/", site.get);
-app.get("/game", game.get);
-app.get("/login", login.get);
-
-app.get("/register", register.get);
-app.post("/register", register.post);
+app.use("/", index);
+app.use("/game", game);
+app.use("/login", login);
+app.use("/register", register);
 
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
