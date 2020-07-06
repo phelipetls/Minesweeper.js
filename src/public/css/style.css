@@ -387,6 +387,16 @@ table.game-stats {
   cursor: pointer;
 }
 
+.game-stats thead th[data-sort='asc'] {
+  background: url("../images/bx-caret-down.svg") no-repeat center right;
+  padding-right: 25px;
+}
+
+.game-stats thead th[data-sort='desc'] {
+  background: url("../images/bx-caret-up.svg") no-repeat center right;
+  padding-right: 25px;
+}
+
 .game-stats tbody th {
   text-align: left;
 }
