@@ -156,18 +156,22 @@ export class Minesweeper {
   }
 
   async recordGame({ victory }) {
-    await fetch("/game", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        width: this.width,
-        height: this.height,
-        bombs: this.bombsCounter,
-        time: this.elapsedTime,
-        level: getDifficultyLevel(),
-        victory: victory
-      })
-    });
+    try {
+      await fetch("/game", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          width: this.width,
+          height: this.height,
+          bombs: this.bombsCounter,
+          time: this.elapsedTime,
+          level: getDifficultyLevel(),
+          victory: victory
+        })
+      });
+    } catch (err) {
+      throw err;
+    }
   }
 
   revealAllBombs() {
