@@ -22,7 +22,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan("short"));
 app.use(flash());
 
-app.use(session({ secret: "secret", resave: false, saveUninitialized: false }));
+app.use(
+  session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { sameSite: "strict" }
+  })
+);
+
 app.use(passport.initialize());
 app.use(passport.session());
 passportConfing.run(passport);
