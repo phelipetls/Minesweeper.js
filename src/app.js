@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const session = require("express-session");
 const flash = require("express-flash");
 const nunjucks = require("nunjucks");
+const crypto = require("crypto");
 const passport = require("passport");
 const passportConfing = require("./passportConfig");
 
@@ -24,7 +25,7 @@ app.use(flash());
 
 app.use(
   session({
-    secret: process.env.SECRET,
+    secret: crypto.randomBytes(6).toString("hex"),
     resave: false,
     saveUninitialized: false,
     cookie: { sameSite: "strict" }
