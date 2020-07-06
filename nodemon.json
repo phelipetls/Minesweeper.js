@@ -1,3 +1,4 @@
 {
-  "ext": "js,html"
+  "ext": "js,html",
+  "ignore": ["src/public/*"]
 }
