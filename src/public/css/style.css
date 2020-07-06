@@ -358,6 +358,53 @@ select {
   background: url("../images/bx-chevron-down.svg") center right / 22% no-repeat;
 }
 
+/* Tables (for game statistics)
+   ========================================================================== */
+
+h1.user {
+  color: var(--dark-grey);
+  text-align: center;
+}
+
+table.game-stats {
+  table-layout: fixed;
+  border-collapse: collapse;
+  border: 1px solid var(--light-grey);
+  margin: 0 auto;
+}
+
+.game-stats thead {
+  padding: 10px;
+  background-color: var(--grey);
+}
+
+.game-stats th {
+  color: var(--black);
+  text-align: left;
+}
+
+.game-stats thead th {
+  cursor: pointer;
+}
+
+.game-stats tbody th {
+  text-align: left;
+}
+
+.game-stats td,
+.game-stats tbody th {
+  border: 1px solid var(--light-grey);
+}
+
+.game-stats tbody td {
+  text-align: center;
+}
+
+.game-stats th,
+.game-stats td {
+  padding: 5px;
+}
+
 /* Miscellaneous
    ========================================================================== */
 
