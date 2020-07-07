@@ -16,7 +16,7 @@ export class Minesweeper {
     this.smiley = this.gameContainer.querySelector(".smiley");
     this.counter = this.gameContainer.querySelector(".counter");
 
-    this.waitToStart();
+    this.resetGame();
 
     this.handleRevealedSquare();
     this.handleFlaggedSquare();
@@ -39,18 +39,36 @@ export class Minesweeper {
     return this.squares.filter(square => square.hasBomb);
   }
 
+
+  startGame(clickedSquare) {
+    this.game.started = true;
+    this.trackElapsedTime();
+    this.placeBombs(clickedSquare);
+  }
+
+  resetGame() {
+    this.createBoard();
+    this.game = { over: false, started: false };
+    this.smiley.dataset.mood = "normal";
+    this.elapsedTime = 0;
+    clearInterval(this.timerInterval);
+  }
+
   handleRightClicks() {
-    this.gameContainer.addEventListener("click", e => {
-      if (e.target.tagName === "TD" && !this.game.over) {
+    this.table.addEventListener("click", e => {
+      if (!this.game.started) {
+        this.startGame(e.target);
         reveal(e.target);
+      } else if (e.target.className === "square" && !this.game.over) {
+        this.action(e.target);
       }
     });
   }
 
   handleLeftClicks() {
-    this.gameContainer.addEventListener("contextmenu", e => {
+    this.table.addEventListener("contextmenu", e => {
       e.preventDefault();
-      if (e.target.tagName === "TD" && !this.game.over) {
+      if (e.target.className === "square" && !this.game.over) {
         flag(e.target);
       }
     });
@@ -75,25 +93,6 @@ export class Minesweeper {
         }
       }
     });
-  }
-
-  waitToStart() {
-    this.game = { over: false, started: false };
-    this.smiley.dataset.mood = "normal";
-    this.createBoard();
-
-    this.elapsedTime = 0;
-    clearInterval(this.timerInterval);
-
-    this.tableBody.addEventListener(
-      "click",
-      e => {
-        this.game.started = true;
-        this.trackElapsedTime();
-        this.placeBombs(e.target);
-      },
-      { once: true }
-    );
   }
 
   placeBombs(clickedSquare) {
@@ -195,7 +194,7 @@ export class Minesweeper {
   handleNewGames() {
     document.addEventListener("newGame", e => {
       if (this.game.over || e.detail.force) {
-        this.waitToStart();
+        this.resetGame();
       } else if (!this.game.started) {
         this.createBoard();
       } else if (this.game.started && !this.game.over) {
