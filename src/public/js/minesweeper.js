@@ -220,22 +220,21 @@ export class Minesweeper {
     window.addEventListener(
       "resize",
       debounce(() => {
-        const { width, height } = getDifficultyParams();
-        this.resizeSquares(width, height);
+        this.resizeSquares(this.width);
       }, 200)
     );
   }
 
-  resizeSquares(width, height) {
-    let dimension = this.getSquaresSize(width, height);
+  resizeSquares(width) {
+    let dimension = this.getSquaresSize(width);
     for (const square of this.squares) {
       square.style.width = dimension + "px";
       square.style.height = dimension + "px";
     }
   }
 
-  getSquaresSize(width, height) {
-    const { clientWidth, clientHeight } = this.tableContainer;
-    return Math.min(25, clientWidth / width, clientHeight / height);
+  getSquaresSize(width) {
+    const { clientWidth } = this.tableContainer;
+    return Math.min(25, clientWidth / width);
   }
 }
