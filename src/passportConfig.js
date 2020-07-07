@@ -2,12 +2,12 @@ const db = require("./db/index");
 const bcrypt = require("bcrypt");
 const LocalStrategy = require("passport-local").Strategy;
 
-exports.run = (passport) => {
+exports.run = passport => {
   async function authenticateUser(username, password, done) {
     try {
-      const { rows } = await db.query(
-        "SELECT * FROM users WHERE name = $1",
-        [username]);
+      const { rows } = await db.query("SELECT * FROM users WHERE name = $1", [
+        username
+      ]);
 
       if (rows.length === 0) {
         done(null, false, { message: "User not registered" });
@@ -28,7 +28,7 @@ exports.run = (passport) => {
   passport.use(new LocalStrategy(authenticateUser));
 
   passport.serializeUser((user, done) => {
-    done(null, user.id)
+    done(null, user.id);
   });
 
   passport.deserializeUser((id, done) => {
@@ -37,4 +37,4 @@ exports.run = (passport) => {
       return done(null, result.rows[0]);
     });
   });
-}
+};

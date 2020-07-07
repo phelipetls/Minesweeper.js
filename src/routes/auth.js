@@ -16,4 +16,4 @@ exports.validate = (username, password, password2) => {
   }
 
   return errors;
-}
+};
