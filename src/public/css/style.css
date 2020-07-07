@@ -213,15 +213,15 @@ div.custom-difficulty-params {
 }
 
 .square[data-state='flagged'] {
-  background-image: url("../images/bxs-flag-alt.svg");
+  background: url("../images/bxs-flag-alt.svg") no-repeat;
 }
 
 .square[data-state='question'] {
-  background-image: url("../images/bx-question-mark.svg");
+  background: url("../images/bx-question-mark.svg") no-repeat;
 }
 
 .square[bomb] {
-  background-image: url("../images/bxs-bomb.svg");
+  background: url("../images/bxs-bomb.svg") no-repeat;
 }
 
 .square[data-square-content="1"]:before {
