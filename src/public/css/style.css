@@ -31,6 +31,10 @@ body {
   flex-flow: column;
 }
 
+body > * {
+  padding: 0 1em;
+}
+
 /* Navigation bar
    ========================================================================== */
 
@@ -50,7 +54,7 @@ nav ul {
   list-style: none;
 
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row;
   align-items: center;
 }
 
@@ -104,6 +108,7 @@ section.play-game-button {
 
 section.difficulty {
   display: flex;
+  flex-flow: row;
   justify-content: space-between;
 }
 
@@ -121,9 +126,12 @@ div.custom-difficulty-params {
 .difficulty-param {
   display: flex;
   flex-flow: row;
+  align-items: center;
 }
 
 .difficulty-param label {
+  width: 4em;
+  text-align: right;
   color: var(--dark-grey);
 }
 
@@ -187,11 +195,6 @@ div.custom-difficulty-params {
 
 .table-container {
   flex: 1;
-}
-
-table {
-  margin: 0;
-  padding: 0;
 }
 
 .square {
