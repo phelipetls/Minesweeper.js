@@ -24,6 +24,7 @@ export class Minesweeper {
     this.handleLeftClicks();
     this.handleDoubleClicks();
     this.handleTouchScreen();
+    this.handleTouchHold();
     this.handleNewGames();
     this.handleResize();
   }
@@ -57,19 +58,45 @@ export class Minesweeper {
   handleLeftClicks() {
     this.table.addEventListener("click", e => {
       if (e.target.tagName !== "TD") return;
-
-      if (!this.game.started) {
-        this.startGame(e.target);
-        reveal(e.target);
-      } else if (e.target.className === "square" && !this.game.over) {
-        if (isTouchScreen()) {
-          if (e.target.dataset.state === "revealed") revealSurroundingSquares(e.target);
-          else this.clickAction(e.target);
-        } else {
-          reveal(e.target);
-        }
-      }
+      this.revealSquare(e.target)
     });
+  }
+
+  handleTouchHold() {
+    if (!isTouchScreen) return;
+
+    this.table.addEventListener("pointerdown", e => {
+      e.preventDefault();
+
+      if (e.pointerType !== "touch" || e.target.className !== "square" || this.game.over) return;
+
+      const clickedElem = e.target;
+
+      const timeout = setTimeout(() => {
+        if (!this.game.started) this.startGame();
+        reveal(clickedElem);
+      }, 750);
+
+      const removeTimeout = () => clearTimeout(timeout);
+
+      clickedElem.addEventListener("pointerup", removeTimeout, { once: true });
+      clickedElem.addEventListener("pointerleave", removeTimeout, { once: true });
+    });
+  }
+
+  revealSquare(square) {
+    if (!this.game.started) {
+      this.startGame(square);
+      reveal(square);
+    } else if (square.className === "square" && !this.game.over) {
+      if (isTouchScreen()) this.revealSquareTouch(square);
+      else reveal(square);
+    }
+  }
+
+  revealSquareTouch(square) {
+    if (square.dataset.state === "revealed") revealSurroundingSquares(square);
+    else this.clickAction(square);
   }
 
   handleRightClicks() {
