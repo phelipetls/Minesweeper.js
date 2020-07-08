@@ -197,7 +197,7 @@ export class Minesweeper {
 
   handleNewGames() {
     document.addEventListener("newGame", e => {
-      if (this.game.over || e.detail.force) {
+      if (this.game.over || e.detail.newGameConfirmed) {
         this.resetGame();
       } else if (!this.game.started) {
         this.createBoard();

@@ -20,7 +20,7 @@ function dispatchNewGameEvent(elem, options = {}) {
   elem.dispatchEvent(
     new CustomEvent("newGame", {
       bubbles: true,
-      detail: { force: false },
+      detail: { newGameConfirmed: false },
       ...options
     })
   );
@@ -45,6 +45,7 @@ function closeOnClick(popup) {
     if (e.target.matches("#yes")) {
       dispatchNewGameEvent(e.target, { detail: { force: true }, once: true });
     }
+    dispatchNewGameEvent(e.target, { detail: { newGameConfirmed: true }, once: true });
 
     popup.remove();
   });
