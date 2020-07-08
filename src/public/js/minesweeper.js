@@ -61,7 +61,8 @@ export class Minesweeper {
         reveal(e.target);
       } else if (e.target.className === "square" && !this.game.over) {
         if (isTouchScreen()) {
-          this.clickAction(e.target);
+          if (e.target.dataset.state === "revealed") revealSurroundingSquares(e.target);
+          else this.clickAction(e.target);
         } else {
           reveal(e.target);
         }
