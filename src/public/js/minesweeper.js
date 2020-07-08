@@ -2,7 +2,7 @@ import { getSample } from "./random.js";
 import { confirmNewGame } from "./restart-game.js";
 import { debounce, createTable, isTouchScreen } from "./utils.js";
 import { getDifficultyParams, getDifficultyLevel } from "./difficulty.js";
-import { flag, reveal, revealBomb, getSurroundingSquares } from "./square.js";
+import { flag, reveal, revealBomb, revealSurroundingSquares } from "./square.js";
 
 export class Minesweeper {
   constructor() {
@@ -83,18 +83,7 @@ export class Minesweeper {
       const square = e.target;
 
       if (square.dataset.state === "revealed" && !this.game.over) {
-        const surroundingSquares = getSurroundingSquares(square);
-
-        const nBombs = +square.dataset.squareContent;
-        const nFlagged = surroundingSquares.filter(
-          square => square.dataset.state === "flagged"
-        ).length;
-
-        // Only reveal surrounding squares if number of surrouding flags
-        // equals/is greater than surrounding bombs
-        if (nFlagged >= nBombs) {
-          surroundingSquares.forEach(reveal);
-        }
+        revealSurroundingSquares(square);
       }
     });
   }

@@ -38,6 +38,21 @@ export function flag(square) {
   }
 }
 
+export function revealSurroundingSquares(square) {
+  const surroundingSquares = getSurroundingSquares(square);
+
+  const nBombs = +square.dataset.squareContent;
+  const nFlagged = surroundingSquares.filter(
+    square => square.dataset.state === "flagged"
+  ).length;
+
+  // Only reveal surrounding squares if number of surrouding flags
+  // equals/is greater than surrounding bombs
+  if (nFlagged >= nBombs) {
+    surroundingSquares.forEach(reveal);
+  }
+}
+
 function getAdjacentSquares(square) {
   return [square.previousElementSibling, square, square.nextElementSibling];
 }
