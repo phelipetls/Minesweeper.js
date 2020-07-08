@@ -1,7 +1,7 @@
 import { insertCenteredPopup } from "./utils.js";
 
 const table = document.querySelector("table");
-const select = document.querySelector("select#difficulty");
+const difficultyMenu = document.querySelector(".difficulty");
 const smiley = document.querySelector(".smiley");
 
 const CONFIRM_NEW_GAME_POPUP_INNER_HTML = `
@@ -26,27 +26,33 @@ function dispatchNewGameEvent(elem, options = {}) {
   );
 }
 
-smiley.onclick = select.onchange = e => {
+smiley.onclick = e => {
   dispatchNewGameEvent(e.target);
 };
+
+difficultyMenu.addEventListener("change", e => {
+  console.log(e.target.tagName);
+  if (e.target.tagName === "SELECT" || e.target.tagName === "INPUT") {
+    dispatchNewGameEvent(e.target);
+  }
+})
 
 export function confirmNewGame() {
   const popup = document.createElement("div");
   popup.className = "popup";
   popup.innerHTML = CONFIRM_NEW_GAME_POPUP_INNER_HTML;
   insertCenteredPopup(table, popup);
-  closeOnClick(popup);
+  closePopupWhenButtonClicked(popup);
 }
 
-function closeOnClick(popup) {
+function closePopupWhenButtonClicked(popup) {
   popup.addEventListener("click", e => {
     if (!e.target.matches("button")) return;
 
     if (e.target.matches("#yes")) {
-      dispatchNewGameEvent(e.target, { detail: { force: true }, once: true });
+      dispatchNewGameEvent(e.target, { detail: { newGameConfirmed: true }, once: true });
     }
-    dispatchNewGameEvent(e.target, { detail: { newGameConfirmed: true }, once: true });
 
     popup.remove();
-  });
+  }, { once: true })
 }
