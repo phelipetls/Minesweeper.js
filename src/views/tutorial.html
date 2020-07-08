@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <select class="device" id="device" name="device">
+    <option value="mouse" selected>Mouse</option>
+    <option value="touch">Touch</option>
+  </select>
+
+  <section class="mouse-device">
+    <p>
+      <h4>Left Click</h4>
+      On an unrevealed square, reveal it.
+    </p>
+    <p>
+      <h4>Right Click</h4>
+      On an unrevealed square, put a flag or a question mark on it. A flag is used if you think there is a bomb in there, a question mark if you're not quite sure yet.
+    </p>
+    <p>
+      <h4>Double Click</h4>
+      On a revealed square, reveal all squares surrounding it, but only if you have flagged an amount equal to or greater than the surrounding bombs displayed by the square.
+    </p>
+  </section>
+
+  <section class="touch-device" hidden>
+    <p>
+      <h4>Touch</h4>
+      On an unrevealed square, reveal or flag a square depending on the current mode (which can be changed by clicking on the square at the right).
+    </p>
+    <p>
+      <h4>Touch Hold</h4>
+      On an unrevealed square, reveal it.
+    </p>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    const select = document.querySelector("select");
+
+    function showTouchSection() {
+      document.querySelector(".mouse-device").setAttribute("hidden", "hidden");
+      document.querySelector(".touch-device").removeAttribute("hidden");
+    }
+
+    function showMouseSection() {
+      document.querySelector(".mouse-device").removeAttribute("hidden");
+      document.querySelector(".touch-device").setAttribute("hidden", "hidden");
+    }
+
+    select.onchange = (e) => {
+      if (e.target.value === "touch") {
+        showTouchSection();
+      } else {
+        showMouseSection();
+      }
+    }
+
+    if (
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      navigator.msMaxTouchPoints > 0
+    ) {
+      select.value = "touch";
+      showTouchSection();
+    } else {
+      select.value = "mouse";
+      showMouseSection();
+    }
+  </script>
+{% endblock %}

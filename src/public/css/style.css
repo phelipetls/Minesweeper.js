@@ -89,8 +89,12 @@ section.intro {
   flex: 2;
 }
 
-section.play-game-button {
+section.index-buttons {
   flex: 1;
+
+  display: flex;
+  flex-flow: row wrap;
+  gap: 10px;
 }
 
 /* Game components

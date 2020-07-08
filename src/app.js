@@ -7,13 +7,6 @@ const crypto = require("crypto");
 const passport = require("passport");
 const passportConfing = require("./passportConfig");
 
-const index = require("./routes/index");
-const game = require("./routes/game");
-const login = require("./routes/login");
-const register = require("./routes/register");
-const logout = require("./routes/logout");
-const profile = require("./routes/profile");
-
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -46,11 +39,20 @@ app.use((req, res, next) => {
   next();
 });
 
+const index = require("./routes/index");
+const game = require("./routes/game");
+const login = require("./routes/login");
+const register = require("./routes/register");
+const logout = require("./routes/logout");
+const profile = require("./routes/profile");
+const tutorial = require("./routes/tutorial");
+
 app.use("/", index);
 app.use("/game", game);
 app.use("/login", login);
 app.use("/register", register);
 app.use("/logout", logout);
 app.use("/profile", profile);
+app.use("/tutorial", tutorial);
 
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
