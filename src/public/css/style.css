@@ -165,14 +165,14 @@ div.custom-difficulty-params {
   outline-offset: 2px;
 }
 
-.game-menu-center {
+.game-menu-buttons {
   flex: 1;
 
   display: flex;
   justify-content: space-around;
 }
 
-.game-menu-center > *:before {
+.game-menu-buttons > *:before {
   content: "";
   width: 24px;
   height: 24px;
