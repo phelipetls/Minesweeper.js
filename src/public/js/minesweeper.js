@@ -56,6 +56,8 @@ export class Minesweeper {
 
   handleLeftClicks() {
     this.table.addEventListener("click", e => {
+      if (e.target.tagName !== "TD") return;
+
       if (!this.game.started) {
         this.startGame(e.target);
         reveal(e.target);
