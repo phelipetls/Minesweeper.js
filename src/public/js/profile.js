@@ -62,7 +62,7 @@ document.addEventListener("click", e => {
   tableBody.append(...sortedRows);
 });
 
-document.addEventListener("mousedown", e => {
+document.addEventListener("pointerdown", e => {
   if (!e.target.matches("thead th")) return;
   e.preventDefault();
 });

@@ -40,7 +40,6 @@ export class Minesweeper {
     return this.squares.filter(square => square.hasBomb);
   }
 
-
   startGame(clickedSquare) {
     this.game.started = true;
     this.trackElapsedTime();
@@ -80,7 +79,7 @@ export class Minesweeper {
   }
 
   handleDoubleClicks() {
-    this.gameContainer.addEventListener("dblclick", e => {
+    this.table.addEventListener("dblclick", e => {
       const square = e.target;
 
       if (square.dataset.state === "revealed" && !this.game.over) {
