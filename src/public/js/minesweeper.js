@@ -58,7 +58,7 @@ export class Minesweeper {
   handleLeftClicks() {
     this.table.addEventListener("click", e => {
       if (e.target.tagName !== "TD") return;
-      this.revealSquare(e.target)
+      this.revealSquare(e.target);
     });
   }
 
@@ -68,7 +68,12 @@ export class Minesweeper {
     this.table.addEventListener("pointerdown", e => {
       e.preventDefault();
 
-      if (e.pointerType !== "touch" || e.target.className !== "square" || this.game.over) return;
+      if (
+        e.pointerType !== "touch" ||
+        e.target.className !== "square" ||
+        this.game.over
+      )
+        return;
 
       const clickedElem = e.target;
 
@@ -80,7 +85,9 @@ export class Minesweeper {
       const removeTimeout = () => clearTimeout(timeout);
 
       clickedElem.addEventListener("pointerup", removeTimeout, { once: true });
-      clickedElem.addEventListener("pointerleave", removeTimeout, { once: true });
+      clickedElem.addEventListener("pointerleave", removeTimeout, {
+        once: true
+      });
     });
   }
 
