@@ -1,6 +1,6 @@
 import { getSample } from "./random.js";
 import { confirmNewGame } from "./restart-game.js";
-import { debounce, createTable } from "./utils.js";
+import { debounce, createTable, isTouchScreen } from "./utils.js";
 import { getDifficultyParams, getDifficultyLevel } from "./difficulty.js";
 import { flag, reveal, revealBomb, getSurroundingSquares } from "./square.js";
 
@@ -23,6 +23,7 @@ export class Minesweeper {
     this.handleRightClicks();
     this.handleLeftClicks();
     this.handleDoubleClicks();
+    this.handleTouchScreen();
     this.handleNewGames();
     this.handleResize();
   }
@@ -60,7 +61,11 @@ export class Minesweeper {
         this.startGame(e.target);
         reveal(e.target);
       } else if (e.target.className === "square" && !this.game.over) {
-        this.action(e.target);
+        if (isTouchScreen()) {
+          this.clickAction(e.target);
+        } else {
+          reveal(e.target);
+        }
       }
     });
   }
@@ -235,5 +240,29 @@ export class Minesweeper {
   getSquaresSize(width) {
     const { clientWidth } = this.tableContainer;
     return Math.min(25, clientWidth / width);
+  }
+
+  handleTouchScreen() {
+    if (isTouchScreen()) {
+      this.handleTouchActionChange();
+    }
+  }
+
+  get clickAction() {
+    return this.clickActionButton.dataset.action === "reveal" ? reveal : flag;
+  }
+
+  handleTouchActionChange() {
+    this.clickActionButton = this.gameContainer.querySelector(".touch-action");
+    this.clickActionButton.removeAttribute("hidden");
+    this.clickActionButton.addEventListener("click", e => {
+      if (e.target.dataset.action === "reveal") {
+        e.target.dataset.action = "flag";
+        e.target.src = "../images/bxs-flag-alt.svg";
+      } else {
+        e.target.dataset.action = "reveal";
+        e.target.src = "../images/bxs-bomb.svg";
+      }
+    });
   }
 }

@@ -157,7 +157,22 @@ div.custom-difficulty-params {
   box-shadow: 1px 1px var(--dark-grey);
 }
 
-.game-menu > *:before {
+.touch-action {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  outline: 1px solid var(--dark-grey);
+  outline-offset: 2px;
+}
+
+.game-menu-center {
+  flex: 1;
+
+  display: flex;
+  justify-content: space-around;
+}
+
+.game-menu-center > *:before {
   content: "";
   width: 24px;
   height: 24px;

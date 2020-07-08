@@ -19,3 +19,11 @@ export function insertCenteredPopup(container, popup) {
   popup.style.left = (coords.width - popup.clientWidth) / 2 + "px";
   popup.style.top = (coords.height - popup.clientHeight) / 2 + "px";
 }
+
+export function isTouchScreen() {
+  return (
+    "ontouchstart" in window ||
+    navigator.maxTouchPoints > 0 ||
+    navigator.msMaxTouchPoints > 0
+  );
+}
