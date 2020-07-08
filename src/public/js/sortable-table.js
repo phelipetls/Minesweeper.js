@@ -24,9 +24,9 @@ function getSortFunc(type) {
   const sortFunc = sortFunc[type];
 }
 
-function removeSortAttributes(header) {
+function resetSortAttribute(header) {
   Array.from(header.cells).forEach(cell => {
-    cell.removeAttribute("data-sort");
+    cell.setAttribute("data-sort", "none");
   });
 }
 
@@ -46,7 +46,7 @@ document.addEventListener("click", e => {
 
     sortedRows = Array.from(rows).reverse();
   } else {
-    removeSortAttributes(e.target.parentElement);
+    resetSortAttribute(e.target.parentElement);
 
     const type = getColumnType(rows, column);
     const sortFunc = sortFuncs[type];

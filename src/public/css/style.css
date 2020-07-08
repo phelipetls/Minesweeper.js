@@ -398,21 +398,25 @@ table.game-stats {
 
 .game-stats th {
   color: var(--black);
-  text-align: left;
+  text-align: center;
 }
 
 .game-stats thead th {
   cursor: pointer;
+  padding-right: 20px;
+}
+
+.game-stats thead th[data-sort='none'] {
+  background: url("../images/bx-caret-up.svg") no-repeat top 40% right / 1rem,
+              url("../images/bx-caret-down.svg") no-repeat bottom 40% right / 1rem;
 }
 
 .game-stats thead th[data-sort='asc'] {
-  background: url("../images/bx-caret-down.svg") no-repeat center right;
-  padding-right: 25px;
+  background: url("../images/bx-caret-down.svg") no-repeat center right / 1rem;
 }
 
 .game-stats thead th[data-sort='desc'] {
-  background: url("../images/bx-caret-up.svg") no-repeat center right;
-  padding-right: 25px;
+  background: url("../images/bx-caret-up.svg") no-repeat center right / 1rem;
 }
 
 .game-stats tbody th {
