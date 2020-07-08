@@ -184,15 +184,15 @@ div.custom-difficulty-params {
 }
 
 .smiley[data-mood='normal'] {
-  background-image: url('../images/bx-smile.svg');
+  background: url('../images/bx-smile.svg') no-repeat;
 }
 
 .smiley[data-mood='sad'] {
-  background-image: url('../images/bx-dizzy.svg');
+  background: url('../images/bx-dizzy.svg') no-repeat;
 }
 
 .smiley[data-mood='cool'] {
-  background-image: url('../images/bx-cool.svg');
+  background: url('../images/bx-cool.svg') no-repeat;
 }
 
 .counter:before {
