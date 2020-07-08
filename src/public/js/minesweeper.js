@@ -54,7 +54,7 @@ export class Minesweeper {
     clearInterval(this.timerInterval);
   }
 
-  handleRightClicks() {
+  handleLeftClicks() {
     this.table.addEventListener("click", e => {
       if (!this.game.started) {
         this.startGame(e.target);
@@ -69,7 +69,7 @@ export class Minesweeper {
     });
   }
 
-  handleLeftClicks() {
+  handleRightClicks() {
     this.table.addEventListener("contextmenu", e => {
       e.preventDefault();
       if (e.target.className === "square" && !this.game.over) {
