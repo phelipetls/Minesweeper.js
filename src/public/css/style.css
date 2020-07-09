@@ -238,6 +238,10 @@ div.custom-difficulty-params {
   background: url("../images/bxs-bomb.svg") no-repeat center;
 }
 
+.square.trigger-bomb {
+  background: url("../images/bxs-bomb-red.svg") no-repeat center;
+}
+
 .square[data-square-content="1"]:before {
   color: blue;
 }

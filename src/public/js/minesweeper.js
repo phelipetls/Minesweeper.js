@@ -173,6 +173,7 @@ export class Minesweeper {
       this.revealAllBombs();
       this.smiley.dataset.mood = "sad";
       this.recordGame({ victory: false });
+      e.target.classList.add("trigger-bomb");
     });
 
     this.gameContainer.addEventListener("squareRevealed", e => {
