@@ -218,6 +218,7 @@ div.custom-difficulty-params {
 }
 
 .square {
+  font-size: 3.5vw;
   text-align: center;
   background-color: var(--grey);
   box-shadow: inset 2px 2px var(--white),
