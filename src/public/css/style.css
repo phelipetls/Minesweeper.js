@@ -391,7 +391,6 @@ h1.user {
 }
 
 table.game-stats {
-  table-layout: fixed;
   border-collapse: collapse;
   border: 1px solid var(--light-grey);
   margin: 0 auto;
@@ -461,3 +460,8 @@ table.game-stats {
   align-items: center;
   justify-content: center;
 }
+
+table {
+  table-layout: fixed;
+}
+
