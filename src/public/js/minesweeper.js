@@ -79,6 +79,7 @@ export class Minesweeper {
       const timeout = setTimeout(() => {
         if (!this.game.started) this.startGame();
         reveal(clickedElem);
+        window.navigator.vibrate(200);
       }, 750);
 
       const removeTimeout = () => clearTimeout(timeout);
