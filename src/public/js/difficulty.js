@@ -4,9 +4,9 @@ const select = document.querySelector("select#difficulty");
 const params = document.querySelector(".custom-difficulty-params");
 
 const difficulties = {
-  easy: { width: 9, height: 9, bombs: 10 },
-  medium: { width: 16, height: 16, bombs: 40 },
-  hard: { width: 30, height: 16, bombs: 99 }
+  easy: { width: 7, height: 11, bombs: 10 },
+  medium: { width: 11, height: 17, bombs: 35 },
+  hard: { width: 14, height: 23, bombs: 75 }
 };
 
 if (select.value === "custom") {
