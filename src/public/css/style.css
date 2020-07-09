@@ -386,7 +386,6 @@ select {
    ========================================================================== */
 
 h1.user {
-  color: var(--dark-grey);
   text-align: center;
 }
 
@@ -465,3 +464,7 @@ table {
   table-layout: fixed;
 }
 
+h1,
+h4 {
+  color: var(--dark-grey);
+}
