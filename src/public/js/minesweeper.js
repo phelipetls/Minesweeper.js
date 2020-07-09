@@ -108,7 +108,7 @@ export class Minesweeper {
   handleRightClicks() {
     this.table.addEventListener("contextmenu", e => {
       e.preventDefault();
-      if (e.target.className === "square" && !this.game.over) {
+      if (e.button === 2 && e.target.className === "square" && !this.game.over) {
         flag(e.target);
       }
     });
