@@ -292,31 +292,46 @@ footer a {
   justify-content: center;
 }
 
-div.authentication-info {
+.authentication div.authentication-info {
   margin: 2em;
 }
 
-form {
+.authentication form {
   display: flex;
   flex-flow: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  margin: .5em;
+}
+
+.authentication form > * {
+  margin: .5em;
 }
 
 .form-input {
   display: flex;
-  flex-flow: row;
+  flex-flow: row wrap;
   align-items: center;
 }
 
 .form-input label {
   width: 6em;
   text-align: right;
-  padding-right: 5px;
+  padding-right: .5em;
 }
 
-form button {
+@media only screen and (max-width: 400px) {
+  .form-input label {
+    text-align: left;
+    padding-bottom: .5em;
+  }
+
+  .form-input input {
+    width: 100%;
+  }
+}
+
+.authentication form button {
   align-self: stretch;
 }
 
@@ -362,6 +377,7 @@ button {
 button:hover {
   color: var(--white);
   background-color: var(--dark-grey);
+  border: 1px solid var(--dark-grey);
 }
 
 button a {
@@ -386,6 +402,11 @@ table.game-stats {
   border-collapse: collapse;
   border: 1px solid var(--light-grey);
   margin: 0 auto;
+}
+
+section.user-profile {
+  flex: 1;
+  overflow-x: auto;
 }
 
 .game-stats thead {
