@@ -234,10 +234,6 @@ div.custom-difficulty-params {
   background: url("../images/bxs-flag-alt.svg") no-repeat center;
 }
 
-.square[data-state='question'] {
-  background: url("../images/bx-question-mark.svg") no-repeat center;
-}
-
 .square[bomb] {
   background: url("../images/bxs-bomb.svg") no-repeat center;
 }

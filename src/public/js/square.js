@@ -27,15 +27,11 @@ export function flag(square) {
 
   if (!square.dataset.state) {
     square.dataset.state = "flagged";
-  } else if (square.dataset.state === "flagged") {
-    square.dataset.state = "question";
-  } else if (square.dataset.state === "question") {
+  } else {
     square.dataset.state = "";
   }
 
-  if (square.dataset.state) {
-    square.dispatchEvent(squareFlagged);
-  }
+  square.dispatchEvent(squareFlagged);
 }
 
 export function revealSurroundingSquares(square) {
