@@ -1,6 +1,6 @@
 import { getSample } from "./random.js";
 import { confirmNewGame } from "./restart-game.js";
-import { debounce, createTable, isTouchScreen } from "./utils.js";
+import { createTable, isTouchScreen } from "./utils.js";
 import { getDifficultyParams, getDifficultyLevel } from "./difficulty.js";
 import { flag, reveal, revealBomb, revealSurroundingSquares } from "./square.js";
 
@@ -26,7 +26,6 @@ export class Minesweeper {
     this.handleTouchScreen();
     this.handleTouchHold();
     this.handleNewGames();
-    this.handleResize();
   }
 
   get rows() {
@@ -242,29 +241,6 @@ export class Minesweeper {
     const newTable = createTable(width, height);
     this.tableBody.innerHTML = newTable;
     this.bombsCounter = bombs;
-    this.resizeSquares(width, height);
-  }
-
-  handleResize() {
-    window.addEventListener(
-      "resize",
-      debounce(() => {
-        this.resizeSquares(this.width);
-      }, 200)
-    );
-  }
-
-  resizeSquares(width) {
-    let dimension = this.getSquaresSize(width);
-    for (const square of this.squares) {
-      square.style.width = dimension + "px";
-      square.style.height = dimension + "px";
-    }
-  }
-
-  getSquaresSize(width) {
-    const { clientWidth } = this.tableContainer;
-    return Math.min(25, clientWidth / width);
   }
 
   handleTouchScreen() {
