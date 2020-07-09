@@ -46,7 +46,6 @@ nav {
 nav h1 {
   flex: 1;
   font-weight: normal;
-  color: var(--dark-grey);
 }
 
 nav ul {
@@ -107,7 +106,6 @@ section.index-buttons {
   height: 100%;
 }
 
-
 /* Difficulty parameters
    ========================================================================== */
 
@@ -143,9 +141,6 @@ div.custom-difficulty-params {
 .difficulty-param input {
   margin: 0 10px;
   width: 4em;
-}
-
-.difficulty-param input:nth-last-child(1) {
 }
 
 /* Game menu
@@ -218,7 +213,9 @@ div.custom-difficulty-params {
 }
 
 .square {
-  font-size: 3.5vw;
+  font-size: 1em;
+  width: 25px;
+  height: 25px;
   text-align: center;
   background-color: var(--grey);
   box-shadow: inset 2px 2px var(--white),
@@ -234,15 +231,15 @@ div.custom-difficulty-params {
 }
 
 .square[data-state='flagged'] {
-  background: url("../images/bxs-flag-alt.svg") no-repeat;
+  background: url("../images/bxs-flag-alt.svg") no-repeat center;
 }
 
 .square[data-state='question'] {
-  background: url("../images/bx-question-mark.svg") no-repeat;
+  background: url("../images/bx-question-mark.svg") no-repeat center;
 }
 
 .square[bomb] {
-  background: url("../images/bxs-bomb.svg") no-repeat;
+  background: url("../images/bxs-bomb.svg") no-repeat center;
 }
 
 .square[data-square-content="1"]:before {
@@ -281,7 +278,7 @@ div.custom-difficulty-params {
    ========================================================================== */
 
 footer {
-  margin: 1em 0;
+  margin: 1em;
 }
 
 footer a {
