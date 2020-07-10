@@ -9,16 +9,16 @@ router.get("/", async (req, res) => {
     return;
   }
 
-  const resultByLevel = await db.query({
+  const result = await db.query({
     text: `
     SELECT
       level AS "Difficulty",
       count(level) AS "Games",
       count(CASE WHEN victory IS TRUE THEN 1 ELSE NULL END) AS "Wins",
-      to_char(avg(CASE WHEN victory IS TRUE THEN 1 ELSE 0 END) * 100, '999.9%') AS "Win Pct.",
-      min(time) AS "Best time",
-      max(time) AS "Worst time",
-      avg(time) AS "Average time"
+      avg(CASE WHEN victory IS TRUE THEN 1 ELSE 0 END) AS "Win Pct.",
+      min(CASE WHEN victory IS TRUE THEN time ELSE NULL END) AS "Best time",
+      max(CASE WHEN victory IS TRUE THEN time ELSE NULL END) AS "Worst time",
+      avg(CASE WHEN victory IS TRUE THEN time ELSE NULL END) AS "Average time"
     FROM plays
     GROUP BY level
     ORDER BY "Games" DESC;
@@ -26,10 +26,7 @@ router.get("/", async (req, res) => {
     rowMode: "array"
   });
 
-  res.render("profile.html", {
-    rows: resultByLevel.rows,
-    fields: resultByLevel.fields.map(field => field.name)
-  });
+  res.render("profile.html", { result: result });
 });
 
 module.exports = router;

@@ -29,10 +29,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 passportConfing.run(passport);
 
-nunjucks.configure("src/views", {
-  autoescape: true,
-  express: app
-});
+const env = nunjucks.configure("src/views", { express: app });
+
+env.addFilter("percent", function(num) {
+  return `${Math.floor(num * 100) / 100}%`;
+})
+
+env.addFilter("if_missing", function(value, alt_value) {
+  return value || alt_value;
+})
 
 app.use((req, res, next) => {
   res.locals.user = req.user;

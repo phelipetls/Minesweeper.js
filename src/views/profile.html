@@ -3,26 +3,31 @@
 {% block content %}
   <section class="user-profile">
     <h1 class="user">{{ user.name | capitalize }}</h1>
-    <table class="game-stats">
-      <thead>
-      {% for field in fields %}
-        <th scope="col" data-sort="none">{{ field }}</th>
-      {% endfor %}
-      </thead>
-      <tbody>
-      {% for level, total, wins, win_pct, best_time, worst_time, avg_time in rows %}
-        <tr>
-          <th scope="row">{{ level | capitalize }}</td>
-          <td>{{ total }}</td>
-          <td>{{ wins }}</td>
-          <td>{{ win_pct }}</td>
-          <td>{{ best_time }}</td>
-          <td>{{ worst_time }}</td>
-          <td>{{ avg_time | round(3) }}</td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
+    <h4>Statistics by difficulty</h4>
+    {% if result.rowCount %}
+      <table class="game-stats">
+        <thead>
+        {% for field in result.fields %}
+          <th scope="col" data-sort="none">{{ field.name }}</th>
+        {% endfor %}
+        </thead>
+        <tbody>
+        {% for level, total, wins, win_pct, best_time, worst_time, avg_time in result.rows %}
+          <tr>
+            <th scope="row">{{ level | capitalize }}</td>
+            <td>{{ total }}</td>
+            <td>{{ wins }}</td>
+            <td>{{ win_pct | percent }}</td>
+            <td>{{ best_time | if_missing("-") }}</td>
+            <td>{{ worst_time | if_missing("-") }}</td>
+            <td>{{ avg_time | if_missing("-") }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>You haven't played any games yet.</p>
+    {% endif %}
   </section>
 {% endblock %}
 
