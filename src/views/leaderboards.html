@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <section class="leaderboards">
+    <div class="leaderboards-input">
+      {% include "difficulty-inputs.html" %}
+
+      <select id="interval">
+        <option value="1 week">Last week</option>
+        <option value="1 month">Last month</option>
+        <option value="1 year">Last year</option>
+        <option value="100 years">All time</option>
+      </select>
+    </div>
+
+    <div class="leaderboard-table-container">
+      <table class="sortable-table leaderboards-table" hidden>
+        <thead>
+          <th data-sort="none" style="width: 75%;" scope="col">Player</th>
+          <th data-sort="none" scope="col">Time</th>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+
+      <div class="not-found" hidden>
+        <p>
+          Nobody played during this time :(
+        </p>
+      </div>
+
+      <div class="leaderboard-query-more" data-page="1" hidden></div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="../js/sortable-table.js"></script>
+  <script src="../js/leaderboards.js"></script>
+{% endblock %}
