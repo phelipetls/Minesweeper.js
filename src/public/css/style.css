@@ -456,50 +456,53 @@ section.user-profile {
   overflow-x: auto;
 }
 
-.game-stats thead {
+.sortable-table {
+  border-collapse: collapse;
+}
+
+.sortable-table thead {
   padding: 10px;
   background-color: var(--grey);
 }
 
-.game-stats th {
+.sortable-table th {
   color: var(--black);
   text-align: center;
 }
 
-.game-stats thead th {
+.sortable-table thead th {
   cursor: pointer;
   padding-right: 20px;
 }
 
-.game-stats thead th[data-sort='none'] {
 .sortable-table thead th[data-sort='none'] {
   background: url("../images/bx-caret-up.svg") no-repeat top calc(50% - 3px) right / 1em,
               url("../images/bx-caret-down.svg") no-repeat bottom calc(50% - 3px) right / 1em;
 }
 
-.game-stats thead th[data-sort='asc'] {
+.sortable-table thead th[data-sort='asc'] {
   background: url("../images/bx-caret-down.svg") no-repeat center right / 1rem;
 }
 
-.game-stats thead th[data-sort='desc'] {
+.sortable-table thead th[data-sort='desc'] {
   background: url("../images/bx-caret-up.svg") no-repeat center right / 1rem;
 }
 
-.game-stats tbody th {
+.sortable-table tbody th {
   text-align: left;
 }
 
-.game-stats td,
-.game-stats tbody th {
+.sortable-table td,
+.sortable-table tbody th {
   border: 1px solid var(--light-grey);
 }
 
-.game-stats tbody td {
+.sortable-table tbody td {
   text-align: center;
 }
 
-.game-stats th,
-.game-stats td {
+.sortable-table th,
+.sortable-table td {
   padding: 5px;
 }
 
