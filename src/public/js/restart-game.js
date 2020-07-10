@@ -1,7 +1,7 @@
 import { insertCenteredPopup } from "./utils.js";
 
 const table = document.querySelector("table");
-const difficultyMenu = document.querySelector(".difficulty");
+const difficultyMenu = document.querySelector(".difficulty-menu");
 const smiley = document.querySelector(".smiley");
 
 const CONFIRM_NEW_GAME_POPUP_INNER_HTML = `

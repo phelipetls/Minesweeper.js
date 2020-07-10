@@ -109,7 +109,7 @@ section.index-buttons {
 /* Difficulty parameters
    ========================================================================== */
 
-section.difficulty {
+section.difficulty-menu {
   display: flex;
   flex-flow: row;
   justify-content: space-between;
