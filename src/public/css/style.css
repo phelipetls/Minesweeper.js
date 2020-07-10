@@ -395,6 +395,49 @@ select {
   background: url("../images/bx-chevron-down.svg") no-repeat center right / 24px 24px;
 }
 
+/* Leaderboards
+   ========================================================================== */
+
+.leaderboards {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+}
+
+.leaderboards-input {
+  display: flex;
+  justify-content: space-between;
+}
+
+.leaderboard-table-container {
+  flex: 1;
+  text-align: center;
+  margin-top: 3em;
+}
+
+.leaderboard-table-container * {
+  margin: 0 auto;
+}
+
+.leaderboard-query-more {
+  cursor: pointer;
+  width: 100%;
+  height: 2em;
+  background: url("../images/bx-caret-down.svg") no-repeat top 50% center / 1em;
+}
+
+.leaderboards-table thead th:first-child {
+  text-align: left;
+}
+
+col.leaderboards-player {
+  width: 20%;
+}
+
+col.leaderboards-player {
+  width: 80%;
+}
+
 /* Tables (for game statistics)
    ========================================================================== */
 
