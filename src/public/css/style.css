@@ -426,10 +426,6 @@ select {
   background: url("../images/bx-caret-down.svg") no-repeat top 50% center / 1em;
 }
 
-.leaderboards-table thead th:first-child {
-  text-align: left;
-}
-
 col.leaderboards-player {
   width: 20%;
 }

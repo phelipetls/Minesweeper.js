@@ -31,7 +31,6 @@ smiley.onclick = e => {
 };
 
 difficultyMenu.addEventListener("change", e => {
-  console.log(e.target.tagName);
   if (e.target.tagName === "SELECT" || e.target.tagName === "INPUT") {
     dispatchNewGameEvent(e.target);
   }

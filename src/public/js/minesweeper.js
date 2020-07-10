@@ -85,9 +85,7 @@ export class Minesweeper {
       const removeTimeout = () => clearTimeout(timeout);
 
       clickedElem.addEventListener("pointerup", removeTimeout, { once: true });
-      clickedElem.addEventListener("pointerleave", removeTimeout, {
-        once: true
-      });
+      clickedElem.addEventListener("pointerleave", removeTimeout, { once: true });
     });
   }
 
