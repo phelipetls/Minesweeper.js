@@ -429,8 +429,9 @@ section.user-profile {
 }
 
 .game-stats thead th[data-sort='none'] {
-  background: url("../images/bx-caret-up.svg") no-repeat top 40% right / 1rem,
-              url("../images/bx-caret-down.svg") no-repeat bottom 40% right / 1rem;
+.sortable-table thead th[data-sort='none'] {
+  background: url("../images/bx-caret-up.svg") no-repeat top calc(50% - 3px) right / 1em,
+              url("../images/bx-caret-down.svg") no-repeat bottom calc(50% - 3px) right / 1em;
 }
 
 .game-stats thead th[data-sort='asc'] {
