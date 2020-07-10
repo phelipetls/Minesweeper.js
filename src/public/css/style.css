@@ -391,7 +391,7 @@ button a {
 
 select {
   padding: 0.5em;
-  padding-right: 1em;
+  padding-right: 1.3em;
   background: url("../images/bx-chevron-down.svg") no-repeat center right / 24px 24px;
 }
 
