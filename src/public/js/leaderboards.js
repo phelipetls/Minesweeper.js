@@ -7,10 +7,6 @@ const table = document.querySelector("table");
 const queryMore = document.querySelector(".leaderboard-query-more");
 const notFound = document.querySelector(".not-found");
 
-// selectDifficulty.addEventListener("change", e => {
-//   params.style.display = e.target.value === "custom" ? "" : "none";
-// });
-
 document.querySelector("main").addEventListener("change", e => {
   if (e.target.tagName === "SELECT") {
     return debounce(fetchFirstTenRows(), 250);
@@ -73,18 +69,29 @@ async function fetchMoreRows() {
 function writeLeaderboardTable(rows) {
   let html = "";
   for (const row of rows) {
-    html += `<tr><td>${row.player}</td><td>${row.time}</td></tr>`;
+    html += getRowHTML(row);
   }
   table.tBodies[0].innerHTML = html;
 }
 
 function appendToLeaderboard(rows) {
+  let html = "";
+  console.log(rows);
   for (const row of rows) {
-    table.tBodies[0].insertAdjacentHTML(
-      "beforeend",
-      `<tr><td>${row.player}</td><td>${row.time}</td></tr>`
-    );
+    html = getRowHTML(row);
+    table.tBodies[0].insertAdjacentHTML("beforeend", html);
   }
+}
+
+function getRowHTML(row) {
+  return (
+    "<tr>" +
+    Object.values(row).reduce((acc, val) => {
+      acc += `<td>${val}</td>`;
+      return acc;
+    }, "") +
+    "</tr>"
+  );
 }
 
 function debounce(func, ms) {

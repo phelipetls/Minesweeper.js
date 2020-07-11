@@ -3,7 +3,13 @@
 {% block content %}
   <section class="leaderboards">
     <div class="leaderboards-input">
-      {% include "difficulty-inputs.html" %}
+      <select id="difficulty" name="">
+        <option value="easy">Easy</option>
+        <option value="medium" selected>Medium</option>
+        <option value="hard">Hard</option>
+        <option value="custom">Custom</option>
+        <option value="random">Random</option>
+      </select>
 
       <select id="interval">
         <option value="1 week">Last week</option>
@@ -17,6 +23,9 @@
       <table class="sortable-table leaderboards-table" hidden>
         <thead>
           <th data-sort="none" style="width: 75%;" scope="col">Player</th>
+          <th data-sort="none" scope="col">Width</th>
+          <th data-sort="none" scope="col">Height</th>
+          <th data-sort="none" scope="col">Bombs</th>
           <th data-sort="none" scope="col">Time</th>
         </thead>
         <tbody>

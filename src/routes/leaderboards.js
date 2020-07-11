@@ -13,7 +13,11 @@ router.post("/", async (req, res) => {
 
     const result = await db.query({
       text: `
-      SELECT users.name AS player, plays.time AS time
+      SELECT users.name AS Player,
+             plays.width AS Width,
+             plays.height AS Height,
+             plays.bombs AS Bombs,
+             plays.time AS Time
       FROM users JOIN plays ON (users.id = plays.user_id)
       WHERE plays.victory IS TRUE
             AND plays.level = $1
