@@ -5,7 +5,9 @@ const LocalStrategy = require("passport-local").Strategy;
 exports.run = passport => {
   async function authenticateUser(username, password, done) {
     try {
-      const { rows } = await db.query("SELECT * FROM users WHERE name = $1", [
+      const {
+        rows
+      } = await db.query("SELECT id, password FROM users WHERE name = $1", [
         username
       ]);
 
@@ -32,9 +34,13 @@ exports.run = passport => {
   });
 
   passport.deserializeUser((id, done) => {
-    db.query("SELECT * FROM users WHERE id = $1", [id], (err, result) => {
-      if (err) throw err;
-      return done(null, result.rows[0]);
-    });
+    db.query(
+      "SELECT id, password FROM users WHERE id = $1",
+      [id],
+      (err, result) => {
+        if (err) throw err;
+        return done(null, result.rows[0]);
+      }
+    );
   });
 };

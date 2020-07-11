@@ -70,6 +70,10 @@ nav ul li a {
   padding: 10px;
 }
 
+nav ul li:first-child a {
+  padding: 0;
+}
+
 nav ul li a:hover {
   text-decoration: underline;
 }

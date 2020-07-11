@@ -32,11 +32,9 @@ passportConfing.run(passport);
 const env = nunjucks.configure("src/views", { express: app });
 
 env.addFilter("percent", function(num) {
-  return `${Math.floor(num * 100) / 100}%`;
-})
-
-env.addFilter("if_missing", function(value, alt_value) {
-  return value || alt_value;
+  // Transform 0.620689655 into 62.06.
+  // String.toFixed is slow.
+  return `${Math.floor((num * 10000)) / 100}%`;
 })
 
 app.use((req, res, next) => {

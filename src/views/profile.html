@@ -18,9 +18,9 @@
             <td>{{ total }}</td>
             <td>{{ wins }}</td>
             <td>{{ win_pct | percent }}</td>
-            <td>{{ best_time | round(2) | if_missing("-") }}</td>
-            <td>{{ worst_time | round(2) | if_missing("-") }}</td>
-            <td>{{ avg_time | round(2) | if_missing("-") }}</td>
+            <td>{{ best_time | round(2) | default("-", true) }}</td>
+            <td>{{ worst_time | round(2) | default("-", true) }}</td>
+            <td>{{ avg_time | round(2) | default("-", true) }}</td>
           </tr>
         {% endfor %}
         </tbody>
