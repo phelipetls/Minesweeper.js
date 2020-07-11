@@ -191,7 +191,7 @@ export class Minesweeper {
         body: JSON.stringify({
           width: this.width,
           height: this.height,
-          bombs: this.bombsCounter,
+          bombs: this.bombs.length,
           time: this.elapsedTime,
           level: getDifficultyLevel(),
           victory: victory
