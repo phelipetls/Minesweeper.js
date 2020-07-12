@@ -14,11 +14,11 @@ router.get("/", async (req, res) => {
     SELECT
       level AS "Difficulty",
       count(level) AS "Games",
-      count(CASE WHEN victory IS TRUE THEN 1 ELSE NULL END) AS "Wins",
-      avg(CASE WHEN victory IS TRUE THEN 1 ELSE 0 END) AS "Win Pct.",
-      min(CASE WHEN victory IS TRUE THEN time ELSE NULL END) AS "Best time",
-      max(CASE WHEN victory IS TRUE THEN time ELSE NULL END) AS "Worst time",
-      avg(CASE WHEN victory IS TRUE THEN time ELSE NULL END) AS "Average time"
+      count(victory) FILTER(WHERE victory IS TRUE) AS "Wins",
+      avg(victory::int)::numeric(3, 2) AS "Win Pct.",
+      min(time) FILTER(WHERE victory IS TRUE) AS "Best time",
+      max(time) FILTER(WHERE victory IS TRUE) AS "Worst time",
+      avg(time) FILTER(WHERE victory IS TRUE) AS "Average time"
     FROM plays
     GROUP BY level
     ORDER BY "Games" DESC;
