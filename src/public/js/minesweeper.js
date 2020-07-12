@@ -56,8 +56,9 @@ export class Minesweeper {
 
   handleLeftClicks() {
     this.table.addEventListener("click", e => {
-      if (e.target.tagName !== "TD") return;
-      this.revealSquare(e.target);
+      if (e.target.className === "square") {
+        this.revealSquare(e.target);
+      }
     });
   }
 
