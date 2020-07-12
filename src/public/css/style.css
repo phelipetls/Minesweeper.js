@@ -199,7 +199,7 @@ div.custom-difficulty-params {
   background: url('../images/bx-cool.svg') no-repeat;
 }
 
-.counter:before {
+.bombs-counter:before {
   background-image: url("../images/bxs-bomb.svg");
   margin-right: 3px;
 }

@@ -14,7 +14,7 @@ export class Minesweeper {
 
     this.timer = this.gameContainer.querySelector(".timer");
     this.smiley = this.gameContainer.querySelector(".smiley");
-    this.counter = this.gameContainer.querySelector(".counter");
+    this.bombsCounter = this.gameContainer.querySelector(".bombs-counter");
 
     this.resetGame();
 
@@ -126,7 +126,7 @@ export class Minesweeper {
   placeBombs(clickedSquare) {
     const sampleSquares = getSample(
       this.squares.filter(square => square !== clickedSquare),
-      this.bombsCounter
+      this.totalBombs
     );
 
     for (const square of sampleSquares) {
@@ -134,12 +134,12 @@ export class Minesweeper {
     }
   }
 
-  get bombsCounter() {
-    return Number(this.counter.innerText);
+  get bombsLeft() {
+    return Number(this.bombsCounter.innerText);
   }
 
-  set bombsCounter(number) {
-    this.counter.innerText = "".padStart.call(number, 2, "0");
+  set bombsLeft(number) {
+    this.bombsCounter.innerText = "".padStart.call(number, 2, "0");
   }
 
   get elapsedTime() {
@@ -191,7 +191,7 @@ export class Minesweeper {
         body: JSON.stringify({
           width: this.width,
           height: this.height,
-          bombs: this.bombs.length,
+          bombs: this.totalBombs,
           time: this.elapsedTime,
           level: getDifficultyLevel(),
           victory: victory
@@ -215,8 +215,8 @@ export class Minesweeper {
 
   handleFlaggedSquare() {
     this.gameContainer.addEventListener("squareFlagged", e => {
-      if (e.target.dataset.state === "flagged") this.bombsCounter--;
-      else this.bombsCounter++;
+      if (e.target.dataset.state === "flagged") this.bombsLeft--;
+      else this.bombsLeft++;
     });
   }
 
@@ -237,10 +237,11 @@ export class Minesweeper {
 
     this.width = width;
     this.height = height;
+    this.totalBombs = bombs;
 
     const newTable = createTable(width, height);
     this.tableBody.innerHTML = newTable;
-    this.bombsCounter = bombs;
+    this.bombsLeft = bombs;
   }
 
   handleTouchScreen() {
