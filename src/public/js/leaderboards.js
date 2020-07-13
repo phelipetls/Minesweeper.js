@@ -11,6 +11,19 @@ const notFound = document.querySelector(".not-found");
 getLeaderboard();
 document.addEventListener("change", getLeaderboard);
 
+async function getLeaderboard() {
+  const rows = await getLeaderboardRows();
+
+  if (rows.length) {
+    table.removeAttribute("hidden");
+    notFound.setAttribute("hidden", "");
+    makeLeaderboardTable(rows);
+  } else {
+    table.setAttribute("hidden", "");
+    notFound.removeAttribute("hidden");
+  }
+}
+
 async function getLeaderboardRows() {
   const difficulty = selectDifficulty.value;
   const dateInterval = selectDateInterval.value;
@@ -28,39 +41,18 @@ async function getLeaderboardRows() {
     })
   });
 
-  const rows = await response.json();
-
-  return rows;
+  return response.json();
 }
 
-async function getLeaderboard() {
-  const rows = await getLeaderboardRows();
+function makeLeaderboardTable(rows) {
+  table.tBodies[0].innerHTML = "";
 
-  if (rows.length) {
-    table.removeAttribute("hidden");
-    writeLeaderboardTable(rows);
-    notFound.setAttribute("hidden", "");
-  } else {
-    table.setAttribute("hidden", "");
-    notFound.removeAttribute("hidden");
-  }
-}
-
-function writeLeaderboardTable(rows) {
-  let html = "";
   for (const row of rows) {
-    html += getRowHTML(row);
-  }
-  table.tBodies[0].innerHTML = html;
-}
+    const tableRow = table.tBodies[0].insertRow();
 
-function getRowHTML(row) {
-  return (
-    "<tr>" +
-    Object.values(row).reduce((acc, val) => {
-      acc += `<td>${val}</td>`;
-      return acc;
-    }, "") +
-    "</tr>"
-  );
+    for (const value of Object.values(row)) {
+      let cell = tableRow.insertCell();
+      cell.textContent = value;
+    }
+  }
 }
