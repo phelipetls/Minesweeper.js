@@ -4,7 +4,7 @@ const db = require("../db/index");
 const router = new express.Router();
 
 router.get("/", (req, res) => {
-  res.render("leaderboards.html");
+  res.render("leaderboard.html");
 });
 
 router.post("/", async (req, res) => {

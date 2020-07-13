@@ -6,21 +6,21 @@
       overflow: auto;
     }
 
-    .leaderboards-table-container {
+    .leaderboard-table-container {
       overflow: auto;
     }
   </style>
 {% endblock %}
 
 {% block content %}
-  <section class="leaderboards-filters">
+  <section class="leaderboard-filters">
     <h4 class="top-players">Top
       <label for="top-players"></label>
       <input id="top-players" name="top-players" type="number" value="10" step="10">
       players
     </h4>
 
-    <div class="leaderboards-selects">
+    <div class="leaderboard-selects">
       <div>
         <label for="difficulty">Difficulty:</label>
         <select id="difficulty" name="difficulty">
@@ -48,8 +48,8 @@
     </div>
   </section>
 
-  <section class="leaderboards-table-container">
-    <table class="sortable-table leaderboards-table" hidden>
+  <section class="leaderboard-table-container">
+    <table class="sortable-table leaderboard-table" hidden>
       <thead>
         <th data-sort="none" style="width: 50%;" scope="col">Player</th>
         <th data-sort="none" scope="col">Time</th>
@@ -71,5 +71,5 @@
 
 {% block scripts %}
   <script src="../js/sortable-table.js"></script>
-  <script src="../js/leaderboards.js"></script>
+  <script src="../js/leaderboard.js"></script>
 {% endblock %}

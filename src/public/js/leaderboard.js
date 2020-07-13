@@ -30,7 +30,7 @@ async function getLeaderboardRows() {
   const dateOffset = inputDateOffset.value;
   const topPlayers = inputTopPlayers.value;
 
-  const response = await fetch("/leaderboards", {
+  const response = await fetch("/leaderboard", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

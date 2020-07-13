@@ -47,7 +47,7 @@ const register = require("./routes/register");
 const logout = require("./routes/logout");
 const profile = require("./routes/profile");
 const tutorial = require("./routes/tutorial");
-const leaderboards = require("./routes/leaderboards");
+const leaderboard = require("./routes/leaderboard");
 
 app.use("/", index);
 app.use("/game", game);
@@ -56,6 +56,6 @@ app.use("/register", register);
 app.use("/logout", logout);
 app.use("/profile", profile);
 app.use("/tutorial", tutorial);
-app.use("/leaderboards", leaderboards);
+app.use("/leaderboard", leaderboard);
 
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));

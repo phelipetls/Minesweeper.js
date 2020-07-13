@@ -412,38 +412,38 @@ h4.top-players input {
   width: 4em;
 }
 
-.leaderboards-filters {
+.leaderboard-filters {
   margin-bottom: 1em;
 }
 
-.leaderboards-selects {
+.leaderboard-selects {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
   justify-content: space-between;
 }
 
-.leaderboards-selects > * {
+.leaderboard-selects > * {
   display: flex;
   align-items: center;
 }
 
-.leaderboards-selects label {
+.leaderboard-selects label {
   width: 6em;
   text-align: left;
   padding-right: .5em;
 }
 
 @media only screen and (max-width: 500px) {
-  .leaderboards-selects * {
+  .leaderboard-selects * {
     margin: 1px 0;
   }
 
-  .leaderboards-selects label {
+  .leaderboard-selects label {
     padding-bottom: .5em;
   }
 
-  .leaderboards-selects input {
+  .leaderboard-selects input {
     width: 100%;
   }
 }
