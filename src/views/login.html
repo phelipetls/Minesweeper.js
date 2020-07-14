@@ -3,7 +3,14 @@
 {% block content %}
   <section class="authentication">
     <form method="post">
-      {% include "authentication-inputs.html" %}
+      <div class="form-input">
+        <label for="username">Username:</label>
+        <input id="username" name="username" type="text" required>
+      </div>
+      <div class="form-input">
+        <label for="password">Password:</label>
+        <input id="password" name="password" type="password" required>
+      </div>
       <button type="submit">Login</button>
     </form>
 
