@@ -34,7 +34,7 @@ difficultyMenu.addEventListener("change", e => {
   if (e.target.tagName === "SELECT" || e.target.tagName === "INPUT") {
     dispatchNewGameEvent(e.target);
   }
-})
+});
 
 export function confirmNewGame() {
   const popup = document.createElement("div");
@@ -45,13 +45,20 @@ export function confirmNewGame() {
 }
 
 function closePopupWhenButtonClicked(popup) {
-  popup.addEventListener("click", e => {
-    if (!e.target.matches("button")) return;
+  popup.addEventListener(
+    "click",
+    e => {
+      if (!e.target.matches("button")) return;
 
-    if (e.target.matches("#yes")) {
-      dispatchNewGameEvent(e.target, { detail: { newGameConfirmed: true }, once: true });
-    }
+      if (e.target.matches("#yes")) {
+        dispatchNewGameEvent(e.target, {
+          detail: { newGameConfirmed: true },
+          once: true
+        });
+      }
 
-    popup.remove();
-  }, { once: true })
+      popup.remove();
+    },
+    { once: true }
+  );
 }

@@ -86,7 +86,9 @@ export class Minesweeper {
       const removeTimeout = () => clearTimeout(timeout);
 
       clickedElem.addEventListener("pointerup", removeTimeout, { once: true });
-      clickedElem.addEventListener("pointerleave", removeTimeout, { once: true });
+      clickedElem.addEventListener("pointerleave", removeTimeout, {
+        once: true
+      });
     });
   }
 
@@ -108,7 +110,11 @@ export class Minesweeper {
   handleRightClicks() {
     this.table.addEventListener("contextmenu", e => {
       e.preventDefault();
-      if (e.button === 2 && e.target.className === "square" && !this.game.over) {
+      if (
+        e.button === 2 &&
+        e.target.className === "square" &&
+        !this.game.over
+      ) {
         flag(e.target);
       }
     });

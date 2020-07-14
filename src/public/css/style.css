@@ -187,16 +187,16 @@ div.custom-difficulty-params {
   cursor: pointer;
 }
 
-.smiley[data-mood='normal'] {
-  background: url('../images/bx-smile.svg') no-repeat;
+.smiley[data-mood="normal"] {
+  background: url("../images/bx-smile.svg") no-repeat;
 }
 
-.smiley[data-mood='sad'] {
-  background: url('../images/bx-dizzy.svg') no-repeat;
+.smiley[data-mood="sad"] {
+  background: url("../images/bx-dizzy.svg") no-repeat;
 }
 
-.smiley[data-mood='cool'] {
-  background: url('../images/bx-cool.svg') no-repeat;
+.smiley[data-mood="cool"] {
+  background: url("../images/bx-cool.svg") no-repeat;
 }
 
 .bombs-counter:before {
@@ -222,11 +222,10 @@ div.custom-difficulty-params {
   height: 25px;
   text-align: center;
   background-color: var(--grey);
-  box-shadow: inset 2px 2px var(--white),
-              1px 1px var(--dark-grey);
+  box-shadow: inset 2px 2px var(--white), 1px 1px var(--dark-grey);
 }
 
-.square[data-state='revealed'] {
+.square[data-state="revealed"] {
   background-color: var(--light-grey);
 }
 
@@ -234,7 +233,7 @@ div.custom-difficulty-params {
   content: attr(data-square-content);
 }
 
-.square[data-state='flagged'] {
+.square[data-state="flagged"] {
   background: url("../images/bxs-flag-alt.svg") no-repeat center;
 }
 
@@ -309,11 +308,11 @@ footer a {
   flex-flow: column;
   align-items: center;
   justify-content: center;
-  margin: .5em;
+  margin: 0.5em;
 }
 
 .authentication form > * {
-  margin: .5em;
+  margin: 0.5em;
 }
 
 .form-input {
@@ -325,13 +324,13 @@ footer a {
 .form-input label {
   width: 6em;
   text-align: right;
-  padding-right: .5em;
+  padding-right: 0.5em;
 }
 
 @media only screen and (max-width: 400px) {
   .form-input label {
     text-align: left;
-    padding-bottom: .5em;
+    padding-bottom: 0.5em;
   }
 
   .form-input input {
@@ -362,18 +361,22 @@ footer a {
 /* Inputs, buttons, select etc.
    ========================================================================== */
 
-button, select {
+button,
+select {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
 }
 
-input, button, select {
+input,
+button,
+select {
   border: 1px solid var(--grey);
-  border-radius: .5em;
+  border-radius: 0.5em;
 }
 
-input, button {
+input,
+button {
   padding: 0.5em;
 }
 
@@ -396,7 +399,8 @@ button a {
 select {
   padding: 0.5em;
   padding-right: 1.3em;
-  background: url("../images/bx-chevron-down.svg") no-repeat center right / 24px 24px;
+  background: url("../images/bx-chevron-down.svg") no-repeat center right / 24px
+    24px;
 }
 
 /* Leaderboards
@@ -431,7 +435,7 @@ h4.top-players input {
 .leaderboard-selects label {
   width: 6em;
   text-align: left;
-  padding-right: .5em;
+  padding-right: 0.5em;
 }
 
 @media only screen and (max-width: 500px) {
@@ -440,7 +444,7 @@ h4.top-players input {
   }
 
   .leaderboard-selects label {
-    padding-bottom: .5em;
+    padding-bottom: 0.5em;
   }
 
   .leaderboard-selects input {
@@ -488,16 +492,18 @@ section.user-profile {
   padding-right: 20px;
 }
 
-.sortable-table thead th[data-sort='none'] {
-  background: url("../images/bx-caret-up.svg") no-repeat top calc(50% - 3px) right / 1em,
-              url("../images/bx-caret-down.svg") no-repeat bottom calc(50% - 3px) right / 1em;
+.sortable-table thead th[data-sort="none"] {
+  background: url("../images/bx-caret-up.svg") no-repeat top calc(50% - 3px)
+      right / 1em,
+    url("../images/bx-caret-down.svg") no-repeat bottom calc(50% - 3px) right /
+      1em;
 }
 
-.sortable-table thead th[data-sort='asc'] {
+.sortable-table thead th[data-sort="asc"] {
   background: url("../images/bx-caret-down.svg") no-repeat center right / 1rem;
 }
 
-.sortable-table thead th[data-sort='desc'] {
+.sortable-table thead th[data-sort="desc"] {
   background: url("../images/bx-caret-up.svg") no-repeat center right / 1rem;
 }
 

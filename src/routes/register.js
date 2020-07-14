@@ -21,9 +21,9 @@ router.post("/", async (req, res) => {
       db.query("INSERT INTO users (name, password) VALUES ($1, $2)", [
         username,
         hashedPassword
-      ])
-      res.redirect("/login")
-    } catch(err) {
+      ]);
+      res.redirect("/login");
+    } catch (err) {
       if (err.code == 23505) {
         errors.push({ message: "User already registered" });
         res.render("register.html", { errors: errors });

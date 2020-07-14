@@ -37,7 +37,7 @@ async function getLeaderboardRows() {
       difficulty,
       dateInterval,
       dateOffset,
-      topPlayers,
+      topPlayers
     })
   });
 

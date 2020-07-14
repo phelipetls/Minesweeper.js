@@ -33,7 +33,7 @@ const env = nunjucks.configure("src/views", { express: app });
 
 env.addFilter("percent", function(num) {
   return `${num * 100}%`;
-})
+});
 
 app.use((req, res, next) => {
   res.locals.user = req.user;
