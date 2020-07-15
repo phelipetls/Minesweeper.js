@@ -416,6 +416,14 @@ h4.top-players input {
   width: 4em;
 }
 
+.leaderboard-table {
+  margin: 0 auto;
+}
+
+col.player {
+  width: 75%;
+}
+
 .leaderboard-filters {
   margin-bottom: 1em;
 }

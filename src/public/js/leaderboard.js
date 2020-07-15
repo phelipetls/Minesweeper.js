@@ -17,7 +17,8 @@ async function getLeaderboard() {
   if (rows.length) {
     table.removeAttribute("hidden");
     notFound.setAttribute("hidden", "");
-    makeLeaderboardTable(rows);
+    makeTableBody(rows);
+    makeTableHead(Object.keys(rows[0]));
   } else {
     table.setAttribute("hidden", "");
     notFound.removeAttribute("hidden");
@@ -44,15 +45,55 @@ async function getLeaderboardRows() {
   return response.json();
 }
 
-function makeLeaderboardTable(rows) {
+function makeTableBody(rows) {
   table.tBodies[0].innerHTML = "";
 
-  for (const row of rows) {
+  rows.forEach((row, rowIndex) => {
     const tableRow = table.tBodies[0].insertRow();
 
-    for (const value of Object.values(row)) {
+    const number = tableRow.insertCell();
+    number.textContent = +rowIndex + 1;
+
+    rowValues = isCustomOrRandomDifficulty()
+      ? Object.values(row)
+      : Object.values(row).slice(0, 2);
+
+    for (value of rowValues) {
       let cell = tableRow.insertCell();
       cell.textContent = value;
-    }
+    };
+  });
+}
+
+HTMLTableRowElement.prototype.insertTh = function() {
+  const th = document.createElement("th");
+  this.append(th);
+  th.dataset.sort = "none";
+  th.setAttribute("scope", "col");
+  return th;
+};
+
+function makeTableHead(headers) {
+  const newTableHead = document.createElement("thead");
+  const tableHeadRow = newTableHead.insertRow();
+
+  const rankingHeader = tableHeadRow.insertTh();
+  rankingHeader.textContent = "#";
+
+  headerValues = isCustomOrRandomDifficulty()
+    ? Object.values(headers)
+    : Object.values(headers).slice(0, 2);
+
+  for (const header of headerValues) {
+    const cell = tableHeadRow.insertTh();
+    cell.textContent = header;
   }
+
+  table.tHead.replaceWith(newTableHead);
+}
+
+function isCustomOrRandomDifficulty() {
+  return (
+    selectDifficulty.value === "custom" || selectDifficulty.value === "random"
+  );
 }
