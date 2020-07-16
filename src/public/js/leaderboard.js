@@ -48,11 +48,11 @@ async function getLeaderboardRows() {
 function makeTableBody(rows) {
   table.tBodies[0].innerHTML = "";
 
-  rows.forEach((row, rowIndex) => {
+  rows.forEach(row => {
     const tableRow = table.tBodies[0].insertRow();
 
-    const number = tableRow.insertCell();
-    number.textContent = +rowIndex + 1;
+    const numberCell = tableRow.insertCell();
+    numberCell.textContent = tableRow.rowIndex + 1;
 
     rowValues = isCustomOrRandomDifficulty()
       ? Object.values(row)
