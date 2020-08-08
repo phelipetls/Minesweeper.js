@@ -181,7 +181,7 @@ export class Minesweeper {
       e.target.classList.add("trigger-bomb");
     });
 
-    this.gameContainer.addEventListener("squareRevealed", e => {
+    this.gameContainer.addEventListener("squareRevealed", () => {
       if (this.areAllNonBombsRevealed()) {
         this.game.over = true;
         this.smiley.dataset.mood = "cool";
@@ -192,7 +192,7 @@ export class Minesweeper {
 
   async recordGame({ victory }) {
     try {
-      await fetch("/game", {
+      fetch("/game", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
