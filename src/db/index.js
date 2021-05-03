@@ -10,7 +10,10 @@ function getConnectionString() {
 }
 
 const pool = new Pool({
-  connectionString: getConnectionString()
+  connectionString: getConnectionString(),
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 module.exports = {
